@@ -228,7 +228,7 @@ The rule in \cref{fig:taskRules} represents the start of a task, which will move
 The left rule in \cref{fig:messageEventRules} realizes a MITE, and the right rule implements a MICE.
 The MICE rule deletes a token and a message and adds an outgoing token.
 The MITE rule moves the token through the event and may send a message to a waiting process snapshot if it has a token waiting at the corresponding MICE.
-An optional existential quantifier is used to send a message only if the receiving process is ready to receive it.
+An optional existential quantifier \cite{rensinkNestedQuantificationGraph2006} is used to send a message only if the receiving process is ready to receive it.
 
 \begin{figure}[ht]
     \centering
@@ -272,8 +272,8 @@ However, they do not terminate processes.
 Process termination is implemented with a generic rule---independent of the input BPMN model---which is applicable to all process snapshots.
 The termination rule (see \cref{fig:terminationRule}) is automatically generated once during the higher-order transformation.
 It is used to terminate processes and subprocesses if they do not have any tokens.
-The rule uses negative-application conditions to only change the state of the process snapshot from running to terminated if it has no tokens and subprocesses.
-The termination rule in Groove is given as an artifact \cite{krauterArtifactsICGT2023}.
+The rule uses a NAC only to change the state of the process snapshot from running to terminated if it has no tokens and subprocesses.
+The concrete termination rule in Groove is given as an artifact \cite{krauterArtifactsICGT2023}.
 
 \begin{figure}[ht]
     \centering
@@ -427,8 +427,8 @@ The atomic proposition \textsf{AllTerminated} is true if there exists no process
 \vskip.3\baselineskip
 
 Both properties can be checked using our implementation \cite{krauterArtifactsICGT2023}.
-To fully check Soundness, we need to check \textit{Proper Completion} and \textit{No Dead Activities}.
-The information needed to check these properties is in the generated state space.
+To fully check Soundness, we also need to check (ii) \textit{Proper Completion} and (ii) \textit{No Dead Activities}.
+The information needed to check these properties can be found in the graph transformation system's state space.
 
 \subsection{Custom properties} \label{subsec:customProperties}
 % Defining atomic propositions in BPMN is a novelty.
