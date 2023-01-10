@@ -1,4 +1,4 @@
-# TERMGRAPH-2022
+# ICGT-2023
 This repository contains the sources for [the paper](./paper.pdf) submitted to [ICGT-2023](https://conf.researchr.org/home/icgt-2023) together with additional information below.
 
 ## BPMN Semantics formalization
