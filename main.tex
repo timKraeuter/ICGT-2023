@@ -82,11 +82,12 @@ Furthermore, our approach is easily accessible since it is implemented in an ope
 
 % Paper outline
 The remainder of this paper is structured as follows.
-First, we describe the \gls*{bpmn} semantics formalization using graph transformation systems (\autoref{sec:formalization}) before explaining how this can be utilized for model checking BPMN-specific and custom properties (\autoref{sec:modelChecking}).
+First, in \autoref{sec:preliminaries} we introduce \gls*{bpmn} and point out the theoretical background of this contribution.
+Second, we describe the \gls*{bpmn} semantics formalization using graph transformation systems (\autoref{sec:formalization}) before explaining how this can be utilized for model checking BPMN-specific and custom properties (\autoref{sec:modelChecking}).
 Then, we shortly present the web-based tool implementing our approach.
 Finally, we discuss related work regarding BPMN construct coverage in \autoref{sec:relatedWork} and conclude in \autoref{sec:conclusion}.
 
-\section{Preliminaries}
+\section{Preliminaries} \label{sec:preliminaries}
 % Describe the application are
 In this paper, we apply graph transformations to formalize the execution semantics of BPMN.
 Thus, in this section, we will briefly introduce BPMN and its execution semantics.
@@ -95,8 +96,7 @@ Please refer to \cite{freundRealLifeBPMNUsing2019} or the BPMN specification \ci
 Furthermore, we describe the theoretical background behind our application of graph transformations.
 \subsection{BPMN}
 % Introduce BPMN
-BPMN is a popular standard notation to define intra- and inter-organizational workflows.
-\autoref{fig:bpmnMetamodel} depicts the structure of BPMN process models and the corresponding BPMN symbols contained in clouds.
+\autoref{fig:bpmnMetamodel} depicts the structure of BPMN process models with the corresponding concrete syntaxBPMN symbols contained in clouds.
 
 \begin{figure}[ht]
   \centering
@@ -183,6 +183,8 @@ Using this type graph, we can now define how the start graph and graph-transform
 % How is a start graph generated?
 The generation of the start graph for a BPMN model is straightforward.
 First, for each process in the BPMN model, we generate a process snapshot if the process contains a none start event (NSE).
+A NSE describes a start event without a trigger (none).
+Popular start event triggers are message and signal (see MSE and SSE in \autoref{fig:bpmnConstructsOverview}).
 Then, for each NSE, we add a token to the respective process snapshot.
 An example of a start graph is shown in \autoref{fig:startGraph} using abstract and concrete syntax.
 Furthermore, we consider allowing the user to define a start graph similar to how he can define atomic propositions for custom properties (see \autoref{subsec:customProperties}).
