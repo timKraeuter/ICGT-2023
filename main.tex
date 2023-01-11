@@ -53,9 +53,9 @@ University of Applied Sciences, FHDW, Hanover, Germany\\
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-The BPMN is a widely used standard notation for defining intra- and inter-organizational workflows.
+The Business Process Modeling Notation (BPMN) is a widely used standard notation for defining intra- and inter-organizational workflows.
 However, the informal description of the BPMN execution semantics leads to different interpretations of BPMN constructs and difficulties in checking behavioral properties.
-In this paper, we propose a formalization of the execution semantics of BPMN that, compared to existing approaches, covers most of the BPMN constructs.
+In this paper, we propose a formalization of the execution semantics of BPMN that, compared to existing approaches, covers more BPMN constructs, while allowing property checking.
 Our approach is based on a higher-order transformation from BPMN models to graph transformation systems.
 As proof of concept, we have implemented our approach in an open-source web-based tool.
 
@@ -70,7 +70,9 @@ As proof of concept, we have implemented our approach in an open-source web-base
 However, the informal description of the BPMN execution semantics leads to different interpretations of BPMN constructs and difficulties in checking behavioral properties \cite{corradiniFormalApproachAnalysis2021}.
 To this end, we propose a formalization that, compared to other approaches, covers most of the BPMN constructs.
 
+% TODO: Change everything to model-transformation?
 Our approach is based on a higher-order transformation from BPMN process models to graph transformation systems using rule generation templates.
+We call the transformation \textit{higher-order} since the resulting graph-transformation systems represent model-transformations themselves \cite{tisiUseHigherOrderModel2009}.
 Thus, our approach constructs a new graph transformation system, i.e., graph transformation rules and a start graph for each BPMN process model.
 This is a significant difference compared to other approaches, such as \cite{corradiniFormalApproachAnalysis2021,vangorpVisualTokenbasedFormalization2013}, where only the BPMN process model is parsed, but the rewrite rules are fixed.
 Generating specific rules for each model leads to possibly more but simpler transformation rules that can be matched faster.
@@ -142,7 +144,7 @@ Since our approach is based on a higher-order transformation from BPMN to graph 
 The approach supports the BPMN constructs depicted in \autoref{fig:bpmnConstructsOverview}.
 BPMN constructs are divided into \textsf{Events}, \textsf{Gateways}, \textsf{Activities}, and \textsf{Edges}.
 \textsf{Events} and \textsf{Activities} are further divided into subgroups.
-Due to space limitations we only explain how the constructs marked with a green background are realized in this paper.
+Due to space limitations, we only explain how the constructs marked with a green background are realized in this paper.
 However, the other constructs are also implemented and tested \cite{krauterArtifactsICGT2023}.
 
 \begin{figure}[ht]
@@ -557,7 +559,7 @@ The coverage of BPMN constructs greatly impacts how useful each approach is in p
     \end{tabular}
     \begin{tablenotes}
         \item[1] Does not support receive tasks after event-based gateways.
-        \item[2] Only supports interrupting boundary events on tasks.
+        \item[2] Only supports interrupting boundary events on tasks not subprocesses.
         \item[3] Only supports message and timer events.
     \end{tablenotes}
     \end{threeparttable}
