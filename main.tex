@@ -492,7 +492,7 @@ A key difference to our approach is that the rules in \cite{vangorpVisualTokenba
 Thus, our approach can be seen as a program specialization compared to \cite{vangorpVisualTokenbasedFormalization2013} since we process a concrete BPMN model before its execution.
 The graph transformation rules are implemented in a prototype using GrGen.NET.
 Unfortunately, the implementation is not publicly accessible anymore.
-Moreover, they do not support model checking since their goal is only formalization.
+Moreover, they do \textit{not} support model checking since their goal is only formalization.
 
 % BProve/Corradini
 The approach by Corradini et al. is based on formal BPMN semantics given in rewriting logic and implemented in the Maude system \cite{corradiniFormalApproachAnalysis2021}.
@@ -567,9 +567,10 @@ The coverage of BPMN constructs greatly impacts how useful each approach is in p
 
 % Summarize the findings and explain them in more detail
 % Explain Van Gorp in detail
-Van Gorp et al. \cite{vangorpVisualTokenbasedFormalization2013} cover a large part of the BPMN semantics.
+Van Gorp et al. \cite{vangorpVisualTokenbasedFormalization2013} cover a large part of the BPMN semantics including some event types we did not realize yet.
 However, they do not support Event-based gateways and event subprocesses, while their support for boundary events is minimal.
 This is a major deficiency, especially since Event-based gateways are often used in practice.
+Furthermore, they do not support checking behavioral properties.
 % Explain Corradini in detail
 Corradini et al. \cite{corradiniFormalApproachAnalysis2021} support message and terminate events.
 However, they do not support BPMN subprocesses.
