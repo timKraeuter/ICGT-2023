@@ -1,7 +1,8 @@
 # ICGT-2023
 
 This repository contains the sources for [the paper](./paper.pdf) submitted
-to [ICGT-2023](https://conf.researchr.org/home/icgt-2023) together with additional information below.
+to [ICGT-2023](https://conf.researchr.org/home/icgt-2023) together with additional information
+below.
 
 **The corresponding tool is
 available [here](https://bpmnanalyzer.whitefield-c9fed487.northeurope.azurecontainerapps.io).**
@@ -36,7 +37,8 @@ Process termination is implemented by the following graph transformation rule in
 ![Atomic property AllTerminated implemented in Groove.](./artifacts/Terminate.png)
 
 The rule is called **Terminate** and is automatically added during graph grammar generation.
-The dashed red borders mark parts of negative application conditions, grey parts remain untouched, blue parts are
+The dashed red borders mark parts of negative application conditions, grey parts remain untouched,
+blue parts are
 deleted and green parts are added.
 
 ## Model Checking BPMN
@@ -54,9 +56,12 @@ unresolved [bug](https://sourceforge.net/p/groove/bugs/499/) and unfinished impl
 java -jar artifacts\groove-5_8_1\bin\Simulator.jar
 ```
 
-- Load a graph grammar. You can generate one using the tool below and unzip it on your local machine.
-- Run LTL verification by copying one of the desired properties (listed below) and right-clicking in the LTS-Simulation
-  tab. Select ```Verify < Check LTL property (full state space)``` and paste the copied LTL property.
+- Load a graph grammar. You can generate one using the tool below and unzip it on your local
+  machine.
+- Run LTL verification by copying one of the desired properties (listed below) and right-clicking in
+  the LTS-Simulation
+  tab. Select ```Verify < Check LTL property (full state space)``` and paste the copied LTL
+  property.
 
 ![check ltl property](./artifacts/check_ltl.png)
 
@@ -66,7 +71,8 @@ The atomic property **Unsafe** is implemented by the following graph condition i
 
 ![Atomic property Unsafe implemented in Groove.](./artifacts/Unsafe.png)
 
-The property matches whenever two tokens of one process snapshot have the same position (but have different identities).
+The property matches whenever two tokens of one process snapshot have the same position (but have
+different identities).
 
 Verify the following LTL property in Groove for **safeness**:
 
@@ -80,7 +86,8 @@ The atomic property **AllTerminated** is implemented by the following graph cond
 
 ![Atomic property AllTerminated implemented in Groove.](./artifacts/AllTerminated.png)
 
-The property matches whenever there is no process snapshot in the state running. All process snapshots are terminated,
+The property matches whenever there is no process snapshot in the state running. All process
+snapshots are terminated,
 i.e., have no tokens.
 
 Verify the following LTL property in Groove for **option to complete**:
@@ -91,21 +98,26 @@ F(G(AllTerminated))
 
 ### Custom properties
 
-Defining atomic propositions directly in the tool by distributing tokens over the process model has not been implemented
+Defining atomic propositions directly in the tool by distributing tokens over the process model has
+not been implemented
 yet.
-Thus, for the time being, custom properties have to be checked in Groove by defining atomic propositions there.
+Thus, for the time being, custom properties have to be checked in Groove by defining atomic
+propositions there.
 
-Adding this feature is planned for the full version of the paper due to the current time constraints.
+Adding this feature is planned for the full version of the paper due to the current time
+constraints.
 
 ## Implementation
 
 ### Tool
 
-The tool is available online [here](https://bpmnanalyzer.whitefield-c9fed487.northeurope.azurecontainerapps.io).
+The tool is available
+online [here](https://bpmnanalyzer.whitefield-c9fed487.northeurope.azurecontainerapps.io).
 
 [![Atomic property Unsafe implemented in Groove.](./images/impl.png)](https://bpmnanalyzer.whitefield-c9fed487.northeurope.azurecontainerapps.io)
 
-The sourcecode of the tool is available [here](https://github.com/timKraeuter/Rewrite_Rule_Generation) and instructions
+The sourcecode of the tool is
+available [here](https://github.com/timKraeuter/Rewrite_Rule_Generation) and instructions
 how to run it locally on your machine can be
 found [here](https://github.com/timKraeuter/Rewrite_Rule_Generation/blob/master/server/README.md).
 
@@ -113,7 +125,8 @@ found [here](https://github.com/timKraeuter/Rewrite_Rule_Generation/blob/master/
 
 The test classes of the testsuite can be found in the subproject **generator
 ** [here](https://github.com/timKraeuter/Rewrite_Rule_Generation).
-The BPMN files (see **bpmnModelsSemanticsTest**) and generated graph grammars from the BPMN models can be
+The BPMN files (see **bpmnModelsSemanticsTest**) and generated graph grammars from the BPMN models
+can be
 found [here](https://github.com/timKraeuter/Rewrite_Rule_Generation/tree/master/generator/src/test/resources/bpmn).
 
 | BPMN feature                                | Test class                      | Test case                                                                                                                |
@@ -136,15 +149,20 @@ found [here](https://github.com/timKraeuter/Rewrite_Rule_Generation/tree/master/
 |                                             |                                 | [Inclusive Gateway - Complex](https://cawemo.com/share/4edc1064-1a2f-46ba-b4bd-9bd3fceea7ae)                             |
 |                                             |                                 | [Exclusive Event Based Gateway](https://cawemo.com/share/c16c4923-dfa0-4a15-ade3-b47acb40ad66)                           |
 | Events                                      | BPMNToGrooveEventsTest          | [Message events](https://cawemo.com/share/e6a2eb93-b0e7-4c09-baa0-93ff18084d0e)                                          |
-|                                             |                                 | [Two Incoming Message Flows](https://cawemo.com/share/44d74e7b-f940-48cd-8ceb-d23976b4da2b)                              |_
-|                                             |                                 | [Message Events without Message Flows](https://cawemo.com/share/b4b588fa-3f0f-4c30-95e9-b7f5dd40cd7a)                    |_
-|                                             |                                 | [Two End Events](https://cawemo.com/share/e1777355-d0cc-45d0-8f01-87d08ba2b5ef)                                          |_
-|                                             |                                 | [Terminate End Event](https://cawemo.com/share/e579995b-65f3-4146-a974-f136f5fd949b)                                     |_
-|                                             |                                 | [Link Event](https://cawemo.com/share/519f49aa-e3ec-4d6d-8425-3933f93f974d)                                              |_
-|                                             |                                 | [Signal events](https://cawemo.com/share/e13f777e-dca2-45e9-8018-0b9d0c4b34cc)                                           |_
-|                                             |                                 | [Signal events - Multi Activation](https://cawemo.com/share/6a29e7e5-bf10-4b3e-bb40-2ff8591f7e0c)                        |_
-|                                             |                                 | [Signal events - Multi Activation - Same Process](https://cawemo.com/share/813dee70-ddc2-4a71-a965-1b6a2d28c7fa)         |_
-|                                             |                                 | [Intermediate Throw Event](https://cawemo.com/share/0b3cb831-a6b2-4e7c-b064-0c83e887bf47)                                |_
+|                                             |                                 | [Two Incoming Message Flows](https://cawemo.com/share/44d74e7b-f940-48cd-8ceb-d23976b4da2b)                              |
+|                                             |                                 | [Message Events without Message Flows](https://cawemo.com/share/b4b588fa-3f0f-4c30-95e9-b7f5dd40cd7a)                    |
+|                                             |                                 | [Two End Events](https://cawemo.com/share/e1777355-d0cc-45d0-8f01-87d08ba2b5ef)                                          |
+|                                             |                                 | [Terminate End Event](https://cawemo.com/share/e579995b-65f3-4146-a974-f136f5fd949b)                                     |
+|                                             |                                 | [Link Event](https://cawemo.com/share/519f49aa-e3ec-4d6d-8425-3933f93f974d)                                              |
+|                                             |                                 | [Signal events](https://cawemo.com/share/e13f777e-dca2-45e9-8018-0b9d0c4b34cc)                                           |
+|                                             |                                 | [Signal events - Multi Activation](https://cawemo.com/share/6a29e7e5-bf10-4b3e-bb40-2ff8591f7e0c)                        |
+|                                             |                                 | [Signal events - Multi Activation - Same Process](https://cawemo.com/share/813dee70-ddc2-4a71-a965-1b6a2d28c7fa)         |
+|                                             |                                 | [Intermediate Throw Event](https://cawemo.com/share/0b3cb831-a6b2-4e7c-b064-0c83e887bf47)                                |
+|                                             |                                 | [No Error Catch Event](https://cawemo.com/share/fc49a2d8-60f3-409a-9225-715b2f682f90)                                    |
+|                                             |                                 | [Subprocess Error Unclear Catch Event](https://cawemo.com/share/2a6dc064-a602-4bda-96d1-a788d9a0e363)                    |
+|                                             |                                 | [Subprocess - Error](https://cawemo.com/share/8854a051-803d-4acf-b5f9-ffd3e7e984e9)                                      |
+|                                             |                                 | [Event Subprocess - Error](https://cawemo.com/share/e10dfa71-5df9-40c5-bd0f-82c391b051e5)                                |
+|                                             |                                 | [Subprocess Error Handling Complex](https://cawemo.com/share/ca354679-b2a9-4deb-93f9-47069658e48f)                       |
 | Boundary Events                             | BPMNToGrooveBoundaryEventsTest  | [Subprocess - Interrupting Boundary Events](https://cawemo.com/share/3b55577a-e7ed-4729-a046-4d79fd11c941)               |
 |                                             |                                 | [Subprocess - Non-Interrupting Boundary Events](https://cawemo.com/share/656b7c63-34e3-404f-9399-bbed9e22a8b7)           |
 |                                             |                                 | [Task - Interrupting Boundary Events](https://cawemo.com/share/9acd9a23-65d7-46cd-bad5-b5b874333567)                     |
