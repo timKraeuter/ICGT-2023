@@ -127,7 +127,8 @@ The test classes of the testsuite can be found in the subproject **generator
 ** [here](https://github.com/timKraeuter/Rewrite_Rule_Generation).
 The BPMN files (see **bpmnModelsSemanticsTest**) and generated graph grammars from the BPMN models
 can be
-found [here](https://github.com/timKraeuter/Rewrite_Rule_Generation/tree/master/generator/src/test/resources/bpmn).
+found [here](https://github.com/timKraeuter/Rewrite_Rule_Generation/tree/master/generator/src/test/resources/bpmn)
+.
 
 | BPMN feature                                | Test class                      | Test case                                                                                                                |
 |---------------------------------------------|---------------------------------|--------------------------------------------------------------------------------------------------------------------------|
@@ -163,6 +164,11 @@ found [here](https://github.com/timKraeuter/Rewrite_Rule_Generation/tree/master/
 |                                             |                                 | [Subprocess - Error](https://cawemo.com/share/8854a051-803d-4acf-b5f9-ffd3e7e984e9)                                      |
 |                                             |                                 | [Event Subprocess - Error](https://cawemo.com/share/e10dfa71-5df9-40c5-bd0f-82c391b051e5)                                |
 |                                             |                                 | [Subprocess Error Handling Complex](https://cawemo.com/share/ca354679-b2a9-4deb-93f9-47069658e48f)                       |
+|                                             |                                 | [No Escalation Catch Event](https://cawemo.com/share/120ed7b8-70e6-4eb2-8b84-b2f74e4f52dd)                               |
+|                                             |                                 | [Subprocess Escalation Unclear Catch Event](https://cawemo.com/share/2f2a2535-bb4a-4290-aef8-3877b3808030)               |
+|                                             |                                 | [Subprocess - Escalation](https://cawemo.com/share/5b367115-13ea-41f5-8c08-5c1453c090fc)                                 |
+|                                             |                                 | [Event Subprocess - Escalation](https://cawemo.com/share/27f3844c-87a7-46cb-a18f-6183d4e0340f)                           |
+|                                             |                                 | [Subprocess Escalation Handling Complex](https://cawemo.com/share/1512a5dd-45f4-4209-9e24-efcfd5dddc8a)                  |
 | Boundary Events                             | BPMNToGrooveBoundaryEventsTest  | [Subprocess - Interrupting Boundary Events](https://cawemo.com/share/3b55577a-e7ed-4729-a046-4d79fd11c941)               |
 |                                             |                                 | [Subprocess - Non-Interrupting Boundary Events](https://cawemo.com/share/656b7c63-34e3-404f-9399-bbed9e22a8b7)           |
 |                                             |                                 | [Task - Interrupting Boundary Events](https://cawemo.com/share/9acd9a23-65d7-46cd-bad5-b5b874333567)                     |
