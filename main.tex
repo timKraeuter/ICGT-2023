@@ -75,9 +75,10 @@ Our approach is based on a higher-order transformation from BPMN process models 
 We call the transformation \textit{higher-order} since the resulting graph-transformation systems represent model-transformations themselves \cite{tisiUseHigherOrderModel2009}.
 Thus, our approach constructs a new graph transformation system, i.e., graph transformation rules and a start graph for each BPMN process model.
 This is a significant difference compared to other approaches, such as \cite{corradiniFormalApproachAnalysis2021,vangorpVisualTokenbasedFormalization2013}, where only the BPMN process model is parsed, but the rewrite rules are fixed.
-Generating specific rules for each model leads to possibly more but simpler transformation rules that can be matched faster.
-Essentially, complexity is partly shifted from the transformation rules to their generation.
-The generated rules are tailored to a given process model and thus are simpler than the general rules in \cite{vangorpVisualTokenbasedFormalization2013}.
+Generating specific rules for each model leads to possibly more but smaller transformation rules.
+Essentially, some complexity is moved from the transformation rules to their generation.
+The generated rules are tailored to a given process model.
+Thus, they are simpler than the general rules in \cite{vangorpVisualTokenbasedFormalization2013} since they only implement one BPMN construct in a certain process model, not in all possible scenarios.
 Furthermore, our approach is easily accessible since it is implemented in an open-source web-based tool.
 
 % Paper outline
@@ -546,9 +547,8 @@ The coverage of BPMN constructs greatly impacts how useful each approach is in p
       None Events & X & X & X & X\\
       Message events & X & X & X & X\\
       Timer Events & & & X & \\
-      Escalation Events & & & & \\
-      Error Events (catch) & X & & &\\
-      Error Events (throw) & X & & &\\
+      Escalation Events & & & & X\\
+      Error Events & X & & & X\\
       Cancel Events & X & & &\\
       Compensation Events & X & & &\\
       Conditional Events & & & &\\
@@ -561,7 +561,7 @@ The coverage of BPMN constructs greatly impacts how useful each approach is in p
     \end{tabular}
     \begin{tablenotes}
         \item[1] Does not support receive tasks after event-based gateways.
-        \item[2] Only supports interrupting boundary events on tasks not subprocesses.
+        \item[2] Only supports interrupting boundary events on tasks, not subprocesses.
         \item[3] Only supports message and timer events.
     \end{tablenotes}
     \end{threeparttable}
