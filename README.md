@@ -28,9 +28,7 @@ deleted and green parts are added.
 
 BPMN-specific properties can be checked in the [web-based tool](https://bpmnanalyzer.whitefield-c9fed487.northeurope.azurecontainerapps.io), which runs Groove in the cloud (no local installation needed).
 
-The following screenshot shows example verification results of the tool:
-
-// TODO: Add screenshot here.
+The [Implementation](https://github.com/timKraeuter/ICGT-2023#implementation) section shows a screenshot with an example verification result.
 
 #### Safeness
 
