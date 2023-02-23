@@ -326,7 +326,7 @@ Subprocesses are terminated by a generic rule (see section \ref{subsec:instAndTe
 \subsection{Gateways}
 \autoref{fig:gatewayTemplates} depicts the rule generation templates for parallel and exclusive gateways (see \autoref{fig:bpmnConstructsOverview}).
 % Parallel
-A parallel gateway can synchronize incoming sequence flows and fork outgoing sequence flows simultaneously.
+A parallel gateway can synchronize and fork the control flow simultaneously.
 Thus, one rule is generated that deletes one token from each incoming sequence flow and adds one token to each outgoing sequence flow.
 
 \begin{figure}[ht]
@@ -395,7 +395,7 @@ In the bottom rule template, one can see that \textit{receive task} rules are id
 Model checking a BPMN process model is possible using the generated graph transformation system.
 Besides a graph transformation system, a set of temporal properties to be checked and the atomic propositions used in these properties must be supplied.
 An atomic proposition is formalized as a graph and holds in a given state if a match exists from the underlying graph of the proposition to the graph representing the state.
-This enables model checking of temporal properties, for example, LTL properties, using the defined atomic propositions.
+This enables model checking of temporal properties using the defined atomic propositions.
 
 We differentiate between \emph{BPMN-specific properties} defined for all BPMN process models and \emph{custom properties} tailored towards a particular BPMN process model.
 We do not consider structural properties (like conformance to the syntax of PBMN) since they can be checked using a standard process modeling tool without implementing execution semantics.
@@ -409,7 +409,7 @@ Soundness is further decomposed into (i) \emph{Option to complete}: any running 
 For example, we will describe how to implement the \emph{Safeness} and \emph{Option to complete} properties.
 
 % Safeness
-\textbf{Safeness} is specified using the LTL property defined in \eqref{eq:safeness}.
+\textbf{Safeness} is specified using the CTL property defined in \eqref{eq:safeness}.
 The atomic property \textsf{Unsafe} is true if two tokens of one process snapshot point to the same sequence flow. This atomic proposition \textit{Unsafe} is depicted in \autoref{fig:unsafe}; Groove rules for all the atomic propositions are included in \cite{krauterArtifactsICGT2023}.
 
 \begin{figure}[ht]
@@ -420,24 +420,23 @@ The atomic property \textsf{Unsafe} is true if two tokens of one process snapsho
 \end{figure}
 
 % Option to complete
-\emph{Option to complete} is specified using the LTL property defined in \eqref{eq:optionToComplete}.
+\emph{Option to complete} is specified using the CTL property defined in \eqref{eq:optionToComplete}.
 The atomic proposition \textsf{AllTerminated} is true if there exists no process snapshot in the state \textsf{Running}, i.e., all process snapshots are \textsf{Terminated}.
 
 \noindent\begin{minipage}{.5\linewidth}
 \begin{equation} \label{eq:safeness}
-  \square (\neg \,\text{Unsafe})
+  AG(\neg \,\text{Unsafe})
 \end{equation}
 \end{minipage}%
 \begin{minipage}{.5\linewidth}
 \begin{equation} \label{eq:optionToComplete}
-  \lozenge ( \square(\text{AllTerminated})) 
+  AF(\text{AllTerminated}) 
 \end{equation}
 \end{minipage}
 \vskip.3\baselineskip
 
-Both properties can be checked using our implementation \cite{krauterArtifactsICGT2023}.
-To fully check Soundness, we also need to check (ii) \textit{Proper Completion} and (ii) \textit{No Dead Activities}.
-The information needed to check these properties can be found in the graph transformation system's state space.
+Checking the properties \textit{Safeness}, \textit{Option to Complete} and \textit{No Dead Activities} is implemented in our tool \cite{krauterArtifactsICGT2023}.
+The property \textit{Proper Completion} is not yet implemented but all the information needed can be found in the graph transformation systems state space.
 
 \subsection{Custom properties} \label{subsec:customProperties}
 % Defining atomic propositions in BPMN is a novelty.
