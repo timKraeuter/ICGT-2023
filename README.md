@@ -26,25 +26,11 @@ deleted and green parts are added.
 
 ### BPMN-specific properties
 
-BPMN-specific properties currently have to be checked in Groove due to an
-unresolved [bug](https://sourceforge.net/p/groove/bugs/499/) and unfinished implementation.
+BPMN-specific properties can be checked in the [web-based tool](https://bpmnanalyzer.whitefield-c9fed487.northeurope.azurecontainerapps.io), which runs Groove in the cloud (no local installation needed).
 
-- Make sure Java is installed on your machine to run Groove (tested with Java version 1.8.0_301)
-- Clone/download this repository.
-- Start Groove by running the following command in **this directory**:
+The following screenshot shows example verification results of the tool:
 
-```
-java -jar artifacts\groove-5_8_1\bin\Simulator.jar
-```
-
-- Load a graph grammar. You can generate one using the tool below and unzip it on your local
-  machine.
-- Run LTL verification by copying one of the desired properties (listed below) and right-clicking in
-  the LTS-Simulation
-  tab. Select ```Verify < Check LTL property (full state space)``` and paste the copied LTL
-  property.
-
-![check ltl property](./artifacts/check_ltl.png)
+// TODO: Add screenshot here.
 
 #### Safeness
 
