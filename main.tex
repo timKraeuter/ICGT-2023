@@ -25,6 +25,9 @@
 \makesavenoteenv{table}
 % Acronyms
 \newacronym{bpmn}{BPMN}{Business Process Modeling Notation}
+\newacronym{gt}{GT}{Graph Transformation}
+\newacronym{mt}{MT}{Model Transformation}
+\newacronym{hot}{HOT}{Higher-Order model Transformation}
 % Fix underscore in dois
 \usepackage[strings]{underscore}
 
@@ -70,7 +73,13 @@ As proof of concept, we have implemented our approach in an open-source web-base
 However, the informal description of the BPMN execution semantics leads to different interpretations of BPMN constructs and difficulties in checking behavioral properties \cite{corradiniFormalApproachAnalysis2021}.
 To this end, we propose a formalization that, compared to other approaches, covers most of the BPMN constructs.
 
-% TODO: Change everything to model-transformation?
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/bpmn_semantics-overview.pdf}
+    \caption{Overview of the approach}
+    \label{fig:approach}
+\end{figure}
+
 Our approach is based on a higher-order transformation from BPMN process models to graph transformation systems using rule generation templates.
 We call the transformation \textit{higher-order} since the resulting graph-transformation systems represent model-transformations themselves \cite{tisiUseHigherOrderModel2009}.
 Thus, our approach constructs a new graph transformation system, i.e., graph transformation rules and a start graph for each BPMN process model.
@@ -94,10 +103,10 @@ In this paper, we apply graph transformations to formalize the execution semanti
 Thus, in this section, we will briefly introduce BPMN and its execution semantics.
 Please refer to \cite{freundRealLifeBPMNUsing2019} or the BPMN specification \cite{objectmanagementgroupBusinessProcessModel2013} for further information about BPMN.
 % Describe the applied theory.
-Furthermore, we describe the theoretical background behind our application of graph transformations.
+Furthermore, we outline the theoretical background behind our application of graph transformations.
 \subsection{BPMN}
 % Introduce BPMN
-\autoref{fig:bpmnMetamodel} depicts the structure of BPMN process models with the corresponding concrete syntaxBPMN symbols contained in clouds.
+\autoref{fig:bpmnMetamodel} depicts the structure of BPMN process models with the corresponding concrete syntax BPMN symbols contained in clouds.
 
 \begin{figure}[ht]
   \centering
@@ -457,27 +466,19 @@ Thus, a user does not need to be aware of the graph transformation semantics use
 
 
 \section{Implementation} \label{sec:impl}
-Our overall approach is summarized in \autoref{fig:approach} as a BPMN process model.
-We use our higher-order transformation to generate a graph transformation system for a given BPMN model.
-Finally, we use the graph transformation system to check temporal properties, possibly leading to property violations.
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.6\textwidth]{images/full-approach.pdf}
-    \caption{Overview of the proposed approach}
-    \label{fig:approach}
-\end{figure}
 
 % Tool
-The first step of the approach is implemented in our web-based tool.
+Our approach is implemented in a web-based tool.
 The tool is open-source, publicly available, and does not require any installation \cite{krauterArtifactsICGT2023}\footnote{\url{https://github.com/timKraeuter/ICGT-2023}}.
 \autoref{fig:implScreenshot} depicts a screenshot of the implemented tool.
-However, model checking must be run locally in the graph-transformation tool Groove\footnote{\url{https://groove.ewi.utwente.nl/about}}.
-We are currently working on extending our tool such that model-checking can be done without installing Groove locally.
-Groove implements SPO with NACs and thus has all the features we need.
-% Evaluation
-To evaluate the correctness of our implementation, we created a comprehensive test suite, which demonstrates correct rule generation for the implemented BPMN constructs \cite{krauterArtifactsICGT2023}.
 
+First, one has to model or upload a \gls*{bpmn} process.
+Then, in the verification section one can choose to check either \gls*{bpmn}-specific properties or custom CTL properties.
+Finally, our tool can generate a graph transformation system for the supplied \gls*{bpmn} model and run model checking in Groove.
+% Evaluation
+Furthermore, to evaluate the correctness of our \gls*{hot}, we created a comprehensive test suite, which verifies correct rule generation for the implemented \gls*{bpmn} constructs \cite{krauterArtifactsICGT2023}.
+
+% Potentially move to the appendix.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{images/impl.png}
@@ -568,7 +569,7 @@ The coverage of BPMN constructs greatly impacts how useful each approach is in p
 
 % Summarize the findings and explain them in more detail
 % Explain Van Gorp in detail
-Van Gorp et al. \cite{vangorpVisualTokenbasedFormalization2013} cover a large part of the BPMN semantics including some event types we did not realize yet.
+Van Gorp et al. \cite{vangorpVisualTokenbasedFormalization2013} cover a large part of the BPMN semantics including error and cancellation events which we did not realize yet.
 However, they do not support Event-based gateways and event subprocesses, while their support for boundary events is minimal.
 This is a major deficiency, especially since Event-based gateways are often used in practice.
 Furthermore, they do not support checking behavioral properties.
@@ -582,6 +583,7 @@ Referring to \autoref{tab:supportedconstructs}, we conclude that our formalizati
 Implementing the missing event types is feasible, as shown in \cite{vangorpVisualTokenbasedFormalization2013}.
 
 \section{Conclusion \& future work} \label{sec:conclusion}
+% TODO: Summarize the contributions of the paper.
 % Summary
 The approach presented in this paper utilizes a higher-order transformation from BPMN models to graph transformation systems. 
 For each BPMN model, we automatically generate a start graph and a set of graph transformation rules.
