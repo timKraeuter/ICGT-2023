@@ -167,7 +167,7 @@ However, the other features are also implemented and tested \cite{krauterArtifac
 
 Our formalization of BPMN is token-based, as in the informal description of the BPMN specification \cite{objectmanagementgroupBusinessProcessModel2013}.
 Thus, to describe processes holding tokens during execution, we use the type graph shown in \autoref{fig:typeGraph}.
-The type graph is depicted using a UML class diagram-like syntax.
+The type graph is depicted as a UML class diagram without operations, which can be seen as an attributed type graph with inheritance \cite{heckelGraphTransformationSoftware2020}.
 
 \begin{figure}[ht]
   \centering
@@ -492,29 +492,25 @@ Furthermore, to evaluate the correctness of our \gls*{hot}, we created a compreh
 A BPMN formalization based on in-place graph transformation rules is given in \cite{vangorpVisualTokenbasedFormalization2013}.
 The formalization covers a substantial part of the BPMN specification, including complex concepts such as inclusive gateway merge and compensation.
 In addition, the graph transformation rules are visual and thus can easily be aligned with the informal description of the execution semantics of BPMN.
-A key difference to our approach is that the rules in \cite{vangorpVisualTokenbasedFormalization2013} are general and can be applied to any BPMN model, while we generate specific rules for every BPMN model based on rule generation templates.
+A key difference to our approach is that the rules in \cite{vangorpVisualTokenbasedFormalization2013} are general and can be applied to any BPMN model, while we generate specific rules for every BPMN model using our \gls*{hot}.
 Thus, our approach can be seen as a program specialization compared to \cite{vangorpVisualTokenbasedFormalization2013} since we process a concrete BPMN model before its execution.
 The graph transformation rules are implemented in a prototype using GrGen.NET.
-Unfortunately, the implementation is not publicly accessible anymore.
 Moreover, they do \textit{not} support model checking since their goal is only formalization.
 
 % BProve/Corradini
-The approach by Corradini et al. is based on formal BPMN semantics given in rewriting logic and implemented in the Maude system \cite{corradiniFormalApproachAnalysis2021}.
-Using this formal semantics, the tool BProVe\footnote{\url{http://pros.unicam.it/bprove/}} can verify custom LTL properties and BPMN-specific properties, such as Safeness and Soundness.
-Furthermore, the tool is accessible online, not requiring any installation.
+The tool \textit{BProVe} is based on formal BPMN semantics given in rewriting logic and implemented in the Maude system \cite{corradiniFormalApproachAnalysis2021}.
+Using this formal semantics, they can verify custom LTL properties and BPMN-specific properties, such as Safeness and Soundness.
 
 % fbpmn/Houhou
-The verification framework \textsf{fbpmn} uses first-order logic to formalize and check BPMN process models \cite{houhouFirstOrderLogicVerification2022}.
+The verification framework \textsf{fbpmn} uses first-order logic to formalize and check BPMN process models \cite{houhouFirstOrderLogicSemantics2019,houhouFirstOrderLogicVerification2022}.
 This formalization is then realized in the TLA\textsuperscript{+} formal language and can be model-checked using TLC.
-Their framework and related information is open source and freely available online\footnote{\url{https://github.com/pascalpoizat/fbpmn}}.
 Like BProVe, \textsf{fbpmn} allows checking BPMN-specific properties, such as Safeness and Soundness.
-However, they do not allow a user to define custom temporal properties.
+Furthermore, they focus on different communication models besides the standard in the \gls*{bpmn} specification and support time-related constructs.
+We currently disregard data flow (see \cite{corradiniFormalisingAnimatingMultiple2022,el-saberCMMICMComplianceChecking2015}) and time-related constructs (see \cite{duranVerifyingTimedBPMN2017,houhouFirstOrderLogicVerification2022}).
 
 \autoref{tab:supportedfeatures} shows which BPMN features are supported by the approaches mentioned above compared to ours.
 We investigated these three approaches since they support a significant subset of the BPMN features and have accessible and well-documented tools.
-However, each approach supports a different subset of the BPMN features.
 The coverage of BPMN features greatly impacts how useful each approach is in practice.
-
 
 \begin{table}[htbp]
     \caption{features supported by different BPMN formalizations (overview based on \cite{vangorpVisualTokenbasedFormalization2013}).}
@@ -569,19 +565,9 @@ The coverage of BPMN features greatly impacts how useful each approach is in pra
 \end{table}
 
 % Summarize the findings and explain them in more detail
-% Explain Van Gorp in detail
-Van Gorp et al. \cite{vangorpVisualTokenbasedFormalization2013} cover a large part of the BPMN semantics including error and cancellation events which we did not realize yet.
-However, they do not support Event-based gateways and event subprocesses, while their support for boundary events is minimal.
-This is a major deficiency, especially since Event-based gateways are often used in practice.
-Furthermore, they do not support checking behavioral properties.
-% Explain Corradini in detail
-Corradini et al. \cite{corradiniFormalApproachAnalysis2021} support message and terminate events.
-However, they do not support BPMN subprocesses.
-% Explain Houhou in detail
-In addition to \cite{corradiniFormalApproachAnalysis2021}, Houhou et al. \cite{houhouFirstOrderLogicVerification2022} support timer and the use of message and timer events as both interrupting and non-interrupting boundary events.
-However, they do not support signal and link events.
-Referring to \autoref{tab:supportedfeatures}, we conclude that our formalization is comprehensive but still lacks support for some of the more advanced event types.
-Implementing the missing event types is feasible, as shown in \cite{vangorpVisualTokenbasedFormalization2013}.
+Our approach covers most of the \gls*{bpmn} features compared to other current approaches.
+Thus, we conclude that our formalization is comprehensive but can still be improved.
+In addition, it covers the most important features found in practice since we come close to the feature coverage of popular process engines such as Camunda\footnote{\url{https://docs.camunda.org/manual/7.16/reference/bpmn20/}}.
 
 \section{Conclusion \& future work} \label{sec:conclusion}
 % TODO: Summarize the contributions of the paper.
