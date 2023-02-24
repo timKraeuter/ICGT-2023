@@ -180,6 +180,10 @@ However, the other features are also implemented and tested \cite{krauterArtifac
     \label{fig:bpmnfeaturesOverview}
 \end{figure}
 
+Before we explain our implementation of the BPMN features we define the BPMN execution metamodel.
+
+\subsection{BPMN execution metamodel}
+
 Our formalization of BPMN is token-based, as in the informal description of the BPMN specification \cite{objectmanagementgroupBusinessProcessModel2013}.
 Thus, to describe processes holding tokens during execution, we use the type graph shown in \autoref{fig:typeGraph}.
 The type graph is depicted as a UML class diagram without operations, which can be seen as an attributed type graph with inheritance \cite{heckelGraphTransformationSoftware2020}.
@@ -187,7 +191,7 @@ The type graph is depicted as a UML class diagram without operations, which can 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.5\linewidth]{images/bpmn_semantics-typegraph.pdf}
-  \caption{BPMN execution model}
+  \caption{BPMN execution metamodel}
   \label{fig:typeGraph}
 \end{figure}
 
