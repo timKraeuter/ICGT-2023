@@ -59,7 +59,7 @@ University of Applied Sciences, FHDW, Hanover, Germany\\
 The Business Process Modeling Notation (BPMN) is a widely used standard notation for defining intra- and inter-organizational workflows.
 However, the informal description of the BPMN execution semantics leads to different interpretations of BPMN features and difficulties in checking behavioral properties.
 In this paper, we propose a formalization of the execution semantics of BPMN that, compared to existing approaches, covers more BPMN features, while allowing property checking.
-Our approach is based on a \gls*{hot} from BPMN models to graph transformation systems.
+Our approach is based on a higher-order transformation from BPMN models to graph transformation systems.
 As proof of concept, we have implemented our approach in an open-source web-based tool.
 
 \keywords{BPMN \and Model transformation \and Graph transformation \and Model checking \and Formalization}
@@ -73,8 +73,12 @@ One can detect errors and optimization potential in process models already durin
 Thus, the cost of business process automation using \gls*{bpmn} can be reduced.
 Consequently, we propose a formalization that covers most of the \gls*{bpmn} features used in practice and supports checking behavioral properties.
 
-% We want to formalize BPMN our generally a behavioral language 
-% Thus, we need to define two things: state and state changes. Which elements change state?
+Generally, we think about two fundamental concepts when formalizing the execution semantics of a behavioral language.
+First, \textit{state structure}, i.e., how can one represent models during execution.
+The state structure corresponds to the typegraph in \gls*{gt} systems.
+Second, \textit{state-changing elements}, i.e., which elements in a model encode potential state changes.
+Those elements, must then be implemented using \gls*{gt} rules.
+Our approach creates \gls*{gt} rules based on a \gls*{hot} and is summarized in \autoref{fig:approach}.
 
 % Describe the approach and highlight that it can be generalized to other languages which have state and state changing-elements.
 \begin{figure}[ht]
@@ -84,33 +88,40 @@ Consequently, we propose a formalization that covers most of the \gls*{bpmn} fea
     \label{fig:approach}
 \end{figure}
 
-Our approach is based on a \gls*{hot} from BPMN process models to graph transformation systems using rule generation templates.
+First, a modeler defines a BPMN model and behavioral properties to check.
+The BPMN model conforms to the BPMN metamodel defined in the BPMN specification \cite{objectmanagementgroupBusinessProcessModel2013}.
+Using the BPMN metamodel, we define the state structure for BPMN in a so-called BPMN execution metamodel, fulfilling the role of a language engineer.
+Usually, an execution metamodel is defined by extending the structural metamodel.
+
+Furthermore, we define a \gls*{hot} from BPMN models to \gls*{gt} systems.
 We call the transformation \textit{higher-order} since the resulting graph-transformation systems represent model-transformations themselves \cite{tisiUseHigherOrderModel2009}.
-Thus, our approach features a new graph transformation system, i.e., graph transformation rules and a start graph for each BPMN process model.
-This is a significant difference compared to other approaches, such as \cite{corradiniFormalApproachAnalysis2021,vangorpVisualTokenbasedFormalization2013}, where only the BPMN process model is parsed, but the rewrite rules are fixed.
-Generating specific rules for each model leads to possibly more but smaller transformation rules.
-Essentially, some complexity is moved from the transformation rules to their generation.
-The generated rules are tailored to a given process model.
- Thus, they are simpler than the general rules in \cite{vangorpVisualTokenbasedFormalization2013} since they only implement one BPMN feature in a certain process model, not in all possible scenarios.
-Furthermore, our approach is easily accessible since it is implemented in an open-source web-based tool.
+The \gls*{hot} creates a \gls*{gt} system, i.e., \gls*{gt} rules and a start graph for a given BPMN model.
+It is defined using so-called rule generation templates, which describe how \gls*{gt} rules should be generated for each state-changing element in BPMN (see \autoref{sec:formalization}).
+The obtained \gls*{gt} system conforms to the execution typegraph, which represents the BPMN execution model interpreted as a type graph.
+We coloured both artifacts in blue to visualize that they contain the same information.
+Finally, we check the previously defined behavioral properties by using Groove to run the \gls*{gt} system.
+
+We implemented our approach in an open-source web-based tool such that it is easily accessible without needing any local installation.
+Furthermore, our approach is general since it can be used to formalize other behavioral languages.
+To formalize the execution semantics of a different behavioral language, one only needs to define a new execution metamodel and \gls*{hot} (see language engineer in \autoref{fig:approach})
 
 % Paper outline
 The remainder of this paper is structured as follows.
 First, in \autoref{sec:preliminaries} we introduce \gls*{bpmn} and point out the theoretical background of this contribution.
-Second, we describe the \gls*{bpmn} semantics formalization using graph transformation systems (\autoref{sec:formalization}) before explaining how this can be utilized for model checking BPMN-specific and custom properties (\autoref{sec:modelChecking}).
+Second, we describe the \gls*{bpmn} semantics formalization using the \gls*{hot} (\autoref{sec:formalization}) before explaining how this can be utilized for model checking BPMN-specific and custom properties (\autoref{sec:modelChecking}).
 Then, in \autoref{sec:impl}, we present the web-based tool implementing our approach.
 Finally, we discuss related work regarding BPMN feature coverage in \autoref{sec:relatedWork} and conclude in \autoref{sec:conclusion}.
 
 \section{Preliminaries} \label{sec:preliminaries}
 % Describe the application are
-In this paper, we apply graph transformations to formalize the execution semantics of BPMN.
+In this paper, we apply \gls*{gt}s to formalize the execution semantics of BPMN.
 Thus, in this section, we will briefly introduce BPMN and its execution semantics.
 Please refer to \cite{freundRealLifeBPMNUsing2019} or the BPMN specification \cite{objectmanagementgroupBusinessProcessModel2013} for further information about BPMN.
 % Describe the applied theory.
-Furthermore, we outline the theoretical background behind our application of graph transformations.
+Furthermore, we outline the theoretical background behind our application of \gls*{gt}s.
 \subsection{BPMN}
 % Introduce BPMN
-\autoref{fig:bpmnMetamodel} depicts the structure of BPMN process models with the corresponding concrete syntax BPMN symbols contained in clouds.
+\autoref{fig:bpmnMetamodel} depicts the structure of BPMN models with the corresponding concrete syntax BPMN symbols contained in clouds.
 
 \begin{figure}[ht]
   \centering
@@ -119,7 +130,7 @@ Furthermore, we outline the theoretical background behind our application of gra
   \label{fig:bpmnMetamodel}
 \end{figure}
 
-A BPMN process model is represented by a \textsf{Collaboration} that has \textsf{participants} and \textsf{MessageFlows} between \textsf{InteractionNodes} (see  \autoref{fig:bpmnMetamodel}).
+A BPMN model is represented by a \textsf{Collaboration} that has \textsf{participants} and \textsf{MessageFlows} between \textsf{InteractionNodes} (see  \autoref{fig:bpmnMetamodel}).
 Each participant is a \textsf{Process} containing \textsf{FlowNodes} connected by \textsf{SequenceFlows}.
 A \textsf{FlowNode} is either an \textsf{Activity}, \textsf{Gateway}, or \textsf{Event}.
 Many types of \textsf{Activities}, \textsf{Gateways}, and \textsf{Events} exist.
@@ -146,16 +157,16 @@ We use typed attributed graphs for the formalization of the BPMN execution seman
 Each state, i.e., token distribution during the execution of a BPMN model, is represented as an attributed graph typed by the BPMN execution type graph, which is introduced in \autoref{sec:formalization}.
 
 % Groove uses the single pushout approach with negative application conditions.
-Regarding graph transformation, we utilize the single-pushout (SPO) approach with negative application conditions (NAC) \cite{ehrigALGEBRAICAPPROACHESGRAPH1997}.
+Regarding \gls*{gt}, we utilize the single-pushout (SPO) approach with negative application conditions (NAC) \cite{ehrigALGEBRAICAPPROACHESGRAPH1997}.
 In addition, we utilize \emph{nested rules} with quantification to make parts of a rule applied repeatedly or optionally \cite{rensinkNestedQuantificationGraph2006,rensinkHowMuchAre2017}.
 Moreover, we utilize NACs to implement more intricate parts in the BPMN execution semantics, such as the termination of processes. 
-In SPO rewriting, a graph transformation rule is defined as a partial graph morphism $L \to R$, where in our case, $L$ and $R$ are typed attributed graphs. 
+In SPO rewriting, a \gls*{gt} rule is defined as a partial graph morphism $L \to R$, where in our case, $L$ and $R$ are typed attributed graphs. 
 
 
 
 \section{BPMN semantics formalization} \label{sec:formalization}
 
-Since our approach is based on a \gls*{hot} from BPMN to graph transformation systems, we generate a \emph{start graph} and \emph{graph transformation rules} for a given BPMN process model.
+Since our approach is based on a \gls*{hot} from BPMN to \gls*{gt} systems, we generate a \emph{start graph} and \emph{\gls*{gt} rules} for a given BPMN model.
 The approach supports the BPMN features depicted in \autoref{fig:bpmnfeaturesOverview}.
 BPMN features are divided into \textsf{Events}, \textsf{Gateways}, \textsf{Activities}, and \textsf{Edges}.
 \textsf{Events} and \textsf{Activities} are further divided into subgroups.
@@ -211,11 +222,11 @@ Furthermore, we consider allowing the user to define a start graph similar to ho
     \label{fig:startGraph}
 \end{figure}
 
-The \gls*{hot} generates one or more graph transformation rules for each \textsf{FlowNode} in a BPMN model.
+The \gls*{hot} generates one or more \gls*{gt} rules for each \textsf{FlowNode} in a BPMN model.
 To give an intuition about the transformation, we will first describe example results, i.e., generated rules for an NSE, a task, a \textit{message intermediate catch event} (MICE), and a \textit{message intermediate throw event} (MITE) (see \autoref{fig:bpmnfeaturesOverview}).
 Afterward, we will explain how these---and other---rules are created by our \gls*{hot}.
 
-\autoref{fig:gtRuleAbstract} depicts an example graph transformation rule ($L \to R$) for an NSE in abstract syntax.
+\autoref{fig:gtRuleAbstract} depicts an example \gls*{gt} rule ($L \to R$) for an NSE in abstract syntax.
 The rule is straightforward and moves a token from the start event to its outgoing sequence flow.
 For the rest of the paper, we will depict all rules in the concrete syntax introduced earlier.
 The rule from \autoref{fig:gtRuleAbstract} depicted in concrete syntax is shown in \autoref{fig:gtRuleConcrete}.
@@ -223,13 +234,13 @@ The rule from \autoref{fig:gtRuleAbstract} depicted in concrete syntax is shown 
 \begin{figure}[ht]
     \centering
   \includegraphics[width=0.8\textwidth]{images/rule_abstract.pdf}
-  \caption{Example graph transformation rule for an NSE (abstract syntax)}  \label{fig:gtRuleAbstract}
+  \caption{Example \gls*{gt} rule for an NSE (abstract syntax)}  \label{fig:gtRuleAbstract}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
   \includegraphics[width=0.6\textwidth]{images/rule_concrete.pdf}
-  \caption{Example graph transformation rule for an NSE (concrete syntax)}
+  \caption{Example \gls*{gt} rule for an NSE (concrete syntax)}
   \label{fig:gtRuleConcrete}
 \end{figure}
 
@@ -238,7 +249,7 @@ The rule in \autoref{fig:taskRules} represents the start of a task, which will m
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.6\textwidth]{images/bpmn_semantics-rules.pdf}
-    \caption{Example graph transformation rule to start a task.}
+    \caption{Example \gls*{gt} rule to start a task.}
     \label{fig:taskRules}
 \end{figure}
 
@@ -284,7 +295,7 @@ In the example, \textsf{E.incSFs} means following all \textsf{incSFs} links for 
 The start event rule template generates the start event rule in \autoref{fig:gtRuleConcrete}.
 The tokens located on the start events are deleted by start event rules, while one token for each outgoing sequence flow is added.
 If a start event has more than one outgoing sequence flow, it functions as an \textit{implicit parallel gateway}, forking the control flow by creating one token for each of the sequence flows.
-Initially, the tokens on the start events are given by the start graph of the graph transformation system (see, e.g., \autoref{fig:startGraph}).
+Initially, the tokens on the start events are given by the start graph of the \gls*{gt} system (see, e.g., \autoref{fig:startGraph}).
     
 % End Event
 The generated end event rules delete tokens one by one for each incoming sequence flow.
@@ -380,7 +391,7 @@ Concretely, we use an optional existential quantifier (see blue dotted rectangle
 The bottom rule shows how MITEs trigger new process instances when interacting with \textit{message start events}.
 For each receiving \textit{message start event}, a new process snapshot with one token at each outgoing sequence flow is added.
 We chose to create a process snapshot immediately rather than creating a message and then consume this message and create a process snapshot in a separate rule.
-This decision keeps the rule generation simpler and the state space of the graph transformation system smaller.
+This decision keeps the rule generation simpler and the state space of the \gls*{gt} system smaller.
 It is worth noting that a MITE might interact with MICEs and \textit{message start events} \textit{simultaneously}.
 Thus, the rule generation templates in \autoref{fig:throwEventTemplates} can be mixed, i.e., messages can be sent and processes instantiated by one MITE.
 We only separated message throw behavior into two rule templates for presentation purposes.
@@ -406,19 +417,19 @@ In the bottom rule template, one can see that \textit{receive task} rules are id
 
 \section{Model checking BPMN} \label{sec:modelChecking}
 
-Model checking a BPMN process model is possible using the generated graph transformation system.
-Besides a graph transformation system, a set of temporal properties to be checked and the atomic propositions used in these properties must be supplied.
+Model checking a BPMN model is possible using the generated \gls*{gt} system.
+Besides a \gls*{gt} system, a set of temporal properties to be checked and the atomic propositions used in these properties must be supplied.
 An atomic proposition is formalized as a graph and holds in a given state if a match exists from the underlying graph of the proposition to the graph representing the state.
 This enables model checking of temporal properties using the defined atomic propositions.
 
-We differentiate between \emph{BPMN-specific properties} defined for all BPMN process models and \emph{custom properties} tailored towards a particular BPMN process model.
-We do not consider structural properties (like conformance to the syntax of PBMN) since they can be checked using a standard process modeling tool without implementing execution semantics.
+We differentiate between \emph{BPMN-specific properties} defined for all BPMN models and \emph{custom properties} tailored towards a particular BPMN model.
+We do not consider structural properties (like conformance to the syntax of PBMN) since they can be checked using a standard modeling tool without implementing execution semantics.
 We will now give an example of two predefined BPMN-specific properties and show how they can be checked using our approach.
 Then, we describe how custom properties can be featureed and checked.
 
 \subsection{BPMN-specific properties}
 \textit{Safeness} and \textit{Soundness} properties are defined for BPMN in \cite{corradiniClassificationBPMNCollaborations2018}.
-A BPMN process model is \emph{safe} if, during its execution, at most one token occurs along the same sequence flow \cite{corradiniClassificationBPMNCollaborations2018}.
+A BPMN model is \emph{safe} if, during its execution, at most one token occurs along the same sequence flow \cite{corradiniClassificationBPMNCollaborations2018}.
 Soundness is further decomposed into (i) \emph{Option to complete}: any running process instance must eventually complete, (ii) \emph{Proper completion}: at the moment of completion, each token of the process instance must be in a different end event, as well as (iii) \emph{No dead activities}: any activity can be executed in at least one process instance \cite{corradiniClassificationBPMNCollaborations2018}.
 For example, we will describe how to implement the \emph{Safeness} and \emph{Option to complete} properties.
 
@@ -450,17 +461,17 @@ The atomic proposition \textsf{AllTerminated} is true if there exists no process
 \vskip.3\baselineskip
 
 Checking the properties \textit{Safeness}, \textit{Option to Complete} and \textit{No Dead Activities} is implemented in our tool \cite{krauterArtifactsICGT2023}.
-The property \textit{Proper Completion} is not yet implemented but all the information needed can be found in the graph transformation systems state space.
+The property \textit{Proper Completion} is not yet implemented but all the information needed can be found in the \gls*{gt} systems state space.
 
 \subsection{Custom properties} \label{subsec:customProperties}
 % Defining atomic propositions in BPMN is a novelty.
 To make model checking user-friendly, we envision users defining atomic propositions in the extended BPMN syntax, i.e., the concrete syntax introduced in \autoref{fig:typeGraph}.
-Thus, to define an atomic proposition, a user adds process snapshots and tokens for a BPMN process model, which we can automatically convert to a graph representing an atomic proposition.
+Thus, to define an atomic proposition, a user adds process snapshots and tokens for a BPMN model, which we can automatically convert to a graph representing an atomic proposition.
 
 For example, the token distribution shown in \autoref{fig:atomicProposition} defines two running process snapshots with a token in task A.
 Differently colored tokens define different process snapshots.
 A user could use this property, for example, to check if, eventually, two processes are executing task A simultaneously.
-Thus, a user does not need to be aware of the graph transformation semantics used for execution, which is a significant advantage compared to other approaches.
+Thus, a user does not need to be aware of the \gls*{gt} semantics used for execution, which is a significant advantage compared to other approaches.
 
 \begin{figure}[ht]
     \centering
@@ -479,7 +490,7 @@ The tool is open-source, publicly available, and does not require any installati
 
 First, one has to model or upload a \gls*{bpmn} process.
 Then, in the verification section one can choose to check either \gls*{bpmn}-specific properties or custom CTL properties.
-Finally, our tool can generate a graph transformation system for the supplied \gls*{bpmn} model and run model checking in Groove.
+Finally, our tool can generate a \gls*{gt} system for the supplied \gls*{bpmn} model and run model checking in Groove.
 % Evaluation
 Furthermore, to evaluate the correctness of our \gls*{hot}, we created a comprehensive test suite, which verifies correct rule generation for the implemented \gls*{bpmn} features \cite{krauterArtifactsICGT2023}.
 
@@ -493,12 +504,12 @@ Furthermore, to evaluate the correctness of our \gls*{hot}, we created a compreh
 
 \section{Related work} \label{sec:relatedWork}
 % Van gorp
-A BPMN formalization based on in-place graph transformation rules is given in \cite{vangorpVisualTokenbasedFormalization2013}.
+A BPMN formalization based on in-place \gls*{gt} rules is given in \cite{vangorpVisualTokenbasedFormalization2013}.
 The formalization covers a substantial part of the BPMN specification, including complex concepts such as inclusive gateway merge and compensation.
-In addition, the graph transformation rules are visual and thus can easily be aligned with the informal description of the execution semantics of BPMN.
+In addition, the \gls*{gt} rules are visual and thus can easily be aligned with the informal description of the execution semantics of BPMN.
 A key difference to our approach is that the rules in \cite{vangorpVisualTokenbasedFormalization2013} are general and can be applied to any BPMN model, while we generate specific rules for every BPMN model using our \gls*{hot}.
 Thus, our approach can be seen as a program specialization compared to \cite{vangorpVisualTokenbasedFormalization2013} since we process a concrete BPMN model before its execution.
-The graph transformation rules are implemented in a prototype using GrGen.NET.
+The \gls*{gt} rules are implemented in a prototype using GrGen.NET.
 Moreover, they do \textit{not} support model checking since their goal is only formalization.
 
 % BProve/Corradini
@@ -506,7 +517,7 @@ The tool \textit{BProVe} is based on formal BPMN semantics given in rewriting lo
 Using this formal semantics, they can verify custom LTL properties and BPMN-specific properties, such as Safeness and Soundness.
 
 % fbpmn/Houhou
-The verification framework \textsf{fbpmn} uses first-order logic to formalize and check BPMN process models \cite{houhouFirstOrderLogicSemantics2019,houhouFirstOrderLogicVerification2022}.
+The verification framework \textsf{fbpmn} uses first-order logic to formalize and check BPMN models \cite{houhouFirstOrderLogicSemantics2019,houhouFirstOrderLogicVerification2022}.
 This formalization is then realized in the TLA\textsuperscript{+} formal language and can be model-checked using TLC.
 Like BProVe, \textsf{fbpmn} allows checking BPMN-specific properties, such as Safeness and Soundness.
 Furthermore, they focus on different communication models besides the standard in the \gls*{bpmn} specification and support time-related constructs.
