@@ -574,28 +574,23 @@ Thus, we conclude that our formalization is comprehensive but can still be impro
 In addition, it covers the most important features found in practice since we come close to the feature coverage of popular process engines such as Camunda\footnote{\url{https://docs.camunda.org/manual/7.16/reference/bpmn20/}}.
 
 \section{Conclusion \& future work} \label{sec:conclusion}
-% TODO: Summarize the contributions of the paper.
-% Summary
-The approach presented in this paper utilizes a \gls*{hot} from BPMN models to graph transformation systems. 
-For each BPMN model, we automatically generate a start graph and a set of graph transformation rules.
-In this way, the graph transformation rules get simpler while the complexity is shifted to the \gls*{hot}.
-% Formalization & model checking
-Our resulting BPMN formalization is comprehensive and supports model checking.
-% Tool
-In addition, we provide a prototype implementation in a web-based tool to make our ideas easily accessible to other researchers and potential practitioners.
+This paper makes two main practical contributions.
+First, we conceptualized a new approach utilizing a \gls*{hot} to formalize the semantics of behavioral languages.
+Our approach moves complexity from the \gls*{gt} rules to the rule templates making up the \gls*{hot}.
+Furthermore, the approach can be applied to any behavioral language if one can define its state structure and identify its state-changing elements.
 
-% Very tool specific maybe some more general things? in-depth performance comparison to the other tools? Ease of integration?
-% Future work
-We aim to improve our formalization and resulting tool in multiple ways in the future.
-% More semantics
-First, we intend to extend our formalization to support even more BPMN features, for example, cancel and compensation events.
-% Proper evaluation
-Second, we plan to evaluate our approach on models from open repositories such as the \enquote{BPM Academic Initiative Model Collection} \cite{weskeModelCollectionBusiness2020} and  \enquote{Camunda BPMN for
-Research}\footnote{\url{https://github.com/camunda/bpmn-for-research}}.
-% Implementing the atomic proposition definition
-Third, we intend to extend the features of our tool so that the user can define atomic propositions for model checking in the tool directly, as described in \autoref{sec:modelChecking}.
-% Counterexample simulation like Houhou
-Finally, counterexamples found during model checking should be visualized directly in the tool, like the implementation in \cite{houhouFirstOrderLogicVerification2022}.
+Second, we apply our approach to BPMN, resulting in a comprehensive formalization regarding feature coverage (compared to the literature and industrial process engines) that supports checking behavioral properties.
+Furthermore, our contribution resulted in an open-source web-based tool to make our ideas easily accessible to other researchers and potential practitioners.
+
+Potential future work can target both of our main contributions.
+First, we plan a detailed comparison of our \gls*{hot} approach with an approach with fixed rules.
+It will be interesting to investigate how the two approaches differ, for example, in runtime during state space generation.
+Second, we aim to improve our formalization and the resulting tool in multiple ways.
+We intend to extend our formalization to support the remaining few BPMN features used in practice.
+For example, we want to support cancel and compensation events.
+Furthermore, we intend to extend the features of our tool so that the user can define atomic propositions for model checking directly in the tool, as described in \autoref{sec:modelChecking}.
+Finally, we want to turn the modeling environment of our tool into an interactive simulation environment that is driven by our formal semantics.
+In addition, we can use this environment to visualize potential counterexamples of behavioral properties.
 
 \bibliographystyle{splncs04} 
 \bibliography{bib}
