@@ -439,14 +439,8 @@ For example, we will describe how to implement the \emph{Safeness} and \emph{Opt
 
 % Safeness
 \textbf{Safeness} is specified using the CTL property defined in \eqref{eq:safeness}.
-The atomic property \textsf{Unsafe} is true if two tokens of one process snapshot point to the same sequence flow. This atomic proposition \textit{Unsafe} is depicted in \autoref{fig:unsafe}; Groove rules for all the atomic propositions are included in \cite{krauterArtifactsICGT2023}.
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.55\textwidth]{images/bpmn_semantics-unsafe.pdf}
-    \caption{Atomic proposition \textsf{Unsafe}}
-    \label{fig:unsafe}
-\end{figure}
+The atomic property \textsf{Unsafe} is true if two tokens of one process snapshot point to the same sequence flow.
+Groove rules for all the atomic propositions are included in \cite{krauterArtifactsICGT2023}.
 
 % Option to complete
 \emph{Option to complete} is specified using the CTL property defined in \eqref{eq:optionToComplete}.
