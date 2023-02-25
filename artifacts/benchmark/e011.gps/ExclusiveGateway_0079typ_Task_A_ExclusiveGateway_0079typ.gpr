@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph id="ExclusiveGateway_0079typ_Task_A_ExclusiveGateway_0079typ" role="rule" edgeids="false" edgemode="directed">
+        <node id="n117">
+            <attr name="layout">
+                <string>62 85 0 0</string>
+            </attr>
+        </node>
+        <edge from="n117" to="n117">
+            <attr name="label">
+                <string>type:ProcessSnapshot</string>
+            </attr>
+        </edge>
+        <node id="n118">
+            <attr name="layout">
+                <string>392 232 0 0</string>
+            </attr>
+        </node>
+        <edge from="n118" to="n118">
+            <attr name="label">
+                <string>string:"SP"</string>
+            </attr>
+        </edge>
+        <node id="n119">
+            <attr name="layout">
+                <string>392 72 0 0</string>
+            </attr>
+        </node>
+        <edge from="n119" to="n119">
+            <attr name="label">
+                <string>type:Running</string>
+            </attr>
+        </edge>
+        <node id="n120">
+            <attr name="layout">
+                <string>412 152 0 0</string>
+            </attr>
+        </node>
+        <edge from="n120" to="n120">
+            <attr name="label">
+                <string>type:Token</string>
+            </attr>
+        </edge>
+        <node id="n121">
+            <attr name="layout">
+                <string>592 224 0 0</string>
+            </attr>
+        </node>
+        <edge from="n121" to="n121">
+            <attr name="label">
+                <string>string:"Task_A_ExclusiveGateway_0079typ"</string>
+            </attr>
+        </edge>
+        <node id="n122">
+            <attr name="layout">
+                <string>592 144 0 0</string>
+            </attr>
+        </node>
+        <edge from="n122" to="n122">
+            <attr name="label">
+                <string>string:"ExclusiveGateway_0079typ_EndEvent_0v9lt5i"</string>
+            </attr>
+        </edge>
+        <edge from="n120" to="n122">
+            <attr name="label">
+                <string>new:position</string>
+            </attr>
+        </edge>
+        <edge from="n120" to="n121">
+            <attr name="label">
+                <string>del:position</string>
+            </attr>
+        </edge>
+        <edge from="n117" to="n118">
+            <attr name="label">
+                <string>name</string>
+            </attr>
+        </edge>
+        <edge from="n117" to="n119">
+            <attr name="label">
+                <string>state</string>
+            </attr>
+        </edge>
+        <edge from="n117" to="n120">
+            <attr name="label">
+                <string>tokens</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

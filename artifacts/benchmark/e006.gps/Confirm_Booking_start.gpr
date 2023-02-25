@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph id="Confirm_Booking_start" role="rule" edgeids="false" edgemode="directed">
+        <node id="n232">
+            <attr name="layout">
+                <string>492 332 0 0</string>
+            </attr>
+        </node>
+        <edge from="n232" to="n232">
+            <attr name="label">
+                <string>type:Token</string>
+            </attr>
+        </edge>
+        <edge from="n232" to="n232">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <node id="n230">
+            <attr name="layout">
+                <string>492 242 0 0</string>
+            </attr>
+        </node>
+        <edge from="n230" to="n230">
+            <attr name="label">
+                <string>type:Token</string>
+            </attr>
+        </edge>
+        <edge from="n230" to="n230">
+            <attr name="label">
+                <string>del:</string>
+            </attr>
+        </edge>
+        <node id="n227">
+            <attr name="layout">
+                <string>62 87 0 0</string>
+            </attr>
+        </node>
+        <edge from="n227" to="n227">
+            <attr name="label">
+                <string>type:ProcessSnapshot</string>
+            </attr>
+        </edge>
+        <node id="n228">
+            <attr name="layout">
+                <string>402 152 0 0</string>
+            </attr>
+        </node>
+        <edge from="n228" to="n228">
+            <attr name="label">
+                <string>string:"Travel Agency"</string>
+            </attr>
+        </edge>
+        <node id="n229">
+            <attr name="layout">
+                <string>402 72 0 0</string>
+            </attr>
+        </node>
+        <edge from="n229" to="n229">
+            <attr name="label">
+                <string>type:Running</string>
+            </attr>
+        </edge>
+        <node id="n231">
+            <attr name="layout">
+                <string>752 242 0 0</string>
+            </attr>
+        </node>
+        <edge from="n231" to="n231">
+            <attr name="label">
+                <string>string:"Payment_Received_Confirm_Booking"</string>
+            </attr>
+        </edge>
+        <node id="n233">
+            <attr name="layout">
+                <string>752 332 0 0</string>
+            </attr>
+        </node>
+        <edge from="n233" to="n233">
+            <attr name="label">
+                <string>string:"Confirm_Booking"</string>
+            </attr>
+        </edge>
+        <edge from="n227" to="n232">
+            <attr name="label">
+                <string>new:tokens</string>
+            </attr>
+        </edge>
+        <edge from="n232" to="n233">
+            <attr name="label">
+                <string>new:position</string>
+            </attr>
+        </edge>
+        <edge from="n227" to="n230">
+            <attr name="label">
+                <string>del:tokens</string>
+            </attr>
+        </edge>
+        <edge from="n230" to="n231">
+            <attr name="label">
+                <string>del:position</string>
+            </attr>
+        </edge>
+        <edge from="n227" to="n228">
+            <attr name="label">
+                <string>name</string>
+            </attr>
+        </edge>
+        <edge from="n227" to="n229">
+            <attr name="label">
+                <string>state</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

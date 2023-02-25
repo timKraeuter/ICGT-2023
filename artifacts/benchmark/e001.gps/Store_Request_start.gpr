@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph id="Store_Request_start" role="rule" edgeids="false" edgemode="directed">
+        <node id="n199">
+            <attr name="layout">
+                <string>440 332 0 0</string>
+            </attr>
+        </node>
+        <edge from="n199" to="n199">
+            <attr name="label">
+                <string>type:Token</string>
+            </attr>
+        </edge>
+        <edge from="n199" to="n199">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <node id="n197">
+            <attr name="layout">
+                <string>440 242 0 0</string>
+            </attr>
+        </node>
+        <edge from="n197" to="n197">
+            <attr name="label">
+                <string>type:Token</string>
+            </attr>
+        </edge>
+        <edge from="n197" to="n197">
+            <attr name="label">
+                <string>del:</string>
+            </attr>
+        </edge>
+        <node id="n194">
+            <attr name="layout">
+                <string>62 87 0 0</string>
+            </attr>
+        </node>
+        <edge from="n194" to="n194">
+            <attr name="label">
+                <string>type:ProcessSnapshot</string>
+            </attr>
+        </edge>
+        <node id="n195">
+            <attr name="layout">
+                <string>402 152 0 0</string>
+            </attr>
+        </node>
+        <edge from="n195" to="n195">
+            <attr name="label">
+                <string>string:"Client"</string>
+            </attr>
+        </edge>
+        <node id="n196">
+            <attr name="layout">
+                <string>402 72 0 0</string>
+            </attr>
+        </node>
+        <edge from="n196" to="n196">
+            <attr name="label">
+                <string>type:Running</string>
+            </attr>
+        </edge>
+        <node id="n198">
+            <attr name="layout">
+                <string>647 242 0 0</string>
+            </attr>
+        </node>
+        <edge from="n198" to="n198">
+            <attr name="label">
+                <string>string:"Send_Command_Store_Request"</string>
+            </attr>
+        </edge>
+        <node id="n200">
+            <attr name="layout">
+                <string>647 332 0 0</string>
+            </attr>
+        </node>
+        <edge from="n200" to="n200">
+            <attr name="label">
+                <string>string:"Store_Request"</string>
+            </attr>
+        </edge>
+        <edge from="n194" to="n199">
+            <attr name="label">
+                <string>new:tokens</string>
+            </attr>
+        </edge>
+        <edge from="n199" to="n200">
+            <attr name="label">
+                <string>new:position</string>
+            </attr>
+        </edge>
+        <edge from="n194" to="n197">
+            <attr name="label">
+                <string>del:tokens</string>
+            </attr>
+        </edge>
+        <edge from="n197" to="n198">
+            <attr name="label">
+                <string>del:position</string>
+            </attr>
+        </edge>
+        <edge from="n194" to="n195">
+            <attr name="label">
+                <string>name</string>
+            </attr>
+        </edge>
+        <edge from="n194" to="n196">
+            <attr name="label">
+                <string>state</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

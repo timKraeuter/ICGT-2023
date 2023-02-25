@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph id="Payment_Received" role="rule" edgeids="false" edgemode="directed">
+        <node id="n252">
+            <attr name="layout">
+                <string>512 423 0 0</string>
+            </attr>
+        </node>
+        <edge from="n252" to="n252">
+            <attr name="label">
+                <string>type:Token</string>
+            </attr>
+        </edge>
+        <edge from="n252" to="n252">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <node id="n254">
+            <attr name="layout">
+                <string>512 82 0 0</string>
+            </attr>
+        </node>
+        <edge from="n254" to="n254">
+            <attr name="label">
+                <string>type:Token</string>
+            </attr>
+        </edge>
+        <edge from="n254" to="n254">
+            <attr name="label">
+                <string>del:</string>
+            </attr>
+        </edge>
+        <node id="n256">
+            <attr name="layout">
+                <string>922 279 0 0</string>
+            </attr>
+        </node>
+        <edge from="n256" to="n256">
+            <attr name="label">
+                <string>type:Message</string>
+            </attr>
+        </edge>
+        <edge from="n256" to="n256">
+            <attr name="label">
+                <string>del:</string>
+            </attr>
+        </edge>
+        <node id="n259">
+            <attr name="layout">
+                <string>522 172 0 0</string>
+            </attr>
+        </node>
+        <edge from="n259" to="n259">
+            <attr name="label">
+                <string>type:Message</string>
+            </attr>
+        </edge>
+        <edge from="n259" to="n259">
+            <attr name="label">
+                <string>del:</string>
+            </attr>
+        </edge>
+        <node id="n249">
+            <attr name="layout">
+                <string>62 405 0 0</string>
+            </attr>
+        </node>
+        <edge from="n249" to="n249">
+            <attr name="label">
+                <string>type:ProcessSnapshot</string>
+            </attr>
+        </edge>
+        <node id="n250">
+            <attr name="layout">
+                <string>422 333 0 0</string>
+            </attr>
+        </node>
+        <edge from="n250" to="n250">
+            <attr name="label">
+                <string>string:"Travel Agency"</string>
+            </attr>
+        </edge>
+        <node id="n251">
+            <attr name="layout">
+                <string>422 252 0 0</string>
+            </attr>
+        </node>
+        <edge from="n251" to="n251">
+            <attr name="label">
+                <string>type:Running</string>
+            </attr>
+        </edge>
+        <node id="n253">
+            <attr name="layout">
+                <string>772 423 0 0</string>
+            </attr>
+        </node>
+        <edge from="n253" to="n253">
+            <attr name="label">
+                <string>string:"Payment_Received_Confirm_Booking"</string>
+            </attr>
+        </edge>
+        <node id="n255">
+            <attr name="layout">
+                <string>772 82 0 0</string>
+            </attr>
+        </node>
+        <edge from="n255" to="n255">
+            <attr name="label">
+                <string>string:"Booking_Received_Payment_Received"</string>
+            </attr>
+        </edge>
+        <node id="n257">
+            <attr name="layout">
+                <string>1422 279 0 0</string>
+            </attr>
+        </node>
+        <edge from="n257" to="n257">
+            <attr name="label">
+                <string>string:"Payment"</string>
+            </attr>
+        </edge>
+        <node id="n258">
+            <attr name="layout">
+                <string>772 164 0 0</string>
+            </attr>
+        </node>
+        <edge from="n258" to="n258">
+            <attr name="label">
+                <string>forall:</string>
+            </attr>
+        </edge>
+        <edge from="n249" to="n252">
+            <attr name="label">
+                <string>new:tokens</string>
+            </attr>
+        </edge>
+        <edge from="n252" to="n253">
+            <attr name="label">
+                <string>new:position</string>
+            </attr>
+        </edge>
+        <edge from="n249" to="n254">
+            <attr name="label">
+                <string>del:tokens</string>
+            </attr>
+        </edge>
+        <edge from="n254" to="n255">
+            <attr name="label">
+                <string>del:position</string>
+            </attr>
+        </edge>
+        <edge from="n249" to="n256">
+            <attr name="label">
+                <string>del:messages</string>
+            </attr>
+        </edge>
+        <edge from="n256" to="n257">
+            <attr name="label">
+                <string>del:position</string>
+            </attr>
+        </edge>
+        <edge from="n249" to="n259">
+            <attr name="label">
+                <string>del:messages</string>
+            </attr>
+        </edge>
+        <edge from="n249" to="n250">
+            <attr name="label">
+                <string>name</string>
+            </attr>
+        </edge>
+        <edge from="n249" to="n251">
+            <attr name="label">
+                <string>state</string>
+            </attr>
+        </edge>
+        <edge from="n259" to="n258">
+            <attr name="label">
+                <string>@</string>
+            </attr>
+        </edge>
+        <edge from="n259" to="n256">
+            <attr name="label">
+                <string>!=</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph id="Confirm_Booking_end" role="rule" edgeids="false" edgemode="directed">
+        <node id="n239">
+            <attr name="layout">
+                <string>492 669 0 0</string>
+            </attr>
+        </node>
+        <edge from="n239" to="n239">
+            <attr name="label">
+                <string>type:Token</string>
+            </attr>
+        </edge>
+        <edge from="n239" to="n239">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <node id="n245">
+            <attr name="layout">
+                <string>442 242 0 0</string>
+            </attr>
+        </node>
+        <edge from="n245" to="n245">
+            <attr name="label">
+                <string>type:Message</string>
+            </attr>
+        </edge>
+        <edge from="n245" to="n245">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <node id="n237">
+            <attr name="layout">
+                <string>492 579 0 0</string>
+            </attr>
+        </node>
+        <edge from="n237" to="n237">
+            <attr name="label">
+                <string>type:Token</string>
+            </attr>
+        </edge>
+        <edge from="n237" to="n237">
+            <attr name="label">
+                <string>del:</string>
+            </attr>
+        </edge>
+        <node id="n234">
+            <attr name="layout">
+                <string>62 424 0 0</string>
+            </attr>
+        </node>
+        <edge from="n234" to="n234">
+            <attr name="label">
+                <string>type:ProcessSnapshot</string>
+            </attr>
+        </edge>
+        <node id="n235">
+            <attr name="layout">
+                <string>402 489 0 0</string>
+            </attr>
+        </node>
+        <edge from="n235" to="n235">
+            <attr name="label">
+                <string>string:"Travel Agency"</string>
+            </attr>
+        </edge>
+        <node id="n236">
+            <attr name="layout">
+                <string>402 409 0 0</string>
+            </attr>
+        </node>
+        <edge from="n236" to="n236">
+            <attr name="label">
+                <string>type:Running</string>
+            </attr>
+        </edge>
+        <node id="n238">
+            <attr name="layout">
+                <string>752 579 0 0</string>
+            </attr>
+        </node>
+        <edge from="n238" to="n238">
+            <attr name="label">
+                <string>string:"Confirm_Booking"</string>
+            </attr>
+        </edge>
+        <node id="n240">
+            <attr name="layout">
+                <string>752 669 0 0</string>
+            </attr>
+        </node>
+        <edge from="n240" to="n240">
+            <attr name="label">
+                <string>string:"Confirm_Booking_Order_Ticket"</string>
+            </attr>
+        </edge>
+        <node id="n241">
+            <attr name="layout">
+                <string>687 314 0 0</string>
+            </attr>
+        </node>
+        <edge from="n241" to="n241">
+            <attr name="label">
+                <string>existsx:</string>
+            </attr>
+        </edge>
+        <node id="n242">
+            <attr name="layout">
+                <string>62 242 0 0</string>
+            </attr>
+        </node>
+        <edge from="n242" to="n242">
+            <attr name="label">
+                <string>type:ProcessSnapshot</string>
+            </attr>
+        </edge>
+        <node id="n243">
+            <attr name="layout">
+                <string>392 72 0 0</string>
+            </attr>
+        </node>
+        <edge from="n243" to="n243">
+            <attr name="label">
+                <string>string:"Customer"</string>
+            </attr>
+        </edge>
+        <node id="n244">
+            <attr name="layout">
+                <string>430 329 0 0</string>
+            </attr>
+        </node>
+        <edge from="n244" to="n244">
+            <attr name="label">
+                <string>type:Running</string>
+            </attr>
+        </edge>
+        <node id="n246">
+            <attr name="layout">
+                <string>687 234 0 0</string>
+            </attr>
+        </node>
+        <edge from="n246" to="n246">
+            <attr name="label">
+                <string>string:"Confirmation"</string>
+            </attr>
+        </edge>
+        <node id="n247">
+            <attr name="layout">
+                <string>462 152 0 0</string>
+            </attr>
+        </node>
+        <edge from="n247" to="n247">
+            <attr name="label">
+                <string>type:Token</string>
+            </attr>
+        </edge>
+        <node id="n248">
+            <attr name="layout">
+                <string>687 144 0 0</string>
+            </attr>
+        </node>
+        <edge from="n248" to="n248">
+            <attr name="label">
+                <string>string:"Ticket_Received_Booking_Confirmed"</string>
+            </attr>
+        </edge>
+        <edge from="n234" to="n239">
+            <attr name="label">
+                <string>new:tokens</string>
+            </attr>
+        </edge>
+        <edge from="n239" to="n240">
+            <attr name="label">
+                <string>new:position</string>
+            </attr>
+        </edge>
+        <edge from="n242" to="n245">
+            <attr name="label">
+                <string>new:messages</string>
+            </attr>
+        </edge>
+        <edge from="n245" to="n246">
+            <attr name="label">
+                <string>new:position</string>
+            </attr>
+        </edge>
+        <edge from="n234" to="n237">
+            <attr name="label">
+                <string>del:tokens</string>
+            </attr>
+        </edge>
+        <edge from="n237" to="n238">
+            <attr name="label">
+                <string>del:position</string>
+            </attr>
+        </edge>
+        <edge from="n234" to="n235">
+            <attr name="label">
+                <string>name</string>
+            </attr>
+        </edge>
+        <edge from="n234" to="n236">
+            <attr name="label">
+                <string>state</string>
+            </attr>
+        </edge>
+        <edge from="n242" to="n243">
+            <attr name="label">
+                <string>name</string>
+            </attr>
+        </edge>
+        <edge from="n242" to="n244">
+            <attr name="label">
+                <string>state</string>
+            </attr>
+        </edge>
+        <edge from="n242" to="n241">
+            <attr name="label">
+                <string>@</string>
+            </attr>
+        </edge>
+        <edge from="n244" to="n241">
+            <attr name="label">
+                <string>@</string>
+            </attr>
+        </edge>
+        <edge from="n245" to="n241">
+            <attr name="label">
+                <string>@</string>
+            </attr>
+        </edge>
+        <edge from="n242" to="n247">
+            <attr name="label">
+                <string>tokens</string>
+            </attr>
+        </edge>
+        <edge from="n247" to="n248">
+            <attr name="label">
+                <string>position</string>
+            </attr>
+        </edge>
+        <edge from="n247" to="n241">
+            <attr name="label">
+                <string>@</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>
