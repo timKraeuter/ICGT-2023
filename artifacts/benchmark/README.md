@@ -5,7 +5,7 @@
 2. The benchmark was run with Groove version **5.8.1**, which is contained in `groove-5_8_1` and does not have to be installed.
 However, Java version 11 or later must be installed.
 
-All benchmarks were run using a Windows 11 machine with a AMD Ryzen 7700X processor with 32 GB DDR5-5600 RAM on NVMe SSD storage.
+All benchmarks were run using a Windows 11 machine with an AMD Ryzen 7700X processor with 32 GB DDR5-5600 RAM on NVMe SSD storage.
 
 # HOT transformation benchmark
 1. Clone this repository.
@@ -18,9 +18,9 @@ hyperfine -L bpmnModel models/e001.bpmn,models/e002.bpmn,models/e006.bpmn,models
 ```
 
 The HOT takes less than 1s and thus is adequately fast.
-We suspect that most of the time is spent doing I/O, i.e, reading the input bpmn file and writing the graph transformation rules for Groove.
+We suspect most of the time is spent doing I/O, i.e., reading the input BPMN file and writing the graph transformation rules for Groove.
 To summarize, the HOT runtime could be further optimized if one avoids writing the generated GT system to stable storage.
-Instead the GT system could remain in main memory and be accessed from there.  
+Instead, the GT system could remain in the main memory and be accessed from there.  
 
 # State space generation benchmark
 
