@@ -15,6 +15,9 @@ However, Java version 11 or later must be installed.
 hyperfine -L bpmnModel models/e001.bpmn,models/e002.bpmn,models/e006.bpmn,models/e007.bpmn,models/e008.bpmn,models/e009.bpmn,models/e010.bpmn,models/e011.bpmn,models/e015.bpmn,models/e016.bpmn "java -jar ruleGenerator-1.jar {bpmnModel} ./" --output ./HOToutput.txt --export-json HOTstats.json
 ```
 
+The HOT takes less than 1s and thus is adequately fast.
+We suspect that most of the time is spent doing I/O, i.e, reading the input bpmn file and writing the graph transformation rules for Groove.
+
 # State space generation benchmark
 
 # Auxiliary information
