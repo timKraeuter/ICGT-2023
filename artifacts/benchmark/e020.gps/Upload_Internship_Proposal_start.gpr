@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph id="Upload_Internship_Proposal_start" role="rule" edgeids="false" edgemode="directed">
+        <node id="n385">
+            <attr name="layout">
+                <string>532 162 0 0</string>
+            </attr>
+        </node>
+        <edge from="n385" to="n385">
+            <attr name="label">
+                <string>type:Token</string>
+            </attr>
+        </edge>
+        <edge from="n385" to="n385">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <node id="n383">
+            <attr name="layout">
+                <string>532 252 0 0</string>
+            </attr>
+        </node>
+        <edge from="n383" to="n383">
+            <attr name="label">
+                <string>type:Token</string>
+            </attr>
+        </edge>
+        <edge from="n383" to="n383">
+            <attr name="label">
+                <string>del:</string>
+            </attr>
+        </edge>
+        <node id="n387">
+            <attr name="layout">
+                <string>517 422 0 0</string>
+            </attr>
+        </node>
+        <edge from="n387" to="n387">
+            <attr name="label">
+                <string>type:Message</string>
+            </attr>
+        </edge>
+        <edge from="n387" to="n387">
+            <attr name="label">
+                <string>del:</string>
+            </attr>
+        </edge>
+        <node id="n380">
+            <attr name="layout">
+                <string>62 89 0 0</string>
+            </attr>
+        </node>
+        <edge from="n380" to="n380">
+            <attr name="label">
+                <string>type:ProcessSnapshot</string>
+            </attr>
+        </edge>
+        <node id="n381">
+            <attr name="layout">
+                <string>412 72 0 0</string>
+            </attr>
+        </node>
+        <edge from="n381" to="n381">
+            <attr name="label">
+                <string>string:"Internship Office"</string>
+            </attr>
+        </edge>
+        <node id="n382">
+            <attr name="layout">
+                <string>412 332 0 0</string>
+            </attr>
+        </node>
+        <edge from="n382" to="n382">
+            <attr name="label">
+                <string>type:Running</string>
+            </attr>
+        </edge>
+        <node id="n384">
+            <attr name="layout">
+                <string>822 252 0 0</string>
+            </attr>
+        </node>
+        <edge from="n384" to="n384">
+            <attr name="label">
+                <string>string:"ExclusiveGateway_025el3u_Upload_Internship_Proposal"</string>
+            </attr>
+        </edge>
+        <node id="n386">
+            <attr name="layout">
+                <string>822 162 0 0</string>
+            </attr>
+        </node>
+        <edge from="n386" to="n386">
+            <attr name="label">
+                <string>string:"Upload_Internship_Proposal"</string>
+            </attr>
+        </edge>
+        <node id="n388">
+            <attr name="layout">
+                <string>822 422 0 0</string>
+            </attr>
+        </node>
+        <edge from="n388" to="n388">
+            <attr name="label">
+                <string>string:"proposal"</string>
+            </attr>
+        </edge>
+        <edge from="n380" to="n385">
+            <attr name="label">
+                <string>new:tokens</string>
+            </attr>
+        </edge>
+        <edge from="n385" to="n386">
+            <attr name="label">
+                <string>new:position</string>
+            </attr>
+        </edge>
+        <edge from="n380" to="n383">
+            <attr name="label">
+                <string>del:tokens</string>
+            </attr>
+        </edge>
+        <edge from="n383" to="n384">
+            <attr name="label">
+                <string>del:position</string>
+            </attr>
+        </edge>
+        <edge from="n380" to="n387">
+            <attr name="label">
+                <string>del:messages</string>
+            </attr>
+        </edge>
+        <edge from="n387" to="n388">
+            <attr name="label">
+                <string>del:position</string>
+            </attr>
+        </edge>
+        <edge from="n380" to="n381">
+            <attr name="label">
+                <string>name</string>
+            </attr>
+        </edge>
+        <edge from="n380" to="n382">
+            <attr name="label">
+                <string>state</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

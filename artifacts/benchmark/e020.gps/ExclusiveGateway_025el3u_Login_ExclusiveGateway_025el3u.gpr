@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph id="ExclusiveGateway_025el3u_Login_ExclusiveGateway_025el3u" role="rule" edgeids="false" edgemode="directed">
+        <node id="n368">
+            <attr name="layout">
+                <string>62 85 0 0</string>
+            </attr>
+        </node>
+        <edge from="n368" to="n368">
+            <attr name="label">
+                <string>type:ProcessSnapshot</string>
+            </attr>
+        </edge>
+        <node id="n369">
+            <attr name="layout">
+                <string>392 232 0 0</string>
+            </attr>
+        </node>
+        <edge from="n369" to="n369">
+            <attr name="label">
+                <string>string:"Internship Office"</string>
+            </attr>
+        </edge>
+        <node id="n370">
+            <attr name="layout">
+                <string>392 72 0 0</string>
+            </attr>
+        </node>
+        <edge from="n370" to="n370">
+            <attr name="label">
+                <string>type:Running</string>
+            </attr>
+        </edge>
+        <node id="n371">
+            <attr name="layout">
+                <string>552 152 0 0</string>
+            </attr>
+        </node>
+        <edge from="n371" to="n371">
+            <attr name="label">
+                <string>type:Token</string>
+            </attr>
+        </edge>
+        <node id="n372">
+            <attr name="layout">
+                <string>802 224 0 0</string>
+            </attr>
+        </node>
+        <edge from="n372" to="n372">
+            <attr name="label">
+                <string>string:"Login_ExclusiveGateway_025el3u"</string>
+            </attr>
+        </edge>
+        <node id="n373">
+            <attr name="layout">
+                <string>802 144 0 0</string>
+            </attr>
+        </node>
+        <edge from="n373" to="n373">
+            <attr name="label">
+                <string>string:"ExclusiveGateway_025el3u_Upload_Internship_Proposal"</string>
+            </attr>
+        </edge>
+        <edge from="n371" to="n373">
+            <attr name="label">
+                <string>new:position</string>
+            </attr>
+        </edge>
+        <edge from="n371" to="n372">
+            <attr name="label">
+                <string>del:position</string>
+            </attr>
+        </edge>
+        <edge from="n368" to="n369">
+            <attr name="label">
+                <string>name</string>
+            </attr>
+        </edge>
+        <edge from="n368" to="n370">
+            <attr name="label">
+                <string>state</string>
+            </attr>
+        </edge>
+        <edge from="n368" to="n371">
+            <attr name="label">
+                <string>tokens</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

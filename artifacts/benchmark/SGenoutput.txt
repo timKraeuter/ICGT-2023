@@ -1,0 +1,17 @@
+Grammar:	e020
+Start graph:	start
+Control:	main
+Exploration:	bfs / final / infinite
+Timestamp:	Sun Feb 26 21:43:07 CET 2023
+
+Progress: (s = 100 states, t = 100 transitions):
+  tstttsttstttsttstttsttsttsttstttstttstttstttsttstttstttstttstttstttstttstttstttstttstttstttsttstttts 2700s (126x) 7300t
+  tttstttstttsttttst
+
+Time (ms):          722
+Space (kB):         2545
+
+States:       3121
+Transitions:  8726
+
+12 result states found: Result [elements=[s619, s679, s826, s1886, s2026, s2585, s2648, s2794, s3015, s3059, s3087, s3120]]
