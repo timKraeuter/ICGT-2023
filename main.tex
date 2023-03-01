@@ -65,6 +65,7 @@ As proof of concept, we have implemented our approach in an open-source web-base
 \keywords{BPMN \and Model transformation \and Graph transformation \and Model checking \and Formalization}
 \end{abstract}
 
+% TODO: Add discussion section with benchmark.
 
 \section{Introduction}
 \gls*{bpmn} \cite{objectmanagementgroupBusinessProcessModel2013} is a widely used standard notation to define intra- and inter-organizational workflows.
@@ -77,10 +78,10 @@ Generally, we think about two fundamental concepts when formalizing the executio
 First, \textit{state structure}, i.e., how can one represent models during execution.
 The state structure corresponds to the typegraph in \gls*{gt} systems.
 Second, \textit{state-changing elements}, i.e., which elements in a model encode potential state changes.
-Those elements, must then be implemented using \gls*{gt} rules.
+Those elements must then be implemented using \gls*{gt} rules.
 Our approach creates \gls*{gt} rules based on a \gls*{hot} and is summarized in \autoref{fig:approach}.
 
-% Describe the approach and highlight that it can be generalized to other languages which have state and state changing-elements.
+% Describe the approach and highlight that it can be generalized to other languages with state and state-changing elements.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{images/bpmn_semantics-overview.pdf}
@@ -97,9 +98,9 @@ Furthermore, we define a \gls*{hot} from BPMN models to \gls*{gt} systems.
 We call the transformation \textit{higher-order} since the resulting graph-transformation systems represent model-transformations themselves \cite{tisiUseHigherOrderModel2009}.
 The \gls*{hot} creates a \gls*{gt} system, i.e., \gls*{gt} rules and a start graph for a given BPMN model.
 It is defined using so-called rule generation templates, which describe how \gls*{gt} rules should be generated for each state-changing element in BPMN (see \autoref{sec:formalization}).
-The obtained \gls*{gt} system conforms to the execution typegraph, which represents the BPMN execution model interpreted as a type graph.
-We coloured both artifacts in blue to visualize that they contain the same information.
-Finally, we check the previously defined behavioral properties by using Groove to run the \gls*{gt} system.
+The obtained \gls*{gt} system conforms to the execution type graph representing the BPMN execution model interpreted as a type graph.
+We colored both artifacts in blue to visualize that they contain the same information.
+Finally, we check the previously defined behavioral properties using Groove to run the \gls*{gt} system.
 
 We implemented our approach in an open-source web-based tool such that it is easily accessible without needing any local installation.
 Furthermore, our approach is general since it can be used to formalize other behavioral languages.
@@ -107,20 +108,17 @@ To formalize the execution semantics of a different behavioral language, one onl
 
 % Paper outline
 The remainder of this paper is structured as follows.
-First, in \autoref{sec:preliminaries} we introduce \gls*{bpmn} and point out the theoretical background of this contribution.
+First, in \autoref{sec:preliminaries}, we introduce \gls*{bpmn} and point out the theoretical background of this contribution.
 Second, we describe the \gls*{bpmn} semantics formalization using the \gls*{hot} (\autoref{sec:formalization}) before explaining how this can be utilized for model checking BPMN-specific and custom properties (\autoref{sec:modelChecking}).
 Then, in \autoref{sec:impl}, we present the web-based tool implementing our approach.
 Finally, we discuss related work regarding BPMN feature coverage in \autoref{sec:relatedWork} and conclude in \autoref{sec:conclusion}.
 
 \section{Preliminaries} \label{sec:preliminaries}
-% Describe the application are
 In this paper, we apply \gls*{gt}s to formalize the execution semantics of BPMN.
 Thus, in this section, we will briefly introduce BPMN and its execution semantics.
 Please refer to \cite{freundRealLifeBPMNUsing2019} or the BPMN specification \cite{objectmanagementgroupBusinessProcessModel2013} for further information about BPMN.
-% Describe the applied theory.
 Furthermore, we outline the theoretical background behind our application of \gls*{gt}s.
 \subsection{BPMN}
-% Introduce BPMN
 \autoref{fig:bpmnMetamodel} depicts the structure of BPMN models with the corresponding concrete syntax BPMN symbols contained in clouds.
 
 \begin{figure}[ht]
@@ -145,9 +143,9 @@ A BPMN process is triggered by one of its start events, leading to the creation 
 % Activities
 Activities can start when at least one token is located on an incoming sequence flow.
 The start of an activity will move the incoming token to the activity.
-When an activity finishes, it deletes its token and adds one token at each outgoing sequence flow.
+When an activity finishes, it deletes its token and adds one at each outgoing sequence flow.
 % Gateways
-Furthermore, different gateway types exist, for example, for parallelization, synchronization, XOR, and OR distribution of tokens.
+Furthermore, different gateway types exist, such as parallelization, synchronization, XOR, and OR distribution of tokens.
 % Events (basic)
 Events delete and add tokens similar to activities but have additional semantics depending on their type.
 For example, message events will add or delete messages.
@@ -180,7 +178,7 @@ However, the other features are also implemented and tested \cite{krauterArtifac
     \label{fig:bpmnfeaturesOverview}
 \end{figure}
 
-Before we explain our implementation of the BPMN features we define the BPMN execution metamodel.
+Before we explain our implementation of the BPMN features, we define the BPMN execution metamodel.
 
 \subsection{BPMN execution metamodel}
 
@@ -205,7 +203,7 @@ To concisely depict graphs conforming to this type graph, we introduce a concret
 Our concrete syntax extends the BPMN syntax by adding process snapshots, tokens, and messages.
 Tokens are represented as colored circles drawn at their specified positions in a model.
 In addition, we use colored circles at the top left of the bounding box, representing instances of the BPMN \textsf{Process}; these circles represent process snapshots.
-% Token color must match the tokens relation in the type graph (constraint!). This should be checked by the tool when using the concrete syntax.
+% Token color must match the tokens relation in the type graph (constraint!). This should be checked by the tool when using concrete syntax.
 The token's color must match the color of the process snapshot holding the token.
 The concrete syntax was inspired by the bpmn-js-token-simulation\footnote{\url{https://github.com/bpmn-io/bpmn-js-token-simulation}}.
 Using this type graph, we can now define how the start graph and graph-transformation rules for the different BPMN features are created.
