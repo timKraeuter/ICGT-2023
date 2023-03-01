@@ -17,7 +17,7 @@ All benchmarks were run using a Windows 11 machine with an AMD Ryzen 7700X proce
 hyperfine -L bpmnModel models/e001.bpmn,models/e002.bpmn,models/e007.bpmn,models/e008.bpmn,models/e009.bpmn,models/e010.bpmn,models/e011.bpmn,models/e015.bpmn,models/e016.bpmn,models/e020.bpmn "java -jar ruleGenerator-1.jar {bpmnModel} ./" --output ./HOToutput.txt --export-json HOTstats.json
 ```
 
-The HOT takes less than 1s and thus is adequately fast.
+The HOT takes less than one second and thus is adequately fast.
 We suspect most of the time is spent doing I/O, i.e., reading the input BPMN file and writing the graph transformation rules for Groove.
 To summarize, the HOT runtime could be further optimized if one avoids writing the generated GT system to stable storage.
 Instead, the GT system could remain in the main memory and be accessed from there.
