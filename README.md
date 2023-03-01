@@ -72,3 +72,7 @@ found [here](https://github.com/timKraeuter/Rewrite_Rule_Generation/blob/master/
 The [wiki](https://github.com/timKraeuter/Rewrite_Rule_Generation/wiki) describes our [comprehensive test suite](https://github.com/timKraeuter/Rewrite_Rule_Generation/wiki/Test-Suite) to test our coverage of BPMN features. 
 
 Feel free to contact me for further information.
+
+## Discussion
+
+The instructions to run the benchmark can be found [here](https://github.com/timKraeuter/ICGT-2023/tree/main/artifacts/benchmark#readme).
