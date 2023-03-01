@@ -3,7 +3,7 @@
    - The benchmark was run with hyperfine version **1.15.0** on Windows 10.
    - The hyperfine windows release **1.15.0** is contained in `artifacts/dependencies`.
 2. The benchmark was run with Groove version **5.8.1**, which is contained in `groove-5_8_1` and does not have to be installed.
-   However, Java version 11 or later must be installed.
+3. Install Java version 11 (Groove might also work with later versions).
 
 All benchmarks were run using a Windows 11 machine with an AMD Ryzen 7700X processor with 32 GB DDR5-5600 RAM on NVMe SSD storage.
 
@@ -27,11 +27,4 @@ Instead, the GT system could remain in the main memory and be accessed from ther
 **Benchmark**:
 ```bash
 hyperfine -L grammar e001.gps,e002.gps,e007.gps,e008.gps,e009.gps,e010.gps,e011.gps,e015.gps,e016.gps,e020.gps "java -jar dependencies/groove-5_8_1/bin/Generator.jar {grammar}" --output ./SGenoutput.txt --export-json Sgenstats.json
-```
-
-# Auxiliary information
-
-Groove graph grammars were generated with the following command (java 11 needs to be installed):
-```bash
-    java -jar ruleGenerator-1.jar models/e001.bpmn ./
 ```
