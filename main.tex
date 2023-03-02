@@ -200,7 +200,7 @@ Otherwise, it has the state \textsf{Running}.
 A \textsf{Token} has an \textsf{elementID}, which points to the BPMN \textsf{Activity} or the \textsf{SequenceFlow} at which it is located.
 A \textsf{Message} has an \textsf{elementID} pointing to a \textsf{MessageFlow}.
 To concisely depict graphs conforming to this type graph, we introduce a concrete syntax in the clouds attached to the elements.
-Our concrete syntax extends the BPMN syntax by adding process snapshots, tokens, and messages.
+Our concrete syntax extends the BPMN syntax by adding process snapshots, subprocess relations, tokens, and messages.
 Tokens are represented as colored circles drawn at their specified positions in a model.
 In addition, we use colored circles at the top left of the bounding box, representing instances of the BPMN \textsf{Process}; these circles represent process snapshots.
 % Token color must match the tokens relation in the type graph (constraint!). This should be checked by the tool when using concrete syntax.
@@ -342,7 +342,7 @@ Subprocess execution is similar to activity execution.
 The upper template generates one rule for each incoming sequence flow.
 The rule deletes an incoming token and adds a process snapshot representing a subprocess. 
 The addition of this process snapshot is represented with a colored circle on the top left corner of the subprocess with a token at each of its start events.
-To depict the \textsf{subprocesses} relation in \autoref{fig:typeGraph}, we chose the same color for the outer ring of the subprocess snapshot and its tokens.
+We added a \textit{subprocess} link between the process snapshots to depict the \textsf{subprocesses} relation in \autoref{fig:typeGraph}.
 If the subprocess has no start events, a token for every activity and gateway without incoming sequence flows is added. %, as defined in the BPMN specification.
 
 The bottom rule template generates one rule to delete a terminated process snapshot and adds tokens at each outgoing sequence flow.
