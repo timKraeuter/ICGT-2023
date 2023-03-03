@@ -601,4 +601,56 @@ In addition, we can use this environment to visualize potential counterexamples 
 
 \bibliographystyle{splncs04} 
 \bibliography{bib}
+
+\section{Appendix}
+
+
+This section shows some simple examples of how our tool is used to check BPMN-specific properties.
+Our tool and the example models are available as artifacts \cite{krauterArtifactsICGT2023}.
+
+\subsection{Safeness example}
+\autoref{fig:unsafeSample} shows a screenshot of the tool detecting an unsafe situation.
+Unfortunately, groove does not provide a counterexample when running CTL model checking through the console.
+Thus, we cannot highlight where the model is unsafe.
+In this case, the sequence flow \textit{Unsafe} is unsafe.
+
+The exclusive gateway merges the sequence flows but does not synchronize.
+Thus, the outgoing sequence flow can hold two tokens, and Activity C is executed twice.
+Again this could be a simple mistake not obvious to people unfamiliar with the BPMN execution semantics.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{artifacts/unsafe_sample.png}
+    \caption{Screenshot of the tool detecting an unsafe situation}
+    \label{fig:unsafeSample}
+\end{figure}
+
+\subsection{Option to complete example}
+\autoref{fig:optionToCompleteSample} shows a screenshot of the tool checking \textit{Option to complete}.
+
+The parallel gateway cannot synchronize since no split happened before.
+Thus, the process cannot terminate.
+Again this could be a simple mistake not obvious to people unfamiliar with the BPMN execution semantics.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{artifacts/option_to_complete_sample.png}
+    \caption{Screenshot of the tool checking \textit{Option to complete}}
+    \label{fig:optionToCompleteSample}
+\end{figure}
+
+\subsection{No dead activities example}
+\autoref{fig:deadSample} shows a screenshot of the tool detecting a dead activity.
+Activity C is \textit{dead}, which is highlighted when checking for dead activities.
+
+The parallel gateway is incorrect since it cannot synchronize two sequence flows that never split.
+This could be a simple mistake not obvious to people unfamiliar with the BPMN execution semantics.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{artifacts/dead_sample.png}
+    \caption{Screenshot of the tool detecting a dead activity}
+    \label{fig:deadSample}
+\end{figure}
+
 \end{document}
