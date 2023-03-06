@@ -456,8 +456,8 @@ The atomic proposition \textsf{AllTerminated} is true if there exists no process
 \end{minipage}
 \vskip.3\baselineskip
 
-Checking the properties \textit{Safeness}, \textit{Option to Complete} and \textit{No Dead Activities} is implemented in our tool \cite{krauterArtifactsICGT2023}.
-The property \textit{Proper Completion} is not yet implemented but all the information needed can be found in the \gls*{gt} systems state space.
+Checking the properties \textit{Safeness}, \textit{Option to Complete}, and \textit{No Dead Activities} is implemented in our tool \cite{krauterArtifactsICGT2023}.
+The property \textit{Proper Completion} is not yet implemented, but all the information needed can be found in the \gls*{gt} systems state space.
 
 \subsection{Custom properties} \label{subsec:customProperties}
 % Defining atomic propositions in BPMN is a novelty.
@@ -467,10 +467,10 @@ Thus, to define an atomic proposition, a modeler adds process snapshots and toke
 For example, the token distribution shown in \autoref{fig:atomicProposition} defines two running process snapshots with a token in task A.
 Differently colored tokens define different process snapshots.
 A modeler could use this property, for example, to check if, eventually, two processes are executing task A simultaneously.
-Thus, a modeler does not need to be aware of the \gls*{gt} semantics used for execution.
+Thus, a modeler does not need to know the \gls*{gt} semantics used for execution.
 
-However, a modeler still needs to know the used temporal logic such as LTL and CTL.
-A domain-specific property language for BPMN would further lessen the knowledge required by a modeler \cite{meyersProMoBoxFrameworkGenerating2014}. 
+However, a modeler must still know the temporal logic, such as LTL and CTL.
+A domain-specific property language for BPMN would further lessen the knowledge required from a modeler \cite{meyersProMoBoxFrameworkGenerating2014}. 
 
 
 \begin{figure}[ht]
