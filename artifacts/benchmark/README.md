@@ -10,7 +10,7 @@ All benchmarks were run using a Windows 11 machine with an AMD Ryzen 7700X proce
 # HOT transformation benchmark
 1. Clone this repository.
 2. Open a terminal in **this folder**.
-3. Run the following commands:
+3. Run the following command:
 
 **Benchmark**:
 ```bash
@@ -26,7 +26,7 @@ Instead, the GT system could remain in the main memory and be accessed from ther
 
 1. Clone this repository.
 2. Open a terminal in **this folder**.
-3. Run the following commands:
+3. Run the following command:
 
 **Benchmark**:
 ```bash
