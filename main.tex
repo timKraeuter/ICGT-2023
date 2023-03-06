@@ -507,14 +507,19 @@ Furthermore, to evaluate the correctness of our \gls*{hot}, we created a compreh
 \section{Performance experiments}
 
 Model checking is a useful technique but often falls short in practice due to insufficient performance.
-Poor performance might have many reasons most notably large models leading to state space explosion.
-We ran a benchmark for ten different BPMN models from \cite{houhouFirstOrderLogicVerification2022} to assess the performance of our implementation. % Describe the BPMN models shortly.
+Poor performance might have many reasons, most notably large models leading to state space explosion.
+We ran a benchmark for ten different BPMN models from \cite{houhouFirstOrderLogicVerification2022} to assess the performance of our implementation.
+The models include realistic business process models (001, 002, and 020), and more information on the models can be found in \cite{houhouFirstOrderLogicVerification2022}.
 
 % Benchmark setup
-Both benchmarks were run on Windows 11 (AMD Ryzen 7700X processor, 32 GB RAM) using Groove version 5.8.1.
+To calculate the average runtime, we used the hyperfine benchmarking tool \cite{peterHyperfine2022} (version 1.15.0), which ran state space exploration for each BPMN model ten times.
+The benchmarks were run on Windows 11 (AMD Ryzen 7700X processor, 32 GB RAM) using Groove version 5.8.1 (detailed results and reproduction steps are given in \cite{krauterArtifactsICGT2023}). 
 
 % Hot benchmark no table everything under 1s. Mostly io probably.
-First,
+First, we benchmarked our \gls*{hot} for the BPMN models.
+The \gls*{hot} took less than one second to generate a \gls*{gt} system for every model.
+Thus, the \gls*{gt} system generation is rather fast.
+Furthermore, we suspect that most of the time is spent on writing files to storage for Groove to consume.
 
 % State space generation benchmark. Check times reported by Groove. Probably some startup time to read the files etc.
 Second,
