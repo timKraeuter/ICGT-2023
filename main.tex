@@ -109,7 +109,7 @@ To formalize the execution semantics of a different behavioral language, one onl
 % Paper outline
 The remainder of this paper is structured as follows.
 First, in \autoref{sec:preliminaries}, we introduce \gls*{bpmn} and point out the theoretical background of this contribution.
-Second, we describe the \gls*{bpmn} semantics formalization using the \gls*{hot} (\autoref{sec:formalization}) before explaining how this can be utilized for model checking BPMN-specific and custom properties (\autoref{sec:modelChecking}).
+Second, we describe the \gls*{bpmn} semantics formalization using the \gls*{hot} (\autoref{sec:formalization}) before explaining how this can be utilized for model checking general BPMN and custom properties (\autoref{sec:modelChecking}).
 Then, in \autoref{sec:impl}, we present the web-based tool implementing our approach.
 Finally, we discuss related work regarding BPMN feature coverage in \autoref{sec:relatedWork} and conclude in \autoref{sec:conclusion}.
 
@@ -424,12 +424,12 @@ Besides a \gls*{gt} system, a set of temporal properties to be checked and the a
 An atomic proposition is formalized as a graph and holds in a given state if a match exists from the underlying graph of the proposition to the graph representing the state.
 This enables model checking of temporal properties using the defined atomic propositions.
 
-We differentiate between \emph{BPMN-specific properties} defined for all BPMN models and \emph{custom properties} tailored towards a particular BPMN model.
+We differentiate between \emph{general BPMN properties} defined for all BPMN models and \emph{custom properties} tailored towards a particular BPMN model.
 We do not consider structural properties (like conformance to the syntax of PBMN) since they can be checked using a standard modeling tool without implementing execution semantics.
-We will now give an example of two predefined BPMN-specific properties and show how they can be checked using our approach.
+We will now give an example of two predefined general BPMN properties and show how they can be checked using our approach.
 Then, we describe how custom properties can be featureed and checked.
 
-\subsection{BPMN-specific properties}
+\subsection{General BPMN properties}
 \textit{Safeness} and \textit{Soundness} properties are defined for BPMN in \cite{corradiniClassificationBPMNCollaborations2018}.
 A BPMN model is \emph{safe} if, during its execution, at most one token occurs along the same sequence flow \cite{corradiniClassificationBPMNCollaborations2018}.
 Soundness is further decomposed into (i) \emph{Option to complete}: any running process instance must eventually complete, (ii) \emph{Proper completion}: at the moment of completion, each token of the process instance must be in a different end event, as well as (iii) \emph{No dead activities}: any activity can be executed in at least one process instance \cite{corradiniClassificationBPMNCollaborations2018}.
@@ -502,6 +502,26 @@ Furthermore, to evaluate the correctness of our \gls*{hot}, we created a compreh
 
 \subsection{Benchmark}
 
+\begin{table}[ht]
+\centering
+
+\begin{tabular}{|c || c | c | c |}
+ \hline
+ Use case & States & Transitions & Exploration time \\
+ \hline\hline
+ No buses & 168 & 438 & \textasciitilde 1.201 ms \\
+ \hline
+ 1 bus & 2.888 & 10.046 & \textasciitilde 1.647 ms \\
+ \hline
+ 2 buses & 27.880 & 121.554 & \textasciitilde 4.087 ms \\
+ \hline
+ 3 buses & 195.336 & 1.028.340 & \textasciitilde 25.137 ms \\
+ \hline
+\end{tabular}
+\caption[State space exploration in Groove]{State space exploration in Groove}
+\label{table:grooveRuntime}
+\end{table}
+
 \section{Related work} \label{sec:relatedWork}
 % Van gorp
 A BPMN formalization based on in-place \gls*{gt} rules is given in \cite{vangorpVisualTokenbasedFormalization2013}.
@@ -514,12 +534,12 @@ Moreover, they do \textit{not} support model checking since their goal is only f
 
 % BProve/Corradini
 The tool \textit{BProVe} is based on formal BPMN semantics given in rewriting logic and implemented in the Maude system \cite{corradiniFormalApproachAnalysis2021}.
-Using this formal semantics, they can verify custom LTL properties and BPMN-specific properties, such as Safeness and Soundness.
+Using this formal semantics, they can verify custom LTL properties and general BPMN properties, such as Safeness and Soundness.
 
 % fbpmn/Houhou
 The verification framework \textsf{fbpmn} uses first-order logic to formalize and check BPMN models \cite{houhouFirstOrderLogicSemantics2019,houhouFirstOrderLogicVerification2022}.
 This formalization is then realized in the TLA\textsuperscript{+} formal language and can be model-checked using TLC.
-Like BProVe, \textsf{fbpmn} allows checking BPMN-specific properties, such as Safeness and Soundness.
+Like BProVe, \textsf{fbpmn} allows checking general BPMN properties, such as Safeness and Soundness.
 Furthermore, they focus on different communication models besides the standard in the \gls*{bpmn} specification and support time-related constructs.
 We currently disregard data flow (see \cite{corradiniFormalisingAnimatingMultiple2022,el-saberCMMICMComplianceChecking2015}) and time-related constructs (see \cite{duranVerifyingTimedBPMN2017,houhouFirstOrderLogicVerification2022}).
 
@@ -609,7 +629,7 @@ In addition, we can use this environment to visualize potential counterexamples 
 \section{Appendix}
 
 
-This section shows some simple examples of how our tool is used to check BPMN-specific properties.
+This section shows some simple examples of how our tool is used to check general BPMN properties.
 Our tool and the example models are available as artifacts \cite{krauterArtifactsICGT2023}.
 
 \subsection{Safeness example}
