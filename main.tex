@@ -215,7 +215,7 @@ A NSE describes a start event without a trigger (none).
 Popular start event triggers are message and signal (see MSE and SSE in \autoref{fig:bpmnfeaturesOverview}).
 Then, for each NSE, we add a token to the respective process snapshot.
 An example of a start graph is shown in \autoref{fig:startGraph} using abstract and concrete syntax.
-Furthermore, we consider allowing the user to define a start graph similar to how he can define atomic propositions for custom properties (see \autoref{subsec:customProperties}).
+Furthermore, we consider allowing the modeler to define a start graph similar to how he can define atomic propositions for custom properties (see \autoref{subsec:customProperties}).
 
 \begin{figure}[ht]
     \centering
@@ -461,13 +461,17 @@ The property \textit{Proper Completion} is not yet implemented but all the infor
 
 \subsection{Custom properties} \label{subsec:customProperties}
 % Defining atomic propositions in BPMN is a novelty.
-To make model checking user-friendly, we envision users defining atomic propositions in the extended BPMN syntax, i.e., the concrete syntax introduced in \autoref{fig:typeGraph}.
-Thus, to define an atomic proposition, a user adds process snapshots and tokens for a BPMN model, which we can automatically convert to a graph representing an atomic proposition.
+To make model checking user-friendly, we envision modelers defining atomic propositions in the extended BPMN syntax, i.e., the concrete syntax introduced in \autoref{fig:typeGraph}.
+Thus, to define an atomic proposition, a modeler adds process snapshots and tokens for a BPMN model, which we can automatically convert to a graph representing an atomic proposition.
 
 For example, the token distribution shown in \autoref{fig:atomicProposition} defines two running process snapshots with a token in task A.
 Differently colored tokens define different process snapshots.
-A user could use this property, for example, to check if, eventually, two processes are executing task A simultaneously.
-Thus, a user does not need to be aware of the \gls*{gt} semantics used for execution, which is a significant advantage compared to other approaches.
+A modeler could use this property, for example, to check if, eventually, two processes are executing task A simultaneously.
+Thus, a modeler does not need to be aware of the \gls*{gt} semantics used for execution.
+
+However, a modeler still needs to know the used temporal logic such as LTL and CTL.
+A domain-specific property language for BPMN would further lessen the knowledge required by a modeler \cite{meyersProMoBoxFrameworkGenerating2014}. 
+
 
 \begin{figure}[ht]
     \centering
@@ -619,7 +623,7 @@ It will be interesting to investigate how the two approaches differ, for example
 Second, we aim to improve our formalization and the resulting tool in multiple ways.
 We intend to extend our formalization to support the remaining few BPMN features used in practice.
 For example, we want to support cancel and compensation events.
-Furthermore, we intend to extend the features of our tool so that the user can define atomic propositions for model checking directly in the tool, as described in \autoref{sec:modelChecking}.
+Furthermore, we intend to extend the features of our tool so that the modeler can define atomic propositions for model checking directly in the tool, as described in \autoref{sec:modelChecking}.
 Finally, we want to turn the modeling environment of our tool into an interactive simulation environment that is driven by our formal semantics.
 In addition, we can use this environment to visualize potential counterexamples of behavioral properties.
 
