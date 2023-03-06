@@ -477,6 +477,7 @@ Then, in the verification section one can choose to check either \gls*{bpmn}-spe
 Finally, our tool can generate a \gls*{gt} system for the supplied \gls*{bpmn} model and run model checking in Groove \cite{kastenbergModelCheckingDynamic2006}.
 % Evaluation
 Furthermore, to evaluate the correctness of our \gls*{hot}, we created a comprehensive test suite, which verifies correct rule generation for the implemented \gls*{bpmn} features \cite{krauterArtifactsICGT2023}.
+As described in the next section, we also ran a performance benchmark for our approach.
 
 % Use impl/impl_short/impl_very_short
 \begin{figure}[ht]
@@ -493,22 +494,26 @@ Furthermore, to evaluate the correctness of our \gls*{hot}, we created a compreh
 Model checking is a useful technique but often falls short in practice due to insufficient performance.
 Poor performance might have many reasons, most notably large models leading to state space explosion.
 We ran a benchmark for ten different BPMN models from \cite{houhouFirstOrderLogicVerification2022} to assess the performance of our implementation.
-The models include realistic business process models (001, 002, and 020), and more information on the models can be found in \cite{houhouFirstOrderLogicVerification2022}.
+The models include realistic business process models (001, 002, and 020), and more information can be found in \cite{houhouFirstOrderLogicVerification2022}.
 
-% Benchmark setup
 To calculate the average runtime, we used the hyperfine benchmarking tool \cite{peterHyperfine2022} (version 1.15.0), which ran state space exploration for each BPMN model ten times.
 The benchmarks were run on Windows 11 (AMD Ryzen 7700X processor, 32 GB RAM) using Groove version 5.8.1 (detailed results and reproduction steps are given in \cite{krauterArtifactsICGT2023}). 
 
-% Hot benchmark no table everything under 1s. Mostly io probably.
 First, we benchmarked our \gls*{hot} for the BPMN models.
 The \gls*{hot} took less than one second to generate a \gls*{gt} system for every model.
-Thus, the \gls*{gt} system generation is rather fast.
-Furthermore, we suspect that most of the time is spent on writing files to storage for Groove to consume.
+Thus, the generation of the \gls*{gt} systems is fast enough.
+Furthermore, we suspect most of the time is spent writing files to disk for Groove to consume.
 
 % State space generation benchmark. Check times reported by Groove. Probably some startup time to read the files etc.
-Second,
+Second, we benchmarked a full state exploration using the resulting ten \gls*{gt} systems, see \autoref{table:stateSpaceBenchmark}.
+The exploration takes roughly one second for most of the models.
+Only model \textit{020} needs nearly two seconds due to its larger state space.
+Furthermore, we estimate that up to one second is spent before state space exploration, most likely reading the \gls*{gt} system files.
+For example, Groove reports only 722 ms for state space exploration for model \textit{020}.
 
-% Example e20. 700ms state space generation reported by Groove. 1s "startup". I guess reading multiple files and other things in Groove.
+We conclude that our approach is sufficiently fast for models of normal size.
+In addition, there is still room for optimization, such as avoiding costly I/O to disk.
+A more comprehensive benchmark and detailed comparison to other implementations are left for future work.
 
 \begin{table}[ht]
 \centering
@@ -540,9 +545,8 @@ Second,
  \hline
 \end{tabular}
 \caption[Full state space exploration in Groove]{Full state space exploration in Groove}
-\label{table:grooveRuntime}
+\label{table:stateSpaceBenchmark}
 \end{table}
-
 
 \section{Related work} \label{sec:relatedWork}
 % Van gorp
@@ -641,8 +645,7 @@ It will be interesting to investigate how the two approaches differ, for example
 Second, we aim to improve our formalization and the resulting tool in multiple ways.
 We intend to extend our formalization to support the remaining few BPMN features used in practice.
 For example, we want to support cancel and compensation events.
-Furthermore, we intend to extend the features of our tool so that the modeler can define atomic propositions for model checking directly in the tool, as described in \autoref{sec:modelChecking}.
-Finally, we want to turn the modeling environment of our tool into an interactive simulation environment that is driven by our formal semantics.
+Finally, we want to turn the modeling environment of our tool into an interactive simulation environment driven by our formal semantics.
 In addition, we can use this environment to visualize potential counterexamples of behavioral properties.
 
 \bibliographystyle{splncs04} 
