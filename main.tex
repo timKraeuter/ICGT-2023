@@ -123,7 +123,7 @@ Furthermore, we outline the theoretical background behind our application of \gl
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.75\linewidth]{images/bpmn_semantics-bpmn-metamodel.pdf}
+  \includegraphics[width=0.7\linewidth]{images/bpmn_semantics-bpmn-metamodel.pdf}
   \caption{Excerpt of the BPMN metamodel \cite{objectmanagementgroupBusinessProcessModel2013}}
   \label{fig:bpmnMetamodel}
 \end{figure}
@@ -188,7 +188,7 @@ The type graph is depicted as a UML class diagram without operations, which can 
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.5\linewidth]{images/bpmn_semantics-typegraph.pdf}
+  \includegraphics[width=0.6\linewidth]{images/bpmn_semantics-typegraph.pdf}
   \caption{BPMN execution metamodel}
   \label{fig:typeGraph}
 \end{figure}
@@ -231,7 +231,7 @@ Afterward, we will explain how these---and other---rules are created by our \gls
 \autoref{fig:gtRuleAbstract} depicts an example \gls*{gt} rule ($L \to R$) for an NSE in abstract syntax.
 The rule is straightforward and moves a token from the start event to its outgoing sequence flow.
 For the rest of the paper, we will depict all rules in the concrete syntax introduced earlier.
-The rule from \autoref{fig:gtRuleAbstract} depicted in concrete syntax is shown in \autoref{fig:gtRuleConcrete}.
+The rule from \autoref{fig:gtRuleAbstract} depicted in concrete syntax is shown in \autoref{fig:gtRuleConcrete} on the left.
 
 \begin{figure}[ht]
     \centering
@@ -239,20 +239,13 @@ The rule from \autoref{fig:gtRuleAbstract} depicted in concrete syntax is shown 
   \caption{Example \gls*{gt} rule for an NSE (abstract syntax)}  \label{fig:gtRuleAbstract}
 \end{figure}
 
+The right rule in \autoref{fig:gtRuleConcrete} represents the start of a task, which will move one token from the incoming sequence flow to the task itself.
+
 \begin{figure}[ht]
     \centering
-  \includegraphics[width=0.6\textwidth]{images/rule_concrete.pdf}
-  \caption{Example \gls*{gt} rule for an NSE (concrete syntax)}
+  \includegraphics[width=1\textwidth]{images/rule_concrete.pdf}
+  \caption{Example \gls*{gt} rule for an NSE (left) and to start a task (right) in concrete syntax}
   \label{fig:gtRuleConcrete}
-\end{figure}
-
-The rule in \autoref{fig:taskRules} represents the start of a task, which will move one token from the incoming sequence flow to the task itself.
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.6\textwidth]{images/bpmn_semantics-rules.pdf}
-    \caption{Example \gls*{gt} rule to start a task.}
-    \label{fig:taskRules}
 \end{figure}
 
 The left rule in \autoref{fig:messageEventRules} realizes a MITE, and the right rule implements a MICE.
@@ -304,15 +297,13 @@ The generated end event rules delete tokens one by one for each incoming sequenc
 However, they do not terminate processes.
 % General termination rule
 Process termination is implemented with a generic rule---independent of the input BPMN model---which is applicable to all process snapshots.
-The termination rule (see \autoref{fig:terminationRule}) is automatically generated once during the \gls*{hot}.
-It is used to terminate processes and subprocesses if they do not have any tokens.
-The rule uses a NAC only to change the state of the process snapshot from running to terminated if it has no tokens and subprocesses.
-The concrete termination rule in Groove is given as an artifact \cite{krauterArtifactsICGT2023}.
+The termination rule in \autoref{fig:terminationRule} is automatically generated once during the \gls*{hot}.
+The rule changes the state of the process snapshot from running to terminated if it has neither tokens nor subprocesses.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.8\textwidth]{images/bpmn_semantics-termination_rule.pdf}
-    \caption{Termination rule}
+    \includegraphics[width=.5\textwidth]{images/terminate_groove.png}
+    \caption{Termination rule in Groove}
     \label{fig:terminationRule}
 \end{figure}
 
