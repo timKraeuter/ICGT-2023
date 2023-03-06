@@ -255,7 +255,7 @@ The MICE rule deletes a token and a message and adds an outgoing token.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=1\textwidth]{images/bpmn_semantics-message-events.pdf}
+    \includegraphics[width=0.9\textwidth]{images/bpmn_semantics-message-events.pdf}
     \caption{Rules for MITE (left) and MICE (right)}
     \label{fig:messageEventRules}
 \end{figure}
@@ -315,10 +315,10 @@ Activity execution is divided into two steps implemented by two rule templates.
 The upper template generates one rule for each incoming sequence flow to start the activity.
 An activity can be started using a token positioned at any of its incoming sequence flows.
 Thus, multiple incoming sequence flows represent an \textit{implicit exclusive gateway} (see exclusive gateway in \autoref{fig:gatewayTemplates}).
-This rule template generates the sample rule in \autoref{fig:taskRules}.
+This rule template generates the sample rule in \autoref{fig:gtRuleConcrete} on the right.
 
 The bottom rule template generates one rule that ends the activity.
-It deletes a token at the activity and adds one token at each outgoing sequence flow.
+It deletes a token at the activity and adds one at each outgoing sequence flow.
 Like start events, this implicitly encodes the same forking behavior as a parallel gateway (see \autoref{fig:gatewayTemplates}). 
 
 \begin{figure}[ht]
