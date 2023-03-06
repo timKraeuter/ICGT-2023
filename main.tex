@@ -372,7 +372,7 @@ However, the resulting rule is simple since it only deletes a token from an inco
 % Mention unsupported types?
 \subsection{Message Events}
 % Message throw
-\autoref{fig:throwEventTemplates} depicts the rule generation templates for \textit{message intermediate throw events} (\textsf{MITE} in \autoref{fig:bpmnfeaturesOverview}).
+\autoref{fig:messageEventTemplates} depicts the rule generation templates for \textit{message intermediate throw events} and \textit{message intermediate catch events} (\textsf{MITE} and \textsf{MICE} in \autoref{fig:bpmnfeaturesOverview}).
 % Message throw with intermediate catch message events
 The upper rule describes how MITEs interact with \textit{message intermediate catch events} (\textsf{MICE} in \autoref{fig:bpmnfeaturesOverview}).
 A MITE deletes an incoming token and adds a token at each outgoing sequence flow.
@@ -380,41 +380,34 @@ In addition, it sends one message to each waiting process by adding it to the in
 However, sending each message is optional, meaning that if a process is not ready to consume a message immediately, the message is not added.
 %This behavior corresponds to the BPMN semantics \cite{objectmanagementgroupBusinessProcessModel2013}.
 We implement optional message sending using a nested rule with quantification.
-Concretely, we use an optional existential quantifier (see blue dotted rectangle marked with optional in \autoref{fig:throwEventTemplates}) to send a message only if the receiving process runs and is ready to receive it \cite{rensinkNestedQuantificationGraph2006}.
+Concretely, we use an optional existential quantifier (see blue dotted rectangle marked with optional in \autoref{fig:messageEventTemplates}) to send a message only if the receiving process runs and is ready to receive it \cite{rensinkNestedQuantificationGraph2006}.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=1\textwidth]{images/throw_messages.pdf}
-    \caption{Rule generation template for message throw events}
-    \label{fig:throwEventTemplates}
+    \includegraphics[width=1\textwidth]{images/bpmn_semantics-message_templates.pdf}
+    \caption{Rule generation templates for message events}
+    \label{fig:messageEventTemplates}
 \end{figure}
 
 % Message throw with message start events
-The bottom rule shows how MITEs trigger new process instances when interacting with \textit{message start events}.
+The middle rule shows how MITEs trigger new process instances when interacting with \textit{message start events}.
 For each receiving \textit{message start event}, a new process snapshot with one token at each outgoing sequence flow is added.
 We chose to create a process snapshot immediately rather than creating a message and then consume this message and create a process snapshot in a separate rule.
 This decision keeps the rule generation simpler and the state space of the \gls*{gt} system smaller.
 It is worth noting that a MITE might interact with MICEs and \textit{message start events} \textit{simultaneously}.
-Thus, the rule generation templates in \autoref{fig:throwEventTemplates} can be mixed, i.e., messages can be sent and processes instantiated by one MITE.
+Thus, the rule generation templates in \autoref{fig:messageEventRules} can be mixed, i.e., messages can be sent and processes instantiated by one MITE.
 We only separated message throw behavior into two rule templates for presentation purposes.
 This template generates the MITE rule in \autoref{fig:messageEventRules}.
 % Explain the similarity to Send-tasks.
 Furthermore, \textit{message end events} and \textit{send tasks} behave similarly regarding message creation and process instantiation.
 
 % Message catch + Receive Task
-\autoref{fig:catchMessageTemplates} depicts the rule generation templates for MICEs and \textit{receive tasks}.
-To trigger a MICE or a \textit{receive task}, only one message at an incoming \textit{message flow} is needed.
+The bottom rule in \autoref{fig:messageEventTemplates} depicts the rule generation template for MICEs.
+To trigger a MICE, only one message at an incoming \textit{message flow} is needed.
 Thus, one rule is generated for each incoming \textit{message flow}.
-The upper rule template shows that MICEs delete one message and one token, and add a token at each outgoing sequence flow.
+The rule template shows that MICEs delete one message and one token, and add a token at each outgoing sequence flow.
 This template generates the MICE rule in \autoref{fig:messageEventRules}.
-In the bottom rule template, one can see that \textit{receive task} rules are identical to the \textit{activity} rules in \autoref{fig:activityTemplates},  besides message deletion when a \textit{receive task} starts.
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=1\textwidth]{images/catch_messages.pdf}
-    \caption{Rule generation template for message catch events and receive tasks}
-    \label{fig:catchMessageTemplates}
-\end{figure}
+Furthermore, \textit{receive tasks} behave similarly regarding message consumption.
 
 
 \section{Model checking BPMN} \label{sec:modelChecking}
@@ -494,17 +487,17 @@ Finally, our tool can generate a \gls*{gt} system for the supplied \gls*{bpmn} m
 % Evaluation
 Furthermore, to evaluate the correctness of our \gls*{hot}, we created a comprehensive test suite, which verifies correct rule generation for the implemented \gls*{bpmn} features \cite{krauterArtifactsICGT2023}.
 
-% Potentially use impl_short
+% Use impl/impl_short/impl_very_short
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/impl.png}
+    \includegraphics[width=0.8\textwidth]{images/impl_very_short.png}
     \caption{Screenshot of the tool}
     \label{fig:implScreenshot}
 \end{figure}
 
 % Experimental results, discussion, other names, runtime experiments, runtime performance, performance tests, performance experiments?
 % Maybe inside the impl section?
-\section{Performance benchmark}
+\subsection{Performance benchmark}
 
 Model checking is a useful technique but often falls short in practice due to insufficient performance.
 Poor performance might have many reasons, most notably large models leading to state space explosion.
