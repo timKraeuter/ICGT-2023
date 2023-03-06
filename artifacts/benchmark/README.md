@@ -2,9 +2,9 @@
 1. Install the command-line benchmark tool [hyperfine](https://github.com/sharkdp/hyperfine#installation).
    - The benchmark was run with hyperfine version **1.15.0** on Windows 10.
    - The hyperfine windows release **1.15.0** is contained in `artifacts/dependencies`.
-2. The benchmark was run with Groove version **5.8.1**, which is contained in `groove-5_8_1` and does not have to be installed.
-3. Install Java version 11 (Groove might also work with later versions).
+2. Install Java version 11 (Groove might also work with later versions).
 
+The benchmark was run with Groove version **5.8.1**, which is contained in `groove-5_8_1` and does not have to be installed.
 All benchmarks were run using a Windows 11 machine with an AMD Ryzen 7700X processor with 32 GB DDR5-5600 RAM on NVMe SSD storage.
 
 # HOT transformation benchmark
@@ -23,6 +23,10 @@ To summarize, the HOT runtime could be further optimized if one avoids writing t
 Instead, the GT system could remain in the main memory and be accessed from there.
 
 # State space generation benchmark
+
+1. Clone this repository.
+2. Open a terminal in **this folder**.
+3. Run the following commands:
 
 **Benchmark**:
 ```bash
