@@ -464,13 +464,13 @@ The property \textit{Proper Completion} is not yet implemented, but all the info
 To make model checking user-friendly, we envision modelers defining atomic propositions in the extended BPMN syntax, i.e., the concrete syntax introduced in \autoref{fig:typeGraph}.
 Thus, to define an atomic proposition, a modeler adds process snapshots and tokens for a BPMN model, which we can automatically convert to a graph representing an atomic proposition.
 
-For example, the token distribution shown in \autoref{fig:atomicProposition} defines two running process snapshots with a token in task A.
+For example, the token distribution shown in \autoref{fig:atomicProposition} defines two running process snapshots with a token at task A.
 Differently colored tokens define different process snapshots.
-A modeler could use this property, for example, to check if, eventually, two processes are executing task A simultaneously.
+A modeler could use this atomic proposition, for example, to check if, eventually, two processes are executing task A simultaneously by creating a LTL/CTL property.
 Thus, a modeler does not need to know the \gls*{gt} semantics used for execution.
 
-However, a modeler must still know the temporal logic, such as LTL and CTL.
-A domain-specific property language for BPMN would further lessen the knowledge required from a modeler \cite{meyersProMoBoxFrameworkGenerating2014}. 
+However, a modeler must still know the temporal logic, such as LTL and CTL to express his properties.
+In the future, a domain-specific property language for BPMN would further lessen the knowledge required from a modeler \cite{meyersProMoBoxFrameworkGenerating2014}. 
 
 
 \begin{figure}[ht]
