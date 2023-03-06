@@ -67,6 +67,10 @@ available [here](https://github.com/timKraeuter/Rewrite_Rule_Generation) and ins
 how to run it locally on your machine can be
 found [here](https://github.com/timKraeuter/Rewrite_Rule_Generation/blob/master/server/README.md).
 
+### Performance benchmark
+
+The benchmark is described [here](https://github.com/timKraeuter/ICGT-2023/tree/main/artifacts/benchmark#readme).
+
 ### Test suite
 
 The [wiki](https://github.com/timKraeuter/Rewrite_Rule_Generation/wiki) describes our [comprehensive test suite](https://github.com/timKraeuter/Rewrite_Rule_Generation/wiki/Test-Suite) to test our coverage of BPMN features. 
