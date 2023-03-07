@@ -134,7 +134,7 @@ Activities represent certain tasks to be carried out during a process, while eve
 Furthermore, gateways model conditions, parallelizations, and synchronizations \cite{freundRealLifeBPMNUsing2019}.
 
 % BPMN semantics: Token distribution
-The BPMN execution semantics are described using the concept of \emph{tokens} \cite{objectmanagementgroupBusinessProcessModel2013}, which can be located at sequence flows and specific flow nodes.
+The BPMN execution semantics are described using the concept of \textit{tokens} \cite{objectmanagementgroupBusinessProcessModel2013}, which can be located at sequence flows and specific flow nodes.
 Tokens are consumed and created by flow nodes according to the connected sequence flows.
 Thus, the flow nodes are colored purple in \autoref{fig:bpmnMetamodel} since they are the \textit{state-changing elements} of BPMN and are crucial when formalizing the BPMN execution semantics in \autoref{sec:formalization}.
 
@@ -155,13 +155,13 @@ Each state, i.e., token distribution during the execution of a BPMN model, is re
 
 % Groove uses the single pushout approach with negative application conditions.
 Regarding \gls*{gt}, we utilize the single-pushout (SPO) approach with negative application conditions (NAC) \cite{ehrigALGEBRAICAPPROACHESGRAPH1997}, as implemented in Groove \cite{rensinkGROOVESimulatorTool2004}.
-In addition, we utilize \emph{nested rules} with quantification to make parts of a rule applied repeatedly or optionally \cite{rensinkNestedQuantificationGraph2006,rensinkHowMuchAre2017}.
+In addition, we utilize \textit{nested rules} with quantification to make parts of a rule applied repeatedly or optionally \cite{rensinkNestedQuantificationGraph2006,rensinkHowMuchAre2017}.
 Moreover, we utilize NACs to implement more intricate parts in the BPMN execution semantics, such as the termination of processes.
 
 
 \section{BPMN semantics formalization} \label{sec:formalization}
 
-Since our approach is based on a \gls*{hot} from BPMN to \gls*{gt} systems, we generate a \emph{start graph} and \emph{\gls*{gt} rules} for a given BPMN model.
+Since our approach is based on a \gls*{hot} from BPMN to \gls*{gt} systems, we generate a \textit{start graph} and \textit{\gls*{gt} rules} for a given BPMN model.
 The approach supports the BPMN features depicted in \autoref{fig:bpmnfeaturesOverview}.
 BPMN features are divided into \textsf{Events}, \textsf{Gateways}, \textsf{Activities}, and \textsf{Edges}.
 \textsf{Events} and \textsf{Activities} are further divided into subgroups.
@@ -269,9 +269,9 @@ However, our implementation covers all concepts shown in \autoref{fig:bpmnfeatur
 \subsection{Process instantiation and termination} \label{subsec:instAndTermination}
 
 \autoref{fig:startAndEndTemplate} depicts the rule generation templates for start and end events (\textsf{NSE} and \textsf{NEE} in \autoref{fig:bpmnfeaturesOverview}).
-All rule generation templates show a BPMN structure defined in the left column and the applicable rule generation template in the right column.
-The structures in the left column show instances of the BPMN metamodel (\autoref{fig:bpmnMetamodel}), and the ones in the right column show the generated rules typed by the BPMN execution type graph (see \autoref{fig:typeGraph}).
-If more than one rule is generated from a BPMN structure there is an expression defining how each rule is generated.
+All rule generation templates show a state-changing element (\textsf{FlowNode}) with surrounding flows in the left column and the applicable rule generation template in the right column.
+The left column shows instances of the BPMN metamodel (\autoref{fig:bpmnMetamodel}), and the right column shows the generated rules typed by the BPMN execution metamodel (see \autoref{fig:typeGraph}).
+If more than one rule is generated from a \textsf{FlowNode}, an expression defines how each rule is generated.
 For example, the expression $\forall \text{sf} \in \text{E.incSFs}$ for the rule generation template of end events (see \autoref{fig:startAndEndTemplate}) generates one rule for each incoming sequence flow \textit{sf} of the end event \textit{E}.
 We use "." in expressions to navigate along the associations of the BPMN metamodel \autoref{fig:bpmnMetamodel}.
 In the example, \textsf{E.incSFs} means following all \textsf{incSFs} links for a \textsf{FlowNode} object, resulting in a set of \textsf{SequenceFlow} objects.
@@ -318,7 +318,7 @@ This rule template generates the sample rule in \autoref{fig:gtRuleConcrete} on 
 
 The bottom rule template generates one rule that ends the activity.
 It deletes a token at the activity and adds one at each outgoing sequence flow.
-Like start events, this implicitly encodes the same forking behavior as a parallel gateway (see \autoref{fig:gatewayTemplates}). 
+Like start events, this implicitly encodes a parallel gateway (see \autoref{fig:gatewayTemplates}). 
 
 \begin{figure}[ht]
     \centering
@@ -331,12 +331,12 @@ Like start events, this implicitly encodes the same forking behavior as a parall
 Subprocess execution is similar to activity execution.
 The upper template generates one rule for each incoming sequence flow.
 The rule deletes an incoming token and adds a process snapshot representing a subprocess. 
-The addition of this process snapshot is represented with a colored circle on the top left corner of the subprocess with a token at each of its start events.
-We added a \textit{subprocess} link between the process snapshots to depict the \textsf{subprocesses} relation in \autoref{fig:typeGraph}.
+The created process snapshot is represented with a colored circle on the top left corner of the subprocess with a token at each of its start events.
+There is a \textit{subprocess} link between the process snapshots to depict the \textsf{subprocesses} relation in \autoref{fig:typeGraph}.
 If the subprocess has no start events, a token for every activity and gateway without incoming sequence flows is added. %, as defined in the BPMN specification.
 
 The bottom rule template generates one rule to delete a terminated process snapshot and adds tokens at each outgoing sequence flow.
-Subprocesses are terminated by a generic rule (see section \ref{subsec:instAndTermination}) if they neither have tokens nor subprocesses.
+Subprocesses are terminated by the termination rule (see section \ref{subsec:instAndTermination}).
 
 
 % Send/Receive tasks (mentioned/shown with message events later)
@@ -356,7 +356,7 @@ Thus, one rule is generated that deletes one token from each incoming sequence f
 % Exclusive --> Exception no incoming flows in sub-processes (token taken from gateway directly)
 Exclusive Gateways are triggered by exactly one incoming sequence flow, and exactly one outgoing sequence flow is triggered.
 Thus, one rule must be generated for every combination of incoming and outgoing sequence flows.
-However, the resulting rule is simple since it only deletes a token from an incoming sequence flow and adds a token to an outgoing sequence flow.
+However, the resulting rule is simple since it only deletes a token from an incoming sequence flow and adds one to an outgoing sequence flow.
 
 % Event-based with different event combinations
 % Mention unsupported types?
@@ -364,8 +364,8 @@ However, the resulting rule is simple since it only deletes a token from an inco
 % Message throw
 \autoref{fig:messageEventTemplates} depicts the rule generation templates for \textit{message intermediate throw events} and \textit{message intermediate catch events} (\textsf{MITE} and \textsf{MICE} in \autoref{fig:bpmnfeaturesOverview}).
 % Message throw with intermediate catch message events
-The upper rule describes how MITEs interact with \textit{message intermediate catch events} (\textsf{MICE} in \autoref{fig:bpmnfeaturesOverview}).
-A MITE deletes an incoming token and adds a token at each outgoing sequence flow.
+The upper rule describes how MITEs interact with MICEs.
+A MITE deletes an incoming token and adds one at each outgoing sequence flow.
 In addition, it sends one message to each waiting process by adding it to the incoming messages of the process.
 However, sending each message is optional, meaning that if a process is not ready to consume a message immediately, the message is not added.
 %This behavior corresponds to the BPMN semantics \cite{objectmanagementgroupBusinessProcessModel2013}.
@@ -379,12 +379,12 @@ Concretely, we use an optional existential quantifier (see blue dotted rectangle
     \label{fig:messageEventTemplates}
 \end{figure}
 
-% Message throw with message start events
-The middle rule shows how MITEs trigger new process instances when interacting with \textit{message start events}.
-For each receiving \textit{message start event}, a new process snapshot with one token at each outgoing sequence flow is added.
-We chose to create a process snapshot immediately rather than creating a message and then consume this message and create a process snapshot in a separate rule.
+% Message throw with MSEs
+The middle rule shows how MITEs trigger new process instances when interacting with \textit{message start events} (MSEs).
+For each MSE, a new process snapshot with one token at each outgoing sequence flow is added.
+We chose to create a process snapshot immediately rather than creating a message and then consuming this message and creating a process snapshot in a separate rule.
 This decision keeps the rule generation simpler and the state space of the \gls*{gt} system smaller.
-It is worth noting that a MITE might interact with MICEs and \textit{message start events} \textit{simultaneously}.
+It is worth noting that a MITE might interact with MICEs and MSEs \textit{simultaneously}.
 Thus, the rule generation templates in \autoref{fig:messageEventRules} can be mixed, i.e., messages can be sent and processes instantiated by one MITE.
 We only separated message throw behavior into two rule templates for presentation purposes.
 This template generates the MITE rule in \autoref{fig:messageEventRules}.
@@ -392,10 +392,10 @@ This template generates the MITE rule in \autoref{fig:messageEventRules}.
 Furthermore, \textit{message end events} and \textit{send tasks} behave similarly regarding message creation and process instantiation.
 
 % Message catch + Receive Task
-The bottom rule in \autoref{fig:messageEventTemplates} depicts the rule generation template for MICEs.
+The bottom part in \autoref{fig:messageEventTemplates} depicts the rule generation template for MICEs.
 To trigger a MICE, only one message at an incoming \textit{message flow} is needed.
 Thus, one rule is generated for each incoming \textit{message flow}.
-The rule template shows that MICEs delete one message and one token, and add a token at each outgoing sequence flow.
+The rule template shows that MICEs delete one message and one token, as well as add a token at each outgoing sequence flow.
 This template generates the MICE rule in \autoref{fig:messageEventRules}.
 Furthermore, \textit{receive tasks} behave similarly regarding message consumption.
 
@@ -403,28 +403,28 @@ Furthermore, \textit{receive tasks} behave similarly regarding message consumpti
 \section{Model checking BPMN} \label{sec:modelChecking}
 
 Model checking a BPMN model is possible using the generated \gls*{gt} system.
-Besides a \gls*{gt} system, a set of temporal properties to be checked and the atomic propositions used in these properties must be supplied.
+Besides a \gls*{gt} system, a set of temporal properties to be checked, and the atomic propositions used in these properties must be supplied.
 An atomic proposition is formalized as a graph and holds in a given state if a match exists from the underlying graph of the proposition to the graph representing the state.
-This enables model checking of temporal properties using the defined atomic propositions.
+This enables model checking of temporal properties with the defined atomic propositions \cite{kastenbergModelCheckingDynamic2006}.
 
-We differentiate between \emph{general BPMN properties} defined for all BPMN models and \emph{custom properties} tailored towards a particular BPMN model.
-We do not consider structural properties (like conformance to the syntax of PBMN) since they can be checked using a standard modeling tool without implementing execution semantics.
+We differentiate between \textit{general BPMN properties} defined for all BPMN models and \textit{custom properties} tailored towards a particular BPMN model.
+We do not consider structural properties (like conformance to the syntax of BPMN) since they can be checked using a standard modeling tool without implementing execution semantics.
 We will now give an example of two predefined general BPMN properties and show how they can be checked using our approach.
-Then, we describe how custom properties can be featureed and checked.
+Then, we describe how custom properties can be defined and checked.
 
 \subsection{General BPMN properties}
 \textit{Safeness} and \textit{Soundness} properties are defined for BPMN in \cite{corradiniClassificationBPMNCollaborations2018}.
-A BPMN model is \emph{safe} if, during its execution, at most one token occurs along the same sequence flow \cite{corradiniClassificationBPMNCollaborations2018}.
-Soundness is further decomposed into (i) \emph{Option to complete}: any running process instance must eventually complete, (ii) \emph{Proper completion}: at the moment of completion, each token of the process instance must be in a different end event, as well as (iii) \emph{No dead activities}: any activity can be executed in at least one process instance \cite{corradiniClassificationBPMNCollaborations2018}.
-For example, we will describe how to implement the \emph{Safeness} and \emph{Option to complete} properties.
+A BPMN model is \textit{safe} if, during its execution, at most one token occurs along the same sequence flow \cite{corradiniClassificationBPMNCollaborations2018}.
+Soundness is further decomposed into (i) \textit{Option to complete}: any running process instance must eventually complete, (ii) \textit{Proper completion}: at the moment of completion, each token of the process instance must be in a different end event, as well as (iii) \textit{No dead activities}: any activity can be executed in at least one process instance \cite{corradiniClassificationBPMNCollaborations2018}.
+For example, we will describe how to implement the \textit{Safeness} and \textit{Option to complete} properties.
 
 % Safeness
-\textbf{Safeness} is specified using the CTL property defined in \eqref{eq:safeness}.
+\textit{Safeness} is specified using the CTL property defined in \eqref{eq:safeness}.
 The atomic property \textsf{Unsafe} is true if two tokens of one process snapshot point to the same sequence flow.
 Groove rules for all the atomic propositions are included in \cite{krauterArtifactsICGT2023}.
 
 % Option to complete
-\emph{Option to complete} is specified using the CTL property defined in \eqref{eq:optionToComplete}.
+\textit{Option to complete} is specified using the CTL property defined in \eqref{eq:optionToComplete}.
 The atomic proposition \textsf{AllTerminated} is true if there exists no process snapshot in the state \textsf{Running}, i.e., all process snapshots are \textsf{Terminated}.
 
 \noindent\begin{minipage}{.5\linewidth}
@@ -445,14 +445,14 @@ The property \textit{Proper Completion} is not yet implemented, but all the info
 \subsection{Custom properties} \label{subsec:customProperties}
 % Defining atomic propositions in BPMN is a novelty.
 To make model checking user-friendly, we envision modelers defining atomic propositions in the extended BPMN syntax, i.e., the concrete syntax introduced in \autoref{fig:typeGraph}.
-Thus, to define an atomic proposition, a modeler adds process snapshots and tokens for a BPMN model, which we can automatically convert to a graph representing an atomic proposition.
+Thus, to define an atomic proposition, a modeler adds process snapshots and tokens to a BPMN model, which we can automatically convert to a graph representing an atomic proposition.
 
 For example, the token distribution shown in \autoref{fig:atomicProposition} defines two running process snapshots with a token at task A.
 Differently colored tokens define different process snapshots.
-A modeler could use this atomic proposition, for example, to check if, eventually, two processes are executing task A simultaneously by creating a LTL/CTL property.
+A modeler could use this atomic proposition, for example, to check if, eventually, two processes are executing task A simultaneously by creating an LTL/CTL property.
 Thus, a modeler does not need to know the \gls*{gt} semantics used for execution.
 
-However, a modeler must still know the temporal logic, such as LTL and CTL to express his properties.
+However, a modeler must still know the temporal logic, such as LTL and CTL, to express his properties.
 In the future, a domain-specific property language for BPMN would further lessen the knowledge required from a modeler \cite{meyersProMoBoxFrameworkGenerating2014}. 
 
 
@@ -487,21 +487,20 @@ As described in the next section, we also ran a performance benchmark for our ap
 \end{figure}
 
 % Experimental results, discussion, other names, runtime experiments, runtime performance, performance tests, performance experiments?
-% Maybe inside the impl section?
 \subsection{Performance benchmark}
 
 Model checking is a useful technique but often falls short in practice due to insufficient performance.
 Poor performance might have many reasons, most notably large models leading to state space explosion.
 We ran a benchmark for ten different BPMN models from \cite{houhouFirstOrderLogicVerification2022} to assess the performance of our implementation.
-The models include realistic business process models (001, 002, and 020), and more information can be found in \cite{houhouFirstOrderLogicVerification2022}.
+The models include realistic business process models (001, 002, and 020), see \cite{houhouFirstOrderLogicVerification2022}.
 
 To calculate the average runtime, we used the hyperfine benchmarking tool \cite{peterHyperfine2022} (version 1.15.0), which ran state space exploration for each BPMN model ten times.
-The benchmarks were run on Windows 11 (AMD Ryzen 7700X processor, 32 GB RAM) using Groove version 5.8.1 (detailed results and reproduction steps are given in \cite{krauterArtifactsICGT2023}). 
+The benchmarks were run on Windows 11 (AMD Ryzen 7700X processor, 32 GB RAM) using Groove version 5.8.1, see \cite{krauterArtifactsICGT2023}. 
 
 First, we benchmarked our \gls*{hot} for the BPMN models.
 The \gls*{hot} took less than one second to generate a \gls*{gt} system for every model.
 Thus, the generation of the \gls*{gt} systems is fast enough.
-Furthermore, we suspect most of the time is spent writing files to disk for Groove to consume.
+Furthermore, we suspect most of the time is spent writing the \gls*{gt} system to disk.
 
 % State space generation benchmark. Check times reported by Groove. Probably some startup time to read the files etc.
 Second, we benchmarked a full state exploration using the resulting ten \gls*{gt} systems, see \autoref{table:stateSpaceBenchmark}.
@@ -550,12 +549,11 @@ A more comprehensive benchmark and detailed comparison to other implementations 
 \section{Related work} \label{sec:relatedWork}
 % Van gorp
 A BPMN formalization based on in-place \gls*{gt} rules is given in \cite{vangorpVisualTokenbasedFormalization2013}.
-The formalization covers a substantial part of the BPMN specification, including complex concepts such as inclusive gateway merge and compensation.
-In addition, the \gls*{gt} rules are visual and thus can easily be aligned with the informal description of the execution semantics of BPMN.
+The formalization covers a substantial part of the BPMN specification, including complex concepts such as inclusive gateways and compensation.
+In addition, the \gls*{gt} rules are visual and thus can be aligned with the informal description of the execution semantics of BPMN.
 A key difference to our approach is that the rules in \cite{vangorpVisualTokenbasedFormalization2013} are general and can be applied to any BPMN model, while we generate specific rules for every BPMN model using our \gls*{hot}.
 Thus, our approach can be seen as a program specialization compared to \cite{vangorpVisualTokenbasedFormalization2013} since we process a concrete BPMN model before its execution.
-The \gls*{gt} rules are implemented in a prototype using GrGen.NET.
-Moreover, they do \textit{not} support model checking since their goal is only formalization.
+However, they do \textit{not} support property checking since their goal is only formalization.
 
 % BProve/Corradini
 The tool \textit{BProVe} is based on formal BPMN semantics given in rewriting logic and implemented in the Maude system \cite{corradiniFormalApproachAnalysis2021}.
@@ -566,11 +564,14 @@ The verification framework \textsf{fbpmn} uses first-order logic to formalize an
 This formalization is then realized in the TLA\textsuperscript{+} formal language and can be model-checked using TLC.
 Like BProVe, \textsf{fbpmn} allows checking general BPMN properties, such as Safeness and Soundness.
 Furthermore, they focus on different communication models besides the standard in the \gls*{bpmn} specification and support time-related constructs.
-We currently disregard data flow (see \cite{corradiniFormalisingAnimatingMultiple2022,el-saberCMMICMComplianceChecking2015}) and time-related constructs (see \cite{duranVerifyingTimedBPMN2017,houhouFirstOrderLogicVerification2022}).
+We currently disregard time-related constructs \cite{duranVerifyingTimedBPMN2017,houhouFirstOrderLogicVerification2022} and data flow \cite{corradiniFormalisingAnimatingMultiple2022,el-saberCMMICMComplianceChecking2015}.
 
 \autoref{tab:supportedfeatures} shows which BPMN features are supported by the approaches mentioned above compared to ours.
-We investigated these three approaches since they support a significant subset of the BPMN features and have accessible and well-documented tools.
 The coverage of BPMN features greatly impacts how useful each approach is in practice.
+% Summarize the findings and explain them in more detail
+Our approach covers most of the \gls*{bpmn} features compared to other current approaches.
+Thus, we conclude that our formalization is comprehensive but can still be improved.
+In addition, it covers the most important features found in practice since we come close to the feature coverage of popular process engines such as Camunda\footnote{\url{https://docs.camunda.org/manual/7.16/reference/bpmn20/}}.
 
 \begin{table}[htbp]
     \caption{features supported by different BPMN formalizations (overview based on \cite{vangorpVisualTokenbasedFormalization2013}).}
@@ -624,27 +625,21 @@ The coverage of BPMN features greatly impacts how useful each approach is in pra
     \end{threeparttable}
 \end{table}
 
-% Summarize the findings and explain them in more detail
-Our approach covers most of the \gls*{bpmn} features compared to other current approaches.
-Thus, we conclude that our formalization is comprehensive but can still be improved.
-In addition, it covers the most important features found in practice since we come close to the feature coverage of popular process engines such as Camunda\footnote{\url{https://docs.camunda.org/manual/7.16/reference/bpmn20/}}.
 
 \section{Conclusion \& future work} \label{sec:conclusion}
 This paper makes two main practical contributions.
 First, we conceptualized a new approach utilizing a \gls*{hot} to formalize the semantics of behavioral languages.
 Our approach moves complexity from the \gls*{gt} rules to the rule templates making up the \gls*{hot}.
-Furthermore, the approach can be applied to any behavioral language if one can define its state structure and identify its state-changing elements.
+Furthermore, the approach can be applied to any behavioral language if one can define its \textit{state structure} and identify its \textit{state-changing elements}.
 
 Second, we apply our approach to BPMN, resulting in a comprehensive formalization regarding feature coverage (compared to the literature and industrial process engines) that supports checking behavioral properties.
-Furthermore, our contribution resulted in an open-source web-based tool to make our ideas easily accessible to other researchers and potential practitioners.
+Furthermore, our contribution resulted in an open-source web-based tool to make our ideas easily accessible to other researchers and practitioners.
 
-Potential future work can target both of our main contributions.
+Future work targets both of our main contributions.
 First, we plan a detailed comparison of our \gls*{hot} approach with an approach with fixed rules.
 It will be interesting to investigate how the two approaches differ, for example, in runtime during state space generation.
 Second, we aim to improve our formalization and the resulting tool in multiple ways.
-We intend to extend our formalization to support the remaining few BPMN features used in practice.
-For example, we want to support cancel and compensation events.
-Finally, we want to turn the modeling environment of our tool into an interactive simulation environment driven by our formal semantics.
+We intend to extend our formalization to support the remaining few BPMN features used in practice and want to turn the modeling environment of our tool into an interactive simulation environment driven by our formal semantics.
 In addition, we can use this environment to visualize potential counterexamples of behavioral properties.
 
 \bibliographystyle{splncs04} 
@@ -664,7 +659,7 @@ In this case, the sequence flow \textit{Unsafe} is unsafe.
 
 The exclusive gateway merges the sequence flows but does not synchronize.
 Thus, the outgoing sequence flow can hold two tokens, and Activity C is executed twice.
-Again this could be a simple mistake not obvious to people unfamiliar with the BPMN execution semantics.
+This could be a simple mistake not obvious to people unfamiliar with the BPMN execution semantics.
 
 \begin{figure}[ht]
     \centering
@@ -674,9 +669,9 @@ Again this could be a simple mistake not obvious to people unfamiliar with the B
 \end{figure}
 
 \subsection{Option to complete example}
-\autoref{fig:optionToCompleteSample} shows a screenshot of the tool checking \textit{Option to complete}.
+\autoref{fig:optionToCompleteSample} shows a screenshot of the tool checking the \textit{Option to complete} property.
 
-The parallel gateway cannot synchronize since no split happened before.
+The parallel gateway cannot synchronize since no split has happened before.
 Thus, the process cannot terminate.
 Again this could be a simple mistake not obvious to people unfamiliar with the BPMN execution semantics.
 
@@ -701,4 +696,10 @@ This could be a simple mistake not obvious to people unfamiliar with the BPMN ex
     \label{fig:deadSample}
 \end{figure}
 
+
+\subsection{Discussion}
+
+All these examples were rather simple and boiled down to the wrong gateway being used.
+However, in practice, erroneous situations might be much more complex when multiple processes communicate using messages, signals, and other events.
+Checking properties can be integrated into the model editor or added to CI/CD pipelines to catch errors as soon as possible.
 \end{document}
