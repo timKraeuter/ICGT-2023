@@ -58,7 +58,7 @@ University of Applied Sciences, FHDW, Hanover, Germany\\
 \begin{abstract}
 The Business Process Modeling Notation (BPMN) is a widely used standard notation for defining intra- and inter-organizational workflows.
 However, the informal description of the BPMN execution semantics leads to different interpretations of BPMN features and difficulties in checking behavioral properties.
-In this paper, we propose a formalization of the execution semantics of BPMN that, compared to existing approaches, covers more BPMN features while allowing property checking.
+In this paper, we propose a formalization of the execution semantics of BPMN that, compared to existing approaches, covers more BPMN features while faciliating property checking.
 Our approach is based on a higher-order transformation from BPMN models to graph transformation systems.
 As proof of concept, we have implemented our approach in an open-source web-based tool.
 
@@ -101,7 +101,10 @@ In our approach, we create \gls*{gt} rules based on a \gls*{hot}, as shown in \a
 %Usually, an execution metamodel is defined by extending the structural metamodel.
 %
 %suggestions
-To begin the \gls*{bpmn} modeling process, a modeler first defines the \gls*{bpmn} model and its corresponding behavioral properties for evaluation. This model must adhere to the \gls*{bpmn} metamodel as outlined in the \gls*{bpmn} specification by the Object Management Group \cite{objectmanagementgroupBusinessProcessModel2013}. To create the state structure for BPMN, the \gls*{bpmn} execution metamodel is defined by language engineers, utilizing the \gls*{bpmn} metamodel as a foundation. Typically, an execution metamodel is created by extending the structural \gls*{bpmn} metamodel.
+To begin the \gls*{bpmn} modeling process, a modeler first defines the \gls*{bpmn} model and its corresponding behavioral properties for evaluation.
+This model must adhere to the \gls*{bpmn} metamodel as outlined in the \gls*{bpmn} specification by the Object Management Group \cite{objectmanagementgroupBusinessProcessModel2013}.
+To create the state structure for BPMN, the \gls*{bpmn} execution metamodel is defined by language engineers, utilizing the \gls*{bpmn} metamodel as a foundation.
+Typically, an execution metamodel is created by extending the structural \gls*{bpmn} metamodel.
 
 Furthermore, we define a \gls*{hot} from \gls*{bpmn} models to \gls*{gt} systems.
 We call the transformation \textit{higher-order} since the resulting graph-transformation systems represent model-transformations themselves \cite{tisiUseHigherOrderModel2009}.
@@ -176,7 +179,7 @@ For example, message events will add or delete messages.
 
 \subsection{Theoretical background}
 We use typed attributed graphs for the formalization of the \gls*{bpmn} execution semantics.
-Each state, i.e., token distribution during the execution of a \gls*{bpmn} model, is represented as an attributed graph typed by the \gls*{bpmn} execution type graph, which is introduced in \autoref{sec:formalization}.
+Each state, i.e., token distribution during the execution of a \gls*{bpmn} model, is represented as an attributed graph typed by the \gls*{bpmn} execution type graph, which we introduce in \autoref{sec:formalization}.
 
 % Groove uses the single pushout approach with negative application conditions.
 Regarding \gls*{gt}, we utilize the single-pushout (SPO) approach with negative application conditions (NAC) \cite{ehrigALGEBRAICAPPROACHESGRAPH1997}, as implemented in Groove \cite{rensinkGROOVESimulatorTool2004}.
@@ -187,7 +190,7 @@ Moreover, we utilize NACs to implement more intricate parts in the \gls*{bpmn} e
 \section{BPMN semantics formalization} \label{sec:formalization}
 
 %Since our approach is based on a \gls*{hot} from BPMN to \gls*{gt} systems, we generate a \textit{start graph} and \textit{\gls*{gt} rules} for each given BPMN model.
-The approach supports the \gls*{bpmn} features depicted in \autoref{fig:bpmnfeaturesOverview}.
+The approach supports all the \gls*{bpmn} features depicted in \autoref{fig:bpmnfeaturesOverview}.
 These \gls*{bpmn} features are divided into \textsf{Events}, \textsf{Gateways}, \textsf{Activities}, and \textsf{Edges}.
 \textsf{Events} and \textsf{Activities} are further divided into subgroups.
 %Due to space limitations, we only explain how the features marked with a green background are realized in this paper.
