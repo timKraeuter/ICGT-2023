@@ -231,7 +231,6 @@ To concisely depict graphs conforming to this type graph, we introduce a concret
 Our concrete syntax extends the BPMN syntax by adding process snapshots, subprocess relations, tokens, and messages.
 Tokens are represented as colored circles drawn at their specified positions in a model.
 In addition, we use colored circles at the top left of the bounding box, representing instances of the BPMN \textsf{Process}; these circles represent process snapshots.
-% Token color must match the tokens relation in the type graph (constraint!). This should be checked by the tool when using concrete syntax.
 The token's color must match the color of the process snapshot holding the token.
 The concrete syntax was inspired by the bpmn-js-token-simulation\footnote{\url{https://github.com/bpmn-io/bpmn-js-token-simulation}}.
 
@@ -240,14 +239,11 @@ The execution metamodel is a UML class diagram without operations, which can be 
 Using execution metamodel as the type graph, we can now define how the start graph and graph-transformation rules for the different BPMN features are created.
 
 Since our approach is based on a \gls*{hot} from BPMN to \gls*{gt} systems, we generate a \textit{start graph} and \textit{\gls*{gt} rules} for each given BPMN model.
-% How is a start graph generated?
 The generation of the start graph for a BPMN model is straightforward.
 First, for each process in the BPMN model, we generate a process snapshot if the process contains a none start event (NSE).
-A NSE describes a start event without a trigger (none).
-%Frequently used start event triggers are message and signal start events (see MSE and SSE in \autoref{fig:bpmnfeaturesOverview}).
-Then, for each NSE, we add a token to the respective process snapshot.
+An NSE describes a start event without a trigger (none).
+Then, we add a token to the respective process snapshot for each NSE.
 An example of a start graph is shown in \autoref{fig:startGraph} using abstract and concrete syntax.
-%Furthermore, we consider allowing the modeler to define a start graph the same way as she defines atomic propositions for custom properties (see \autoref{subsec:customProperties}).
 
 \begin{figure}[ht]
     \centering
@@ -257,10 +253,8 @@ An example of a start graph is shown in \autoref{fig:startGraph} using abstract 
 \end{figure}
 
 The \gls*{hot} generates one or more \gls*{gt} rules for each \textsf{FlowNode}, i.e., state-changing element in a BPMN model.
-% To give an intuition about the transformation, we will first describe two example results, meaning generated rules for an NSE and a task (see \autoref{fig:bpmnfeaturesOverview}).
-% Afterward, we will explain how our \gls*{hot} creates these and other rules.
-%suggestion
-In order to provide a better understanding of the transformation process, we will begin by presenting two example results, namely the generated rules for a NSE and a task (as shown in \autoref{fig:bpmnfeaturesOverview}). Following this, we will delve into an explanation of how our \gls*{hot} creates these rules as well as others.
+In order to provide a better understanding of the transformation process, we will begin by presenting two example results, namely the generated rules for an NSE and a task (as shown in \autoref{fig:bpmnfeaturesOverview}).
+Following this, we will delve into an explanation of how our \gls*{hot} creates these rules as well as others.
 
 \autoref{fig:gtRuleAbstract} depicts an example \gls*{gt} rule ($L \to R$) for an NSE in abstract syntax.
 The rule is straightforward, moving a token from the start event to its outgoing sequence flow.
@@ -338,7 +332,7 @@ Activity execution is divided into two steps implemented by two rule templates.
 The upper template generates one rule for each incoming sequence flow to start the activity.
 An activity can be started using a token positioned at any of its incoming sequence flows.
 Thus, multiple incoming sequence flows represent an \textit{implicit exclusive gateway} (see exclusive gateway in \autoref{fig:gatewayTemplates}).
-This rule template generates the sample rule or the rigth of in \autoref{fig:gtRuleConcrete}.
+This rule template generates the sample rule in the right of \autoref{fig:gtRuleConcrete}.
 
 The bottom rule template generates one rule that ends the activity.
 It deletes a token at the activity and adds one at each outgoing sequence flow.
@@ -357,7 +351,7 @@ The upper template generates one rule for each incoming sequence flow.
 The rule deletes an incoming token and adds a process snapshot representing a subprocess. 
 The created process snapshot is represented with a colored circle on the top left corner of the subprocess with a token at each of its start events.
 There is a \textit{subprocess} link between the process snapshots to depict the \textsf{subprocesses} relation in \autoref{fig:typeGraph}.
-If the subprocess has no start events, a token for every activity and gateway without incoming sequence flows is added. %, as defined in the BPMN specification.
+If the subprocess has no start events, a token will be added to every activity and gateway with no incoming sequence flows.
 
 The bottom rule template generates one rule to delete a terminated process snapshot and adds tokens at each outgoing sequence flow.
 Subprocesses are terminated by the termination rule (see section \ref{subsec:instAndTermination}).
