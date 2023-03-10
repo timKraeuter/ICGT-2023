@@ -76,7 +76,7 @@ As proof of concept, we have implemented our approach in an open-source web-base
 %
 In today's fast-paced business environment, organisations with complex workflows require a powerful means to accurately map, analyse, and optimize their processes. 
 \gls*{bpmn} \cite{objectmanagementgroupBusinessProcessModel2013} is widely used standard to define these workflows.
-However, the informal description of the BPMN execution semantics leads to different interpretations of BPMN features and difficulties in checking behavioral properties \cite{corradiniFormalApproachAnalysis2021}.
+However, the informal description of the \gls*{bpmn} execution semantics leads to different interpretations of \gls*{bpmn} features and difficulties in checking behavioral properties \cite{corradiniFormalApproachAnalysis2021}.
 Formalizing \gls*{bpmn} would reduce the cost of business process automation drastically by facilitating the detection of errors and optimization potentials in process models already during design time. 
 To this end, we propose a formalization that covers most of the \gls*{bpmn} features used in practice and supports checking behavioral properties.
 
@@ -101,13 +101,13 @@ In our approach, we create \gls*{gt} rules based on a \gls*{hot}, as shown in \a
 %Usually, an execution metamodel is defined by extending the structural metamodel.
 %
 %suggestions
-To begin the BPMN modeling process, a modeler first defines the BPMN model and its corresponding behavioral properties for evaluation. This model must adhere to the BPMN metamodel as outlined in the BPMN specification by the Object Management Group \cite{objectmanagementgroupBusinessProcessModel2013}. To create the state structure for BPMN, the BPMN execution metamodel is defined by language engineers, utilizing the BPMN metamodel as a foundation. Typically, an execution metamodel is created by extending the structural BPMN metamodel.
+To begin the \gls*{bpmn} modeling process, a modeler first defines the \gls*{bpmn} model and its corresponding behavioral properties for evaluation. This model must adhere to the \gls*{bpmn} metamodel as outlined in the \gls*{bpmn} specification by the Object Management Group \cite{objectmanagementgroupBusinessProcessModel2013}. To create the state structure for BPMN, the \gls*{bpmn} execution metamodel is defined by language engineers, utilizing the \gls*{bpmn} metamodel as a foundation. Typically, an execution metamodel is created by extending the structural \gls*{bpmn} metamodel.
 
-Furthermore, we define a \gls*{hot} from BPMN models to \gls*{gt} systems.
+Furthermore, we define a \gls*{hot} from \gls*{bpmn} models to \gls*{gt} systems.
 We call the transformation \textit{higher-order} since the resulting graph-transformation systems represent model-transformations themselves \cite{tisiUseHigherOrderModel2009}.
-The \gls*{hot} creates a \gls*{gt} system, i.e., \gls*{gt} rules and a start graph for a given BPMN model.
-It is defined using so-called rule generation templates, which describe how \gls*{gt} rules should be generated for each state-changing element in BPMN (see \autoref{sec:formalization}).
-The obtained \gls*{gt} system conforms to the execution type graph representing the BPMN execution metamodel interpreted as a type graph.
+The \gls*{hot} creates a \gls*{gt} system, i.e., \gls*{gt} rules and a start graph for a given \gls*{bpmn} model.
+It is defined using so-called rule generation templates, which describe how \gls*{gt} rules should be generated for each state-changing element in \gls*{bpmn} (see \autoref{sec:formalization}).
+The obtained \gls*{gt} system conforms to the execution type graph representing the \gls*{bpmn} execution metamodel interpreted as a type graph.
 In the figure, we have colored both artifacts blue to visualize that they contain the same information.
 %Finally, we check the previously defined behavioral properties using Groove to run the \gls*{gt} system.
 %Suggestion
@@ -125,9 +125,9 @@ To define the execution semantics of an alternate behavioral language, one simpl
 % Paper outline
 The remainder of this paper is structured as follows.
 First, in \autoref{sec:preliminaries}, we introduce \gls*{bpmn} and point out the theoretical background of this contribution.
-Second, we describe the \gls*{bpmn} semantics formalization using the \gls*{hot} (\autoref{sec:formalization}) before explaining how this can be utilized for model checking general BPMN and custom properties (\autoref{sec:modelChecking}).
+Second, we describe the \gls*{bpmn} semantics formalization using the \gls*{hot} (\autoref{sec:formalization}) before explaining how this can be utilized for model checking general \gls*{bpmn} and custom properties (\autoref{sec:modelChecking}).
 Then, in \autoref{sec:impl}, we present the web-based tool implementing our approach and benchmark the implementation.
-Finally, we discuss related work regarding BPMN feature coverage in \autoref{sec:relatedWork} and conclude in \autoref{sec:conclusion}.
+Finally, we discuss related work regarding \gls*{bpmn} feature coverage in \autoref{sec:relatedWork} and conclude in \autoref{sec:conclusion}.
 
 \section{Preliminaries} \label{sec:preliminaries}
 % In this paper, we apply \gls*{gt}s to formalize the execution semantics of BPMN.
@@ -136,35 +136,34 @@ Finally, we discuss related work regarding BPMN feature coverage in \autoref{sec
 % Furthermore, we outline the theoretical background behind our application of \gls*{gt}s.
 %Suggestion
 
-In this section, we will briefly introduce the execution semantics of BPMN, and readers are encouraged to consult \cite{freundRealLifeBPMNUsing2019} or the BPMN specification \cite{objectmanagementgroupBusinessProcessModel2013} for more in-depth information. 
-Furthermore, our application of \gls*{gt}s to formalize the execution semantics of BPMN will be outlined in addition to a brief overview of the theoretical principles that underlie our use of \gls*{gt}s.
+In this section, we will briefly introduce the execution semantics of BPMN, and readers are encouraged to consult \cite{freundRealLifeBPMNUsing2019} or the \gls*{bpmn} specification \cite{objectmanagementgroupBusinessProcessModel2013} for more in-depth information. 
+Furthermore, our application of \gls*{gt}s to formalize the execution semantics of \gls*{bpmn} will be outlined in addition to a brief overview of the theoretical principles that underlie our use of \gls*{gt}s.
 
 
 
 \subsection{BPMN}
-\autoref{fig:bpmnMetamodel} depicts the structure of BPMN models with the corresponding concrete syntax BPMN symbols contained in clouds.
+\autoref{fig:bpmnMetamodel} depicts the structure of \gls*{bpmn} models with the corresponding concrete syntax \gls*{bpmn} symbols contained in clouds.
 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.7\linewidth]{images/bpmn_semantics-bpmn-metamodel.pdf}
-  \caption{Excerpt of the BPMN metamodel \cite{objectmanagementgroupBusinessProcessModel2013}}
+  \caption{Excerpt of the \gls*{bpmn} metamodel \cite{objectmanagementgroupBusinessProcessModel2013}}
   \label{fig:bpmnMetamodel}
 \end{figure}
 
-A BPMN model is represented by a \textsf{Collaboration} that has \textsf{participants} and \textsf{MessageFlows} between \textsf{InteractionNodes}.
+A \gls*{bpmn} model is represented by a \textsf{Collaboration} that has \textsf{participants} and \textsf{MessageFlows} between \textsf{InteractionNodes}.
 Each participant is a \textsf{Process} containing \textsf{FlowNodes} connected by \textsf{SequenceFlows}.
 A \textsf{FlowNode} is either an \textsf{Activity}, \textsf{Gateway}, or \textsf{Event}.
 Many types of \textsf{Activities}, \textsf{Gateways}, and \textsf{Events} exist.
 Activities represent certain tasks to be carried out during a process, while events may happen during the execution of these tasks.
 Furthermore, gateways model conditions, parallelizations, and synchronizations \cite{freundRealLifeBPMNUsing2019}.
 
-% BPMN semantics: Token distribution
-The BPMN execution semantics is described using the concept of \textit{tokens} \cite{objectmanagementgroupBusinessProcessModel2013}, which can be located at sequence flows and specific flow nodes.
+The \gls*{bpmn} execution semantics is described using the concept of \textit{tokens} \cite{objectmanagementgroupBusinessProcessModel2013}, which can be located at sequence flows and specific flow nodes.
 Tokens are consumed and created by flow nodes according to the connected sequence flows.
 %Thus, the flow nodes are 
-The \textsf{FlowNode} is colored purple in \autoref{fig:bpmnMetamodel} since it represents a state-changing element of BPMN as described in \autoref{sec:formalization}.
+The \textsf{FlowNode} is colored purple in \autoref{fig:bpmnMetamodel} since it represents a state-changing element of \gls*{bpmn} as described in \autoref{sec:formalization}.
 
-A BPMN process is triggered by one of its start events, leading to the creation of a token at the triggered start event.
+A \gls*{bpmn} process is triggered by one of its start events, leading to the creation of a token at the triggered start event.
 % Activities
 Activities can start when at least one token is on an incoming sequence flow.
 The start of an activity will move the incoming token to the activity.
@@ -176,32 +175,32 @@ Events delete and add tokens like activities but have additional semantics depen
 For example, message events will add or delete messages.
 
 \subsection{Theoretical background}
-We use typed attributed graphs for the formalization of the BPMN execution semantics.
-Each state, i.e., token distribution during the execution of a BPMN model, is represented as an attributed graph typed by the BPMN execution type graph, which is introduced in \autoref{sec:formalization}.
+We use typed attributed graphs for the formalization of the \gls*{bpmn} execution semantics.
+Each state, i.e., token distribution during the execution of a \gls*{bpmn} model, is represented as an attributed graph typed by the \gls*{bpmn} execution type graph, which is introduced in \autoref{sec:formalization}.
 
 % Groove uses the single pushout approach with negative application conditions.
 Regarding \gls*{gt}, we utilize the single-pushout (SPO) approach with negative application conditions (NAC) \cite{ehrigALGEBRAICAPPROACHESGRAPH1997}, as implemented in Groove \cite{rensinkGROOVESimulatorTool2004}.
 In addition, we utilize \textit{nested rules} with quantification to make parts of a rule applied repeatedly or optionally \cite{rensinkNestedQuantificationGraph2006,rensinkHowMuchAre2017}.
-Moreover, we utilize NACs to implement more intricate parts in the BPMN execution semantics, such as the termination of processes.
+Moreover, we utilize NACs to implement more intricate parts in the \gls*{bpmn} execution semantics, such as the termination of processes.
 
 
 \section{BPMN semantics formalization} \label{sec:formalization}
 
 %Since our approach is based on a \gls*{hot} from BPMN to \gls*{gt} systems, we generate a \textit{start graph} and \textit{\gls*{gt} rules} for each given BPMN model.
-The approach supports the BPMN features depicted in \autoref{fig:bpmnfeaturesOverview}.
-These BPMN features are divided into \textsf{Events}, \textsf{Gateways}, \textsf{Activities}, and \textsf{Edges}.
+The approach supports the \gls*{bpmn} features depicted in \autoref{fig:bpmnfeaturesOverview}.
+These \gls*{bpmn} features are divided into \textsf{Events}, \textsf{Gateways}, \textsf{Activities}, and \textsf{Edges}.
 \textsf{Events} and \textsf{Activities} are further divided into subgroups.
 %Due to space limitations, we only explain how the features marked with a green background are realized in this paper.
 %However, the other features are also implemented and tested \cite{krauterArtifactsICGT2023}.
 %Suggestion
 Although all these features have been implemented and tested (see \cite{krauterArtifactsICGT2023}), due to space limitations, we only explain the realization of the features marked with a green background.
-In the following, first we define the BPMN execution metamodel to represent the BPMN state structure, then we explain our formalization of the features in \autoref{fig:bpmnfeaturesOverview}.
+In the following, first we define the \gls*{bpmn} execution metamodel to represent the \gls*{bpmn} state structure, then we explain our formalization of the features in \autoref{fig:bpmnfeaturesOverview}.
 
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.99\textwidth]{images/bpmn_semantics-feature-overview.pdf}
-    \caption{Overview of the supported BPMN features (structure adapted from \cite{houhouFirstOrderLogicVerification2022})}
+    \caption{Overview of the supported \gls*{bpmn} features (structure adapted from \cite{houhouFirstOrderLogicVerification2022})}
     \label{fig:bpmnfeaturesOverview}
 \end{figure}
 
@@ -210,7 +209,7 @@ In the following, first we define the BPMN execution metamodel to represent the 
 
 % Our formalization of BPMN is token-based, as in the informal description of the BPMN specification \cite{objectmanagementgroupBusinessProcessModel2013}.
 %Suggestion
-In our formalization of BPMN, we utilize a token-based representation of the execution semantics, which is similar to the approach used in the informal description of the BPMN specification \cite{objectmanagementgroupBusinessProcessModel2013}.
+In our formalization of BPMN, we utilize a token-based representation of the execution semantics, similar to the approach used in the informal description of the \gls*{bpmn} specification \cite{objectmanagementgroupBusinessProcessModel2013}.
 % Thus, t
 To describe processes holding tokens during execution, we use the execution metamodel shown in \autoref{fig:typeGraph}, depicted as a UML class diagram.
 
@@ -221,26 +220,26 @@ To describe processes holding tokens during execution, we use the execution meta
   \label{fig:typeGraph}
 \end{figure}
 
-We use \textsf{ProcessSnapshot} to denote a running BPMN process with a specific token distribution that describes one state in the history of the process execution.
+We use \textsf{ProcessSnapshot} to denote a running \gls*{bpmn} process with a specific token distribution that describes one state in the history of the process execution.
 Every \textsf{ProcessSnapshot} has a set of \textsf{tokens}, incoming \textsf{messages}, and \textsf{subprocesses}.
 A \textsf{ProcessSnapshot} has the state \textsf{Terminated} if it has no \textsf{tokens} or \textsf{subprocesses}.
 Otherwise, it has the state \textsf{Running}.
-A \textsf{Token} has an \textsf{elementID}, which points to the BPMN \textsf{Activity} or the \textsf{SequenceFlow} at which it is located.
+A \textsf{Token} has an \textsf{elementID}, which points to the \gls*{bpmn} \textsf{Activity} or the \textsf{SequenceFlow} at which it is located.
 A \textsf{Message} has an \textsf{elementID} pointing to a \textsf{MessageFlow}.
 To concisely depict graphs conforming to this type graph, we introduce a concrete syntax in the clouds attached to the elements.
-Our concrete syntax extends the BPMN syntax by adding process snapshots, subprocess relations, tokens, and messages.
+Our concrete syntax extends the \gls*{bpmn} syntax by adding process snapshots, subprocess relations, tokens, and messages.
 Tokens are represented as colored circles drawn at their specified positions in a model.
-In addition, we use colored circles at the top left of the bounding box, representing instances of the BPMN \textsf{Process}; these circles represent process snapshots.
+In addition, we use colored circles at the top left of the bounding box, representing instances of the \gls*{bpmn} \textsf{Process}; these circles represent process snapshots.
 The token's color must match the color of the process snapshot holding the token.
 The concrete syntax was inspired by the bpmn-js-token-simulation\footnote{\url{https://github.com/bpmn-io/bpmn-js-token-simulation}}.
 
 
 The execution metamodel is a UML class diagram without operations, which can be seen as an attributed type graph with inheritance \cite{heckelGraphTransformationSoftware2020}.
-Using execution metamodel as the type graph, we can now define how the start graph and graph-transformation rules for the different BPMN features are created.
+Using execution metamodel as the type graph, we can now define how the start graph and graph-transformation rules for the different \gls*{bpmn} features are created.
 
-Since our approach is based on a \gls*{hot} from BPMN to \gls*{gt} systems, we generate a \textit{start graph} and \textit{\gls*{gt} rules} for each given BPMN model.
-The generation of the start graph for a BPMN model is straightforward.
-First, for each process in the BPMN model, we generate a process snapshot if the process contains a none start event (NSE).
+Since our approach is based on a \gls*{hot} from \gls*{bpmn} to \gls*{gt} systems, we generate a \textit{start graph} and \textit{\gls*{gt} rules} for each given \gls*{bpmn} model.
+The generation of the start graph for a \gls*{bpmn} model is straightforward.
+First, for each process in the \gls*{bpmn} model, we generate a process snapshot if the process contains a none start event (NSE).
 An NSE describes a start event without a trigger (none).
 Then, we add a token to the respective process snapshot for each NSE.
 An example of a start graph is shown in \autoref{fig:startGraph} using abstract and concrete syntax.
@@ -252,7 +251,7 @@ An example of a start graph is shown in \autoref{fig:startGraph} using abstract 
     \label{fig:startGraph}
 \end{figure}
 
-The \gls*{hot} generates one or more \gls*{gt} rules for each \textsf{FlowNode}, i.e., state-changing element in a BPMN model.
+The \gls*{hot} generates one or more \gls*{gt} rules for each \textsf{FlowNode}, i.e., state-changing element in a \gls*{bpmn} model.
 In order to provide a better understanding of the transformation process, we will begin by presenting two example results, namely the generated rules for an NSE and a task (as shown in \autoref{fig:bpmnfeaturesOverview}).
 Following this, we will delve into an explanation of how our \gls*{hot} creates these rules as well as others.
 
@@ -281,17 +280,17 @@ To summarize, we described two example rules and introduced a concrete syntax to
 In the following subsections, we use this concrete syntax to describe how these rules and rules for other flow nodes are generated by our \gls*{hot}.
 Elements of the \gls*{hot} are depicted using rule generation templates that describe how specific rules are created for various flow nodes.
 We only explain rule generation for (i) process instantiation and termination, (ii) activities and subprocesses, (iii) gateways, as well as (iv) message events due to space constraints.
-However, our implementation covers all BPMN features shown in \autoref{fig:bpmnfeaturesOverview} \cite{krauterArtifactsICGT2023}.
+However, our implementation covers all \gls*{bpmn} features shown in \autoref{fig:bpmnfeaturesOverview} \cite{krauterArtifactsICGT2023}.
 
 
 \subsection{Process instantiation and termination} \label{subsec:instAndTermination}
 
 \autoref{fig:startAndEndTemplate} depicts the rule generation templates for start and end events (\textsf{NSE} and \textsf{NEE} in \autoref{fig:bpmnfeaturesOverview}).
 All rule generation templates show a state-changing element (\textsf{FlowNode}) with surrounding flows in the left column and the applicable rule generation template in the right column.
-The left column shows instances of the BPMN metamodel (\autoref{fig:bpmnMetamodel}), and the right column shows the generated rules typed by the BPMN execution metamodel (see \autoref{fig:typeGraph}).
+The left column shows instances of the \gls*{bpmn} metamodel (\autoref{fig:bpmnMetamodel}), and the right column shows the generated rules typed by the \gls*{bpmn} execution metamodel (see \autoref{fig:typeGraph}).
 If more than one rule is generated from a \textsf{FlowNode}, an expression defines how each rule is generated.
 For example, the expression $\forall \text{sf} \in \text{E.incSFs}$ for the rule generation template of end events (see \autoref{fig:startAndEndTemplate}) generates one rule for each incoming sequence flow \textit{sf} of the end event \textit{E}.
-We use ``.'' in expressions to navigate along the associations of the BPMN metamodel shown in \autoref{fig:bpmnMetamodel}.
+We use ``.'' in expressions to navigate along the associations of the \gls*{bpmn} metamodel shown in \autoref{fig:bpmnMetamodel}.
 In the example, \textsf{E.incSFs} means following all \textsf{incSFs} links for a \textsf{FlowNode} object, resulting in a set of \textsf{SequenceFlow} objects.
 
 
@@ -313,7 +312,7 @@ Initially, the tokens on the start events are given by the start graph of the \g
 The generated end event rules delete tokens one by one for each incoming sequence flow.
 However, they do not terminate processes.
 % General termination rule
-Process termination is implemented with a generic rule---independent of the input BPMN model---which is applicable to all process snapshots.
+Process termination is implemented with a generic rule---independent of the input \gls*{bpmn} model---which is applicable to all process snapshots.
 The termination rule in \autoref{fig:terminationRule} is automatically generated once during the \gls*{hot}.
 The rule changes the state of the process snapshot from running to terminated if it has neither tokens nor subprocesses.
 
@@ -418,19 +417,19 @@ Furthermore, \textit{receive tasks} behave similarly regarding message consumpti
 
 \section{Model checking BPMN} \label{sec:modelChecking}
 
-Model checking a BPMN model is possible using the generated \gls*{gt} system.
+Model checking a \gls*{bpmn} model is possible using the generated \gls*{gt} system.
 Besides a \gls*{gt} system, a set of temporal properties to be checked, and the atomic propositions used in these properties must be supplied.
 An atomic proposition is formalized as a graph and holds in a given state if a match exists from the underlying graph of the proposition to the graph representing the state.
 This enables model checking of temporal properties with the defined atomic propositions \cite{kastenbergModelCheckingDynamic2006}.
 
-We differentiate between \textit{general BPMN properties} defined for all BPMN models and \textit{custom properties} tailored towards a particular BPMN model.
+We differentiate between \textit{general \gls*{bpmn} properties} defined for all \gls*{bpmn} models and \textit{custom properties} tailored towards a particular \gls*{bpmn} model.
 We do not consider structural properties (like conformance to the syntax of BPMN) since they can be checked using a standard modeling tool without implementing execution semantics.
-We will now give an example of two predefined general BPMN properties and show how they can be checked using our approach.
+We will now give an example of two predefined general \gls*{bpmn} properties and show how they can be checked using our approach.
 Then, we describe how custom properties can be defined and checked.
 
 \subsection{General BPMN properties}
-\textit{Safeness} and \textit{Soundness} properties are defined for BPMN in \cite{corradiniClassificationBPMNCollaborations2018}.
-A BPMN model is \textit{safe} if, during its execution, at most one token occurs along the same sequence flow \cite{corradiniClassificationBPMNCollaborations2018}.
+\textit{Safeness} and \textit{Soundness} properties are defined for \gls*{bpmn} in \cite{corradiniClassificationBPMNCollaborations2018}.
+A \gls*{bpmn} model is \textit{safe} if, during its execution, at most one token occurs along the same sequence flow \cite{corradiniClassificationBPMNCollaborations2018}.
 Soundness is further decomposed into (i) \textit{Option to complete}: any running process instance must eventually complete, (ii) \textit{Proper completion}: at the moment of completion, each token of the process instance must be in a different end event, as well as (iii) \textit{No dead activities}: any activity can be executed in at least one process instance \cite{corradiniClassificationBPMNCollaborations2018}.
 For example, we will describe how to implement the \textit{Safeness} and \textit{Option to complete} properties.
 
@@ -460,8 +459,8 @@ The property \textit{Proper Completion} is not yet implemented, but all the info
 
 \subsection{Custom properties} \label{subsec:customProperties}
 % Defining atomic propositions in BPMN is a novelty.
-To make model checking user-friendly, we envision modelers defining atomic propositions in the extended BPMN syntax, i.e., the concrete syntax introduced in \autoref{fig:typeGraph}.
-Thus, to define an atomic proposition, a modeler adds process snapshots and tokens to a BPMN model, which we can automatically convert to a graph representing an atomic proposition.
+To make model checking user-friendly, we envision modelers defining atomic propositions in the extended \gls*{bpmn} syntax, i.e., the concrete syntax introduced in \autoref{fig:typeGraph}.
+Thus, to define an atomic proposition, a modeler adds process snapshots and tokens to a \gls*{bpmn} model, which we can automatically convert to a graph representing an atomic proposition.
 
 For example, the token distribution shown in \autoref{fig:atomicProposition} defines two running process snapshots with a token at task A.
 Differently colored tokens define different process snapshots.
@@ -469,7 +468,7 @@ A modeler could use this atomic proposition, for example, to check if, eventuall
 Thus, a modeler does not need to know the \gls*{gt} semantics used for execution.
 
 However, a modeler must still know the temporal logic, such as LTL and CTL, to express his properties.
-In the future, a domain-specific property language for BPMN would further lessen the knowledge required from a modeler \cite{meyersProMoBoxFrameworkGenerating2014}. 
+In the future, a domain-specific property language for \gls*{bpmn} would further lessen the knowledge required from a modeler \cite{meyersProMoBoxFrameworkGenerating2014}. 
 
 
 \begin{figure}[ht]
@@ -507,13 +506,13 @@ As described in the next section, we also ran a performance benchmark for our ap
 
 Model checking is a useful technique but often falls short in practice due to insufficient performance.
 Poor performance might have many reasons, most notably large models leading to state space explosion.
-We ran a benchmark for ten different BPMN models from \cite{houhouFirstOrderLogicVerification2022} to assess the performance of our implementation.
+We ran a benchmark for ten different \gls*{bpmn} models from \cite{houhouFirstOrderLogicVerification2022} to assess the performance of our implementation.
 The models include realistic business process models (001, 002, and 020) \cite{houhouFirstOrderLogicVerification2022}.
 
-To calculate the average runtime, we used the hyperfine benchmarking tool \cite{peterHyperfine2022} (version 1.15.0), which ran state space exploration for each BPMN model ten times.
+To calculate the average runtime, we used the hyperfine benchmarking tool \cite{peterHyperfine2022} (version 1.15.0), which ran state space exploration for each \gls*{bpmn} model ten times.
 The benchmarks were run on Windows 11 (AMD Ryzen 7700X processor, 32 GB RAM) using Groove version 5.8.1 \cite{krauterArtifactsICGT2023}. 
 
-First, we benchmarked our \gls*{hot} for the BPMN models.
+First, we benchmarked our \gls*{hot} for the \gls*{bpmn} models.
 The \gls*{hot} took less than one second to generate a \gls*{gt} system for every model.
 Thus, the generation of the \gls*{gt} systems is fast enough.
 Furthermore, we suspect most of the time is spent writing the \gls*{gt} system to disk.
@@ -564,33 +563,33 @@ A more comprehensive benchmark and detailed comparison to other implementations 
 
 \section{Related work} \label{sec:relatedWork}
 % Van gorp
-A BPMN formalization based on in-place \gls*{gt} rules is given in \cite{vangorpVisualTokenbasedFormalization2013}.
-The formalization covers a substantial part of the BPMN specification, including complex concepts such as inclusive gateways and compensation.
+A \gls*{bpmn} formalization based on in-place \gls*{gt} rules is given in \cite{vangorpVisualTokenbasedFormalization2013}.
+The formalization covers a substantial part of the \gls*{bpmn} specification, including complex concepts such as inclusive gateways and compensation.
 In addition, the \gls*{gt} rules are visual and thus can be aligned with the informal description of the execution semantics of BPMN.
-A key difference to our approach is that the rules in \cite{vangorpVisualTokenbasedFormalization2013} are general and can be applied to any BPMN model, while we generate specific rules for every BPMN model using our \gls*{hot}.
-Thus, our approach can be seen as a program specialization compared to \cite{vangorpVisualTokenbasedFormalization2013} since we process a concrete BPMN model before its execution.
+A key difference to our approach is that the rules in \cite{vangorpVisualTokenbasedFormalization2013} are general and can be applied to any \gls*{bpmn} model, while we generate specific rules for every \gls*{bpmn} model using our \gls*{hot}.
+Thus, our approach can be seen as a program specialization compared to \cite{vangorpVisualTokenbasedFormalization2013} since we process a concrete \gls*{bpmn} model before its execution.
 However, they do \textit{not} support property checking since their goal is only formalization.
 
 % BProve/Corradini
-The tool \textit{BProVe} is based on formal BPMN semantics given in rewriting logic and implemented in the Maude system \cite{corradiniFormalApproachAnalysis2021}.
-Using this formal semantics, they can verify custom LTL properties and general BPMN properties, such as Safeness and Soundness.
+The tool \textit{BProVe} is based on formal \gls*{bpmn} semantics given in rewriting logic and implemented in the Maude system \cite{corradiniFormalApproachAnalysis2021}.
+Using this formal semantics, they can verify custom LTL properties and general \gls*{bpmn} properties, such as Safeness and Soundness.
 
 % fbpmn/Houhou
-The verification framework \textsf{fbpmn} uses first-order logic to formalize and check BPMN models \cite{houhouFirstOrderLogicVerification2022}.
+The verification framework \textsf{fbpmn} uses first-order logic to formalize and check \gls*{bpmn} models \cite{houhouFirstOrderLogicVerification2022}.
 This formalization is then realized in the TLA\textsuperscript{+} formal language and can be model-checked using TLC.
-Like BProVe, \textsf{fbpmn} allows checking general BPMN properties, such as Safeness and Soundness.
+Like BProVe, \textsf{fbpmn} allows checking general \gls*{bpmn} properties, such as Safeness and Soundness.
 Furthermore, they focus on different communication models besides the standard in the \gls*{bpmn} specification and support time-related constructs.
 We currently disregard time-related constructs \cite{duranVerifyingTimedBPMN2017,houhouFirstOrderLogicVerification2022} and data flow \cite{corradiniFormalisingAnimatingMultiple2022,el-saberCMMICMComplianceChecking2015}.
 
-\autoref{tab:supportedfeatures} shows which BPMN features are supported by the approaches mentioned above compared to ours.
-The coverage of BPMN features greatly impacts how useful each approach is in practice.
+\autoref{tab:supportedfeatures} shows which \gls*{bpmn} features are supported by the approaches mentioned above compared to ours.
+The coverage of \gls*{bpmn} features greatly impacts how useful each approach is in practice.
 % Summarize the findings and explain them in more detail
 Our approach covers most of the \gls*{bpmn} features compared to other current approaches.
 Thus, we conclude that our formalization is comprehensive but can still be improved.
 In addition, it covers the most important features found in practice since we come close to the feature coverage of popular process engines such as Camunda\footnote{\url{https://docs.camunda.org/manual/7.16/reference/bpmn20/}}.
 
 \begin{table}[htbp]
-    \caption{features supported by different BPMN formalizations (overview based on \cite{vangorpVisualTokenbasedFormalization2013}).}
+    \caption{features supported by different \gls*{bpmn} formalizations (overview based on \cite{vangorpVisualTokenbasedFormalization2013}).}
     \label{tab:supportedfeatures}
     \begin{threeparttable}
     \begin{tabular}{l l l l l}
@@ -655,7 +654,7 @@ Future work targets both of our main contributions.
 First, we plan a detailed comparison of our \gls*{hot} approach with an approach with fixed rules.
 It will be interesting to investigate how the two approaches differ, for example, in runtime during state space generation.
 Second, we aim to improve our formalization and the resulting tool in multiple ways.
-We intend to extend our formalization to support the remaining few BPMN features used in practice and want to turn the modeling environment of our tool into an interactive simulation environment driven by our formal semantics.
+We intend to extend our formalization to support the remaining few \gls*{bpmn} features used in practice and want to turn the modeling environment of our tool into an interactive simulation environment driven by our formal semantics.
 In addition, we can use this environment to visualize potential counterexamples of behavioral properties.
 
 \bibliographystyle{splncs04} 
@@ -664,7 +663,7 @@ In addition, we can use this environment to visualize potential counterexamples 
 \section{Appendix}
 
 
-This section shows examples of our tool checking general BPMN properties.
+This section shows examples of our tool checking general \gls*{bpmn} properties.
 Our tool and the example models are available as artifacts \cite{krauterArtifactsICGT2023}.
 
 \subsection{Safeness example}
@@ -675,7 +674,7 @@ In this case, the sequence flow \textit{Unsafe} is unsafe.
 
 The exclusive gateway merges the sequence flows but does not synchronize.
 Thus, the outgoing sequence flow can hold two tokens, and Activity C is executed twice.
-This could be a simple mistake not obvious to people unfamiliar with the BPMN execution semantics.
+This could be a simple mistake not obvious to people unfamiliar with the \gls*{bpmn} execution semantics.
 
 \begin{figure}[ht]
     \centering
@@ -689,7 +688,7 @@ This could be a simple mistake not obvious to people unfamiliar with the BPMN ex
 
 The parallel gateway cannot synchronize since no split has happened before.
 Thus, the process cannot terminate.
-Again, this could be a simple mistake not obvious to people unfamiliar with the BPMN execution semantics.
+Again, this could be a simple mistake not obvious to people unfamiliar with the \gls*{bpmn} execution semantics.
 
 \begin{figure}[ht]
     \centering
@@ -703,7 +702,7 @@ Again, this could be a simple mistake not obvious to people unfamiliar with the 
 Activity C is \textit{dead}, which is highlighted when checking for dead activities.
 
 The parallel gateway is incorrect since it cannot synchronize two sequence flows that never split.
-This could be a simple mistake not obvious to people unfamiliar with the BPMN execution semantics.
+This could be a simple mistake not obvious to people unfamiliar with the \gls*{bpmn} execution semantics.
 
 \begin{figure}[ht]
     \centering
