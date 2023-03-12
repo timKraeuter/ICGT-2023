@@ -113,11 +113,6 @@ Then, in \autoref{sec:impl}, we present the web-based tool implementing our appr
 Finally, we discuss related work regarding \gls*{bpmn} feature coverage in \autoref{sec:relatedWork} and conclude in \autoref{sec:conclusion}.
 
 \section{Preliminaries} \label{sec:preliminaries}
-% In this paper, we apply \gls*{gt}s to formalize the execution semantics of BPMN.
-% Thus, in this section, we will briefly introduce BPMN and its execution semantics.
-% Please refer to \cite{freundRealLifeBPMNUsing2019} or the BPMN specification \cite{objectmanagementgroupBusinessProcessModel2013} for further information about BPMN.
-% Furthermore, we outline the theoretical background behind our application of \gls*{gt}s.
-%Suggestion
 
 In this section, we will briefly introduce the execution semantics of BPMN, and readers are encouraged to consult \cite{freundRealLifeBPMNUsing2019} or the \gls*{bpmn} specification \cite{objectmanagementgroupBusinessProcessModel2013} for more in-depth information. 
 Furthermore, our application of \gls*{gt}s to formalize the execution semantics of \gls*{bpmn} will be outlined in addition to a brief overview of the theoretical principles that underlie our use of \gls*{gt}s.
@@ -143,10 +138,9 @@ Furthermore, gateways model conditions, parallelizations, and synchronizations \
 
 The \gls*{bpmn} execution semantics is described using the concept of \textit{tokens} \cite{objectmanagementgroupBusinessProcessModel2013}, which can be located at sequence flows and specific flow nodes.
 Tokens are consumed and created by flow nodes according to the connected sequence flows.
-%Thus, the flow nodes are 
 The \textsf{FlowNode} is colored purple in \autoref{fig:bpmnMetamodel} since it represents a state-changing element of \gls*{bpmn} as described in \autoref{sec:formalization}.
 
-A \gls*{bpmn} process is triggered by one of its start events, leading to the creation of a token at the triggered start event.
+A \gls*{bpmn} process is triggered by one of its start events, creating a token at the triggered start event.
 % Activities
 Activities can start when at least one token is on an incoming sequence flow.
 The start of an activity will move the incoming token to the activity.
@@ -169,7 +163,6 @@ Moreover, we utilize NACs to implement more intricate parts in the \gls*{bpmn} e
 
 \section{BPMN semantics formalization} \label{sec:formalization}
 
-%Since our approach is based on a \gls*{hot} from BPMN to \gls*{gt} systems, we generate a \textit{start graph} and \textit{\gls*{gt} rules} for each given BPMN model.
 The approach supports all the \gls*{bpmn} features depicted in \autoref{fig:bpmnfeaturesOverview}.
 These \gls*{bpmn} features are divided into \textsf{Events}, \textsf{Gateways}, \textsf{Activities}, and \textsf{Edges}.
 \textsf{Events} and \textsf{Activities} are further divided into subgroups.
@@ -221,7 +214,7 @@ The execution metamodel is a UML class diagram without operations, which can be 
 Using execution metamodel as the type graph, we can now define how the start graph and graph-transformation rules for the different \gls*{bpmn} features are created.
 
 Since our approach is based on a \gls*{hot} from \gls*{bpmn} to \gls*{gt} systems, we generate a \textit{start graph} and \textit{\gls*{gt} rules} for each given \gls*{bpmn} model.
-The generation of the start graph for a \gls*{bpmn} model is straightforward.
+Generating the start graph for a \gls*{bpmn} model is straightforward.
 First, for each process in the \gls*{bpmn} model, we generate a process snapshot if the process contains a none start event (NSE).
 An NSE describes a start event without a trigger (none).
 Then, we add a token to the respective process snapshot for each NSE.
