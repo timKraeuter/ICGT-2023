@@ -183,10 +183,7 @@ In the following, first we define the \gls*{bpmn} execution metamodel to represe
 
 \subsection{BPMN execution metamodel}
 
-% Our formalization of BPMN is token-based, as in the informal description of the BPMN specification \cite{objectmanagementgroupBusinessProcessModel2013}.
-%Suggestion
 In our formalization of BPMN, we utilize a token-based representation of the execution semantics, similar to the approach used in the informal description of the \gls*{bpmn} specification \cite{objectmanagementgroupBusinessProcessModel2013}.
-% Thus, t
 To describe processes holding tokens during execution, we use the execution metamodel shown in \autoref{fig:typeGraph}, depicted as a UML class diagram.
 
 \begin{figure}[ht]
@@ -207,7 +204,7 @@ Our concrete syntax extends the \gls*{bpmn} syntax by adding process snapshots, 
 Tokens are represented as colored circles drawn at their specified positions in a model.
 In addition, we use colored circles at the top left of the bounding box, representing instances of the \gls*{bpmn} \textsf{Process}; these circles represent process snapshots.
 The token's color must match the color of the process snapshot holding the token.
-The concrete syntax was inspired by the bpmn-js-token-simulation\footnote{\url{https://github.com/bpmn-io/bpmn-js-token-simulation}}.
+The concrete syntax was inspired by the bpmn-js-token-simulation \cite{camundaservicesgmbhBpmnjsTokenSimulation2023}.
 
 
 The execution metamodel is a UML class diagram without operations, which can be seen as an attributed type graph with inheritance \cite{heckelGraphTransformationSoftware2020}.
@@ -380,7 +377,7 @@ It is worth noting that a MITE might interact with MICEs and MSEs \textit{simult
 Thus, the rule generation templates in \autoref{fig:messageEventTemplates} can be mixed, i.e., messages can be sent and processes instantiated by one MITE.
 We only separated message throw behavior into two rule templates for presentation purposes.
 
-% Message catch + Receive Task
+% Message catch
 The third rule template in \autoref{fig:messageEventTemplates} shows the behavior of MICEs.
 To trigger a MICE, only one message at an incoming \textit{message flow} is needed.
 Thus, one rule is generated for each incoming \textit{message flow}.
