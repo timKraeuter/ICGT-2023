@@ -453,18 +453,11 @@ In the future, a domain-specific property language for \gls*{bpmn} would further
 \section{Implementation} \label{sec:impl}
 
 % Tool
-Our approach is implemented in a web-based tool that is open-source, publicly available, and does not require any installation \cite{krauterArtifactsICGT2023}.
-\autoref{fig:implScreenshot} depicts a screenshot of the implemented tool.
+Our approach is implemented in a web-based tool called \textit{BPMN Analyzer} that is open-source, publicly available, and does not require any installation \cite{krauterArtifactsICGT2023}.
+\autoref{fig:implScreenshot} depicts a screenshot of BPMN Analyzer.
 
-% First, the modeler creates or uploads a \gls*{bpmn} model.
-% Then, in the verification section, one can check either \gls*{bpmn}-specific properties or custom CTL properties.
-% Finally, our tool can generate a \gls*{gt} system for the supplied \gls*{bpmn} model and run model checking in Groove \cite{kastenbergModelCheckingDynamic2006}.
-% % Evaluation
-% Furthermore, to evaluate the correctness of our \gls*{hot}, we created a comprehensive test suite, which verifies correct rule generation for the implemented \gls*{bpmn} features \cite{krauterArtifactsICGT2023}.
-% As described in the next section, we also ran a performance benchmark for our approach.
-%SUGGESTION
 The modeler can create or upload a \gls*{bpmn} model, which can then be verified using either \gls*{bpmn}-specific properties or custom CTL properties in the verification section. 
-Our tool is able to generate a \gls*{gt} system for the supplied \gls*{bpmn} model and run model checking in Groove \cite{kastenbergModelCheckingDynamic2006}. 
+BPMN Analyzer can generate a \gls*{gt} system for the supplied \gls*{bpmn} model and run model checking in Groove \cite{kastenbergModelCheckingDynamic2006}. 
 To evaluate the correctness of our \gls*{hot}, we have created a comprehensive test suite that verifies the correct generation of rules for the implemented \gls*{bpmn} features \cite{krauterArtifactsICGT2023}.
 Additionally, we have conducted a performance benchmark for our approach, as described in the next section.
 
@@ -473,28 +466,27 @@ Additionally, we have conducted a performance benchmark for our approach, as des
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.7\textwidth]{images/impl_short.png}
-    \caption{Screenshot of the tool}
+    \caption{Screenshot of the BPMN Analyzer tool}
     \label{fig:implScreenshot}
 \end{figure}
 
 % Experimental results, discussion, other names, runtime experiments, runtime performance, performance tests, performance experiments?
-\subsection{Performance benchmark}
+\subsection{Experimental results}
 
 Model checking is a useful technique but often falls short in practice due to insufficient performance.
 Poor performance might have many reasons, most notably large models leading to state space explosion.
-We ran a benchmark for ten different \gls*{bpmn} models from \cite{houhouFirstOrderLogicVerification2022} to assess the performance of our implementation.
+We experimented with ten different \gls*{bpmn} models from \cite{houhouFirstOrderLogicVerification2022} to assess the performance of our implementation.
 The models include realistic business process models (001, 002, and 020) \cite{houhouFirstOrderLogicVerification2022}.
 
 To calculate the average runtime, we used the hyperfine benchmarking tool \cite{peterHyperfine2022} (version 1.15.0), which ran state space exploration for each \gls*{bpmn} model ten times.
-The benchmarks were run on Windows 11 (AMD Ryzen 7700X processor, 32 GB RAM) using Groove version 5.8.1 \cite{krauterArtifactsICGT2023}. 
+The experiment was run on Windows 11 (AMD Ryzen 7700X processor, 32 GB RAM) using Groove version 5.8.1 \cite{krauterArtifactsICGT2023}. 
 
-First, we benchmarked our \gls*{hot} for the \gls*{bpmn} models.
+First, we ran our \gls*{hot} for the \gls*{bpmn} models.
 The \gls*{hot} took less than one second to generate a \gls*{gt} system for each model.
 Thus, the generation of the \gls*{gt} systems is fast enough.
-Furthermore, we suspect most of the time is spent writing the \gls*{gt} system to disk.
+Furthermore, we estimate most of the time is spent writing the \gls*{gt} system to disk.
 
-% State space generation benchmark. Check times reported by Groove. Probably some startup time to read the files etc.
-Second, we benchmarked a full state exploration using the resulting ten \gls*{gt} systems, see \autoref{table:stateSpaceBenchmark}.
+Second, we ran a full state exploration using the resulting ten \gls*{gt} systems, see \autoref{table:stateSpaceBenchmark}.
 The exploration takes roughly one second for most of the models.
 Only model \textit{020} needs nearly two seconds due to its larger state space.
 Furthermore, we estimate that up to one second is spent before state space exploration, most likely reading the \gls*{gt} system files.
@@ -502,7 +494,7 @@ For example, Groove reports only 722 ms for state space exploration for model \t
 
 We conclude that our approach is sufficiently fast for models of normal size.
 In addition, there is still room for optimization, such as avoiding costly I/O to disk.
-A more comprehensive benchmark and detailed comparison to other implementations are left for future work.
+A comprehensive benchmark, including a detailed comparison to other tools, is left for future work.
 
 \begin{table}[ht]
 \centering
@@ -533,7 +525,7 @@ A more comprehensive benchmark and detailed comparison to other implementations 
  020 & 1 & 39(6) & 3121 & 8726 & $\sim$ 1.75 s \\
  \hline
 \end{tabular}
-\caption[Full state space exploration in Groove]{Full state space exploration in Groove}
+\caption[Experimental results for a full state space exploration in Groove]{Experimental results for a full state space exploration in Groove}
 \label{table:stateSpaceBenchmark}
 \end{table}
 
