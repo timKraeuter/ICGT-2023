@@ -636,6 +636,8 @@ In addition, we can use this environment to visualize potential counterexamples 
 \bibliographystyle{splncs04} 
 \bibliography{bib}
 
+% The appendix is not published.
+% I added it to showcase the tool's capabilities in more detail.
 \section{Appendix}
 
 
@@ -649,12 +651,12 @@ Thus, we cannot highlight where the model is unsafe.
 In this case, the sequence flow \textit{Unsafe} is unsafe.
 
 The exclusive gateway merges the sequence flows but does not synchronize.
-Thus, the outgoing sequence flow can hold two tokens, and Activity C is executed twice.
-This could be a simple mistake not obvious to people unfamiliar with the \gls*{bpmn} execution semantics.
+Thus, the outgoing sequence flow can hold two tokens, and Activity C is executed twice, which might not be intended.
+This could be a simple mistake of picking an exclusive instead of a parallel gateway.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=1\textwidth]{artifacts/unsafe_sample.png}
+    \includegraphics[width=1\textwidth]{artifacts/appendix/unsafe_sample.png}
     \caption{Screenshot of the tool detecting an unsafe situation}
     \label{fig:unsafeSample}
 \end{figure}
@@ -662,13 +664,13 @@ This could be a simple mistake not obvious to people unfamiliar with the \gls*{b
 \subsection{Option to complete example}
 \autoref{fig:optionToCompleteSample} shows a screenshot of the tool checking the \textit{Option to complete} property.
 
-The parallel gateway cannot synchronize since no split has happened before.
-Thus, the process cannot terminate.
-Again, this could be a simple mistake not obvious to people unfamiliar with the \gls*{bpmn} execution semantics.
+\textit{Option to complete} does not hold for the BPMN model since the scan (second exclusive gateway) might never be successful.
+This leads to an infinite loop.
+Thus, not every process might terminate.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=1\textwidth]{artifacts/option_to_complete_sample.png}
+    \includegraphics[width=1\textwidth]{artifacts/appendix/option_to_complete_sample.png}
     \caption{Screenshot of the tool checking \textit{Option to complete}}
     \label{fig:optionToCompleteSample}
 \end{figure}
@@ -677,20 +679,15 @@ Again, this could be a simple mistake not obvious to people unfamiliar with the 
 \autoref{fig:deadSample} shows a screenshot of the tool detecting a dead activity.
 Activity C is \textit{dead}, which is highlighted when checking for dead activities.
 
-The parallel gateway is incorrect since it cannot synchronize two sequence flows that never split.
-This could be a simple mistake not obvious to people unfamiliar with the \gls*{bpmn} execution semantics.
-
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=1\textwidth]{artifacts/dead_sample.png}
+    \includegraphics[width=1\textwidth]{artifacts/appendix/dead_sample.png}
     \caption{Screenshot of the tool detecting a dead activity}
     \label{fig:deadSample}
 \end{figure}
 
-
-\subsection{Discussion}
-
-All these examples were rather simple and boiled down to the wrong gateway being used.
+The parallel gateway is incorrect since it cannot synchronize two sequence flows that never split.
+The mistake can be fixed by using one gateway type consistently.
 However, in practice, erroneous situations might be much more complex when multiple processes communicate using messages, signals, and other events.
-Checking properties can be integrated into the model editor or added to CI/CD pipelines to catch errors as soon as possible.
+
 \end{document}
