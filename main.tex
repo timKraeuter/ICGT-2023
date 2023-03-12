@@ -433,8 +433,8 @@ Then, we describe how custom properties can be defined and checked.
 \subsection{General BPMN properties}
 \textit{Safeness} and \textit{Soundness} properties are defined for \gls*{bpmn} in \cite{corradiniClassificationBPMNCollaborations2018}.
 A \gls*{bpmn} model is \textit{safe} if, during its execution, at most one token occurs along the same sequence flow \cite{corradiniClassificationBPMNCollaborations2018}.
-Soundness is further decomposed into (i) \textit{Option to complete}: any running process instance must eventually complete, (ii) \textit{Proper completion}: at the moment of completion, each token of the process instance must be in a different end event, as well as (iii) \textit{No dead activities}: any activity can be executed in at least one process instance \cite{corradiniClassificationBPMNCollaborations2018}.
-For example, we will describe how to implement the \textit{Safeness} and \textit{Option to complete} properties.
+Soundness is further decomposed into (i) \textit{Option to complete}: any running process instance must eventually complete, (ii) \textit{Proper completion}: at the moment of completion, each token of the process instance must be in a different end event, as well as (iii) \textit{No dead activities}: each activity can be executed in at least one process instance \cite{corradiniClassificationBPMNCollaborations2018}.
+In the following, we will describe how to implement the \textit{Safeness} and \textit{Option to complete} properties.
 
 % Safeness
 \textit{Safeness} is specified using the CTL property defined in \eqref{eq:safeness}.
@@ -488,7 +488,7 @@ In the future, a domain-specific property language for \gls*{bpmn} would further
 Our approach is implemented in a web-based tool which is open-source, publicly available, and does not require any installation \cite{krauterArtifactsICGT2023}.
 \autoref{fig:implScreenshot} depicts a screenshot of the implemented tool.
 
-% First, a modeler creates or uploads a \gls*{bpmn} model.
+% First, the modeler creates or uploads a \gls*{bpmn} model.
 % Then, in the verification section, one can check either \gls*{bpmn}-specific properties or custom CTL properties.
 % Finally, our tool can generate a \gls*{gt} system for the supplied \gls*{bpmn} model and run model checking in Groove \cite{kastenbergModelCheckingDynamic2006}.
 % % Evaluation
@@ -521,7 +521,7 @@ To calculate the average runtime, we used the hyperfine benchmarking tool \cite{
 The benchmarks were run on Windows 11 (AMD Ryzen 7700X processor, 32 GB RAM) using Groove version 5.8.1 \cite{krauterArtifactsICGT2023}. 
 
 First, we benchmarked our \gls*{hot} for the \gls*{bpmn} models.
-The \gls*{hot} took less than one second to generate a \gls*{gt} system for every model.
+The \gls*{hot} took less than one second to generate a \gls*{gt} system for each model.
 Thus, the generation of the \gls*{gt} systems is fast enough.
 Furthermore, we suspect most of the time is spent writing the \gls*{gt} system to disk.
 
@@ -597,7 +597,7 @@ Thus, we conclude that our formalization is comprehensive but can still be impro
 In addition, it covers the most important features found in practice since we come close to the feature coverage of popular process engines such as Camunda\footnote{\url{https://docs.camunda.org/manual/7.16/reference/bpmn20/}}.
 
 \begin{table}[htbp]
-    \caption{features supported by different \gls*{bpmn} formalizations (overview based on \cite{vangorpVisualTokenbasedFormalization2013}).}
+    \caption{Features supported by different \gls*{bpmn} formalizations (based on \cite{vangorpVisualTokenbasedFormalization2013}).}
     \label{tab:supportedfeatures}
     \begin{threeparttable}
     \begin{tabular}{l l l l l}
@@ -663,7 +663,7 @@ First, we plan a detailed comparison of our \gls*{hot} approach with approaches 
 It will be interesting to investigate how the two approaches differ, for example, in runtime during state space generation.
 Second, we aim to improve our formalization and the resulting tool in multiple ways.
 We intend to extend our formalization to support the remaining few \gls*{bpmn} features used in practice and want to turn the modeling environment of our tool into an interactive simulation environment. % driven by our formal semantics.
-In addition, we can use this environment to visualize potential counterexamples  of behavioral properties.
+In addition, we can use this environment to visualize potential counterexamples of behavioral properties.
 
 \bibliographystyle{splncs04} 
 \bibliography{bib}
