@@ -4,11 +4,11 @@ This repository contains the sources for [the paper](./paper.pdf) submitted
 to [ICGT-2023](https://conf.researchr.org/home/icgt-2023) together with additional information
 below.
 
-**The corresponding tool is available [here](https://bpmnanalyzer.whitefield-c9fed487.northeurope.azurecontainerapps.io).**
+**The corresponding BPMN Analyzer tool is available [here](https://bpmnanalyzer.whitefield-c9fed487.northeurope.azurecontainerapps.io).**
 
 ## BPMN Semantics formalization
 
-Our [wiki](https://github.com/timKraeuter/Rewrite_Rule_Generation/wiki) describes the the BPMN formalization in more detail accompanied by many example BPMN models and graph transformation rule examples.
+Our [wiki](https://github.com/timKraeuter/Rewrite_Rule_Generation/wiki) describes the BPMN formalization in more detail accompanied by many examples BPMN models and graph transformation rule examples.
 
 ### Process termination
 
@@ -49,27 +49,27 @@ snapshots are terminated, i.e., have no tokens.
 
 ### Custom properties
 
-Defining atomic propositions directly in the tool by distributing tokens over the process model has
+Defining atomic propositions directly in BPMN Analyzer by distributing tokens over the process model has
 not been implemented yet.
 Thus, for the time being, custom properties have to be checked in Groove by defining atomic propositions there.
 
 ## Implementation
 
-### Tool
+### BPMN Analyzer tool
 
-The tool is available
+The BPMN Analyzer is available
 online [here](https://bpmnanalyzer.whitefield-c9fed487.northeurope.azurecontainerapps.io).
 
 [![Atomic property Unsafe implemented in Groove.](./images/impl.png)](https://bpmnanalyzer.whitefield-c9fed487.northeurope.azurecontainerapps.io)
 
-The sourcecode of the tool is
+The source code of the BPMN Analyzer is
 available [here](https://github.com/timKraeuter/Rewrite_Rule_Generation) and instructions
 how to run it locally on your machine can be
 found [here](https://github.com/timKraeuter/Rewrite_Rule_Generation/blob/master/server/README.md).
 
-### Performance benchmark
+### Experiments
 
-The benchmark is described [here](https://github.com/timKraeuter/ICGT-2023/tree/main/artifacts/benchmark#readme).
+The experiments are described [here](https://github.com/timKraeuter/ICGT-2023/tree/main/artifacts/experiment#readme).
 
 ### Test suite
 
@@ -79,4 +79,4 @@ Feel free to contact me for further information.
 
 ## Discussion
 
-The instructions to run the benchmark can be found [here](https://github.com/timKraeuter/ICGT-2023/tree/main/artifacts/benchmark#readme).
+The instructions to run the experiments can be found [here](https://github.com/timKraeuter/ICGT-2023/tree/main/artifacts/experiment#readme).
