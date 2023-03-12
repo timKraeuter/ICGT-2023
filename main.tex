@@ -66,21 +66,13 @@ As proof of concept, we have implemented our approach in an open-source web-base
 \end{abstract}
 
 \section{Introduction}
-%\gls*{bpmn} \cite{objectmanagementgroupBusinessProcessModel2013} is a widely used standard notation to define intra- and inter-organizational workflows.
-%However, the informal description of the BPMN execution semantics leads to different interpretations of BPMN features and difficulties in checking behavioral properties \cite{corradiniFormalApproachAnalysis2021}.
-%One can detect errors and optimization potential in process models already during creation by checking behavioral properties.
-%Thus, the cost of business process automation using \gls*{bpmn} can be reduced.
-%Consequently, we propose a formalization that covers most of the \gls*{bpmn} features used in practice and supports checking behavioral properties.
-%
-%Suggestion
-%
 In today's fast-paced business environment, organisations with complex workflows require a powerful means to accurately map, analyse, and optimize their processes. 
 \gls*{bpmn} \cite{objectmanagementgroupBusinessProcessModel2013} is widely used standard to define these workflows.
 However, the informal description of the \gls*{bpmn} execution semantics leads to different interpretations of \gls*{bpmn} features and difficulties in checking behavioral properties \cite{corradiniFormalApproachAnalysis2021}.
 Formalizing \gls*{bpmn} would reduce the cost of business process automation drastically by facilitating the detection of errors and optimization potentials in process models already during design time. 
 To this end, we propose a formalization that covers most of the \gls*{bpmn} features used in practice and supports checking behavioral properties.
 
-Generally, we think about two fundamental concepts when formalizing the execution semantics of a behavioral language.
+In this paper, we consider two fundamental concepts when formalizing the execution semantics of \gls*{bpmn}.
 First, \textit{state structure}, i.e., how models are represented during execution.
 The state structure corresponds to the type graph in \gls*{gt} systems.
 Second, \textit{state-changing elements}, i.e., which elements in a model encode state changes.
@@ -95,12 +87,6 @@ In our approach, we create \gls*{gt} rules based on a \gls*{hot}, as shown in \a
     \label{fig:approach}
 \end{figure}
 
-%First, a modeler defines a BPMN model and behavioral properties to check.
-%The BPMN model conforms to the BPMN metamodel defined in the BPMN specification \cite{objectmanagementgroupBusinessProcessModel2013}.
-%Using the BPMN metamodel, we define the state structure for BPMN in a so-called BPMN execution metamodel, fulfilling the role of a language engineer.
-%Usually, an execution metamodel is defined by extending the structural metamodel.
-%
-%suggestions
 To begin the \gls*{bpmn} modeling process, a modeler first defines the \gls*{bpmn} model and its corresponding behavioral properties for evaluation.
 This model must adhere to the \gls*{bpmn} metamodel as outlined in the \gls*{bpmn} specification by the Object Management Group \cite{objectmanagementgroupBusinessProcessModel2013}.
 To create the state structure for BPMN, the \gls*{bpmn} execution metamodel is defined by language engineers, utilizing the \gls*{bpmn} metamodel as a foundation.
@@ -109,17 +95,11 @@ Typically, an execution metamodel is created by extending the structural \gls*{b
 Furthermore, we define a \gls*{hot} from \gls*{bpmn} models to \gls*{gt} systems.
 We call the transformation \textit{higher-order} since the resulting graph-transformation systems represent model-transformations themselves \cite{tisiUseHigherOrderModel2009}.
 The \gls*{hot} creates a \gls*{gt} system, i.e., \gls*{gt} rules and a start graph for a given \gls*{bpmn} model.
-It is defined using so-called rule generation templates, which describe how \gls*{gt} rules should be generated for each state-changing element in \gls*{bpmn} (see \autoref{sec:formalization}).
-The obtained \gls*{gt} system conforms to the execution type graph representing the \gls*{bpmn} execution metamodel interpreted as a type graph.
+It is defined using rule generation templates, which describe how \gls*{gt} rules should be generated for each state-changing element in \gls*{bpmn} (see \autoref{sec:formalization}).
+The obtained \gls*{gt} system conforms to the execution type graph which corresponds to the \gls*{bpmn} execution metamodel.
 In the figure, we have colored both artifacts blue to visualize that they contain the same information.
-%Finally, we check the previously defined behavioral properties using Groove to run the \gls*{gt} system.
-%Suggestion
 Ultimately, we use Groove as an execution engine for the \gls*{gt} system and to check the behavioral properties that were defined earlier.
 
-% We implemented our approach in an open-source web-based tool such that it is easily accessible without installation.
-% Furthermore, our approach is general since it can be used to formalize other behavioral languages.
-% To formalize the execution semantics of a different behavioral language, one only needs to define a new execution metamodel and \gls*{hot} (see language engineer in \autoref{fig:approach})
-%Suggestion
 Our approach has been incorporated into a user-friendly, open-source web-based tool, which can be accessed without the need for installation. 
 Additionally, our approach is versatile as it can be applied to formalize other behavioral languages as well. 
 To define the execution semantics of an alternate behavioral language, one simply needs to establish a new execution metamodel and \gls*{hot} (see the language engineer in \autoref{fig:approach}).
@@ -594,7 +574,7 @@ The coverage of \gls*{bpmn} features greatly impacts how useful each approach is
 % Summarize the findings and explain them in more detail
 Our approach covers most of the \gls*{bpmn} features compared to other current approaches.
 Thus, we conclude that our formalization is comprehensive but can still be improved.
-In addition, it covers the most important features found in practice since we come close to the feature coverage of popular process engines such as Camunda\footnote{\url{https://docs.camunda.org/manual/7.16/reference/bpmn20/}}.
+In addition, it covers the most important features found in practice since we come close to the feature coverage of popular process engines such as Camunda \cite{camundaservicesgmbhBPMNImplementationReference}.
 
 \begin{table}[htbp]
     \caption{Features supported by different \gls*{bpmn} formalizations (based on \cite{vangorpVisualTokenbasedFormalization2013}).}
