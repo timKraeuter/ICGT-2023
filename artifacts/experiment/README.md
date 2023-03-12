@@ -18,7 +18,7 @@ hyperfine -L bpmnModel models/e001.bpmn,models/e002.bpmn,models/e007.bpmn,models
 ```
 
 The HOT takes less than one second and thus is adequately fast.
-We suspect most of the time is spent doing I/O, i.e., reading the input BPMN file and writing the graph transformation rules for Groove.
+We estimate most of the time is spent doing I/O, i.e., reading the input BPMN file and writing the graph transformation rules for Groove.
 To summarize, the HOT runtime could be further optimized if one avoids writing the generated GT system to stable storage.
 Instead, the GT system could remain in the main memory and be accessed from there.
 
