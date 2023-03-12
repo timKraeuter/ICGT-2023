@@ -391,6 +391,8 @@ The rule template shows that MICEs delete one message and one token, as well as 
 
 Model checking---and verification in general---of \gls*{bpmn} models is necessary to ensure the correctness and reliability of business processes, which ultimately leads to increased efficiency, reduced costs, and improved user satisfaction.
 Using our approach, model checking a \gls*{bpmn} model is possible using the generated \gls*{gt} system, a set of temporal properties to be checked, and the atomic propositions used in these properties.
+Properties are defined using a temporal logic, such as CTL and LTL.
+In this paper we will use CTL.
 An atomic proposition is formalized as a graph and holds in a given state if a match exists from the graph representing the proposition to the graph representing the state \cite{kastenbergModelCheckingDynamic2006}.
 
 We differentiate between \textit{general \gls*{bpmn} properties} defined for all \gls*{bpmn} models and \textit{custom properties} tailored towards a particular \gls*{bpmn} model.
@@ -405,13 +407,21 @@ Soundness is further decomposed into (i) \textit{Option to complete}: any runnin
 In the following, we will describe how to implement the \textit{Safeness} and \textit{Option to complete} properties.
 
 % Safeness
-\textit{Safeness} is specified using the CTL property defined in \eqref{eq:safeness}.
+We specify \textit{Safeness} as the CTL property defined in \eqref{eq:safeness}.
 The atomic property \textsf{Unsafe} is true if two tokens of one process snapshot point to the same sequence flow.
-Groove rules for all the atomic propositions are included in \cite{krauterArtifactsICGT2023}.
+It is shown in \autoref{fig:unsafe}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/Unsafe.png}
+    \caption{The atomic proposition \textit{Unsafe} in Groove.}
+    \label{fig:unsafe}
+\end{figure}
 
 % Option to complete
 \textit{Option to complete} is specified using the CTL property defined in \eqref{eq:optionToComplete}.
 The atomic proposition \textsf{AllTerminated} is true if there exists no process snapshot in the state \textsf{Running}, i.e., all process snapshots are \textsf{Terminated}.
+\textsf{AllTerminated} is given in \cite{krauterArtifactsICGT2023}.
 
 \noindent\begin{minipage}{.5\linewidth}
 \begin{equation} \label{eq:safeness}
@@ -458,7 +468,7 @@ In this section, we will present our tool and then describe experiments regardin
 Our approach is implemented in a web-based tool called \textit{BPMN Analyzer} that is open-source, publicly available, and does not require any installation \cite{krauterArtifactsICGT2023}.
 \autoref{fig:implScreenshot} depicts a screenshot of BPMN Analyzer.
 
-The modeler can create or upload a \gls*{bpmn} model, which can then be verified using either \gls*{bpmn}-specific properties or custom CTL properties in the verification section. 
+The modeler can create or upload a \gls*{bpmn} model, which can then be verified using either \gls*{bpmn}-specific properties or custom CTL properties in the verification section.
 BPMN Analyzer can generate a \gls*{gt} system for the supplied \gls*{bpmn} model and run model checking in Groove \cite{kastenbergModelCheckingDynamic2006}. 
 To evaluate the correctness of our \gls*{hot}, we have created a comprehensive test suite that verifies the correct generation of rules for the implemented \gls*{bpmn} features \cite{krauterArtifactsICGT2023}.
 Additionally, we have conducted a performance benchmark for our approach, as described in the next section.

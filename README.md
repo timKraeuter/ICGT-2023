@@ -33,7 +33,7 @@ The [Implementation](https://github.com/timKraeuter/ICGT-2023#implementation) se
 
 The atomic property **Unsafe** is implemented by the following graph condition in Groove:
 
-![Atomic property Unsafe implemented in Groove.](./artifacts/Unsafe.png)
+![Atomic property Unsafe implemented in Groove.](./images/Unsafe.png)
 
 The property matches whenever two tokens of one process snapshot have the same position (but have
 different identities).
