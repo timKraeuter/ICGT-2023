@@ -141,7 +141,7 @@ The \gls*{bpmn} execution semantics is described using the concept of \textit{to
 Tokens are consumed and created by flow nodes according to the connected sequence flows.
 The \textsf{FlowNode} is colored purple in \autoref{fig:bpmnMetamodel} since it represents a state-changing element of \gls*{bpmn} as described in \autoref{sec:formalization}.
 
-A \gls*{bpmn} process is triggered by one of its start events, creating a token at the triggered start event.
+A \gls*{bpmn} process is triggered by one of its start events, leading to a token at each outgoing flow of the triggered start event.
 % Activities
 Activities can start when at least one token is on an incoming sequence flow.
 The start of an activity will move the incoming token to the activity.
