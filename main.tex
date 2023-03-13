@@ -252,8 +252,11 @@ Elements of the \gls*{hot} are depicted using rule generation templates that des
 
 \subsection{Process instantiation and termination} \label{subsec:instAndTermination}
 
-\autoref{fig:startAndEndTemplate} depicts the rule generation templates for start and end events (\textsf{NSE} and \textsf{NEE} in \autoref{fig:bpmnelementsOverview}).
-All rule generation templates show a state-changing element (\textsf{FlowNode}) with surrounding flows in the left column and the applicable rule generation template in the right column.
+Start events do not need \gls*{gt} rules since the generated start graph of the \gls*{gt} system will contain a token for each outgoing sequence flow of a NSE.
+Other types of start events are triggered in corresponding throw event rules.
+
+\autoref{fig:startAndEndTemplate} depicts the rule generation template for end events (\textsf{NEE} in \autoref{fig:bpmnelementsOverview}).
+All rule generation templates show a state-changing element (\textsf{FlowNode}) with surrounding flows in the left column and the applicable rule generation in the right column.
 The left column shows instances of the \gls*{bpmn} metamodel (\autoref{fig:bpmnMetamodel}), and the right column shows the generated rules typed by the \gls*{bpmn} execution metamodel (see \autoref{fig:typeGraph}).
 If more than one rule is generated from a \textsf{FlowNode}, an expression defines how each rule is generated.
 For example, the expression $\forall \text{sf} \in \text{E.incSFs}$ for the rule generation template of end events (see \autoref{fig:startAndEndTemplate}) generates one rule for each incoming sequence flow \textit{sf} of the end event \textit{E}.
@@ -262,16 +265,10 @@ In the example, \textsf{E.incSFs} means following all \textsf{incSFs} links for 
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.8\textwidth]{images/start_end_template.pdf}
+    \includegraphics[width=.8\textwidth]{images/end_template.pdf}
     \caption{Rule generation templates for start and end events}
     \label{fig:startAndEndTemplate}
 \end{figure}
-
-% Start Event + Refer to the start graph.
-The start event rule template generates the start event rule in \autoref{fig:gtRuleConcrete}.
-The tokens located on the start events are deleted by start event rules, while one token for each outgoing sequence flow is added.
-If a start event has more than one outgoing sequence flow, it functions as an \textit{implicit parallel gateway}, forking the control flow by creating one token for each of the sequence flows.
-Initially, the tokens on the start events are given by the start graph of the \gls*{gt} system (see, e.g., \autoref{fig:startGraph}).
     
 % End Event
 The generated end event rules delete tokens one by one for each incoming sequence flow.
@@ -314,7 +311,7 @@ This implicitly encodes a parallel gateway (see \autoref{fig:gatewayTemplates}) 
 Subprocess execution is like activity execution.
 The upper part of the template generates one rule for each incoming sequence flow.
 The rule deletes an incoming token and adds a process snapshot representing a subprocess. 
-The created process snapshot is represented with a colored circle on the top left corner of the subprocess with a token at each of its start events.
+The created process snapshot is represented with a colored circle on the top left corner of the subprocess with a token at each outgoing sequence flow of its start events (similar to start graph generation).
 There is a \textit{subprocess} link between the process snapshots to depict the \textsf{subprocesses} relation in \autoref{fig:typeGraph}.
 If the subprocess has no start events, a token will be added to every activity and gateway with no incoming sequence flows.
 
