@@ -299,10 +299,12 @@ Activity execution is divided into two steps implemented by two rule templates.
 The first template generates one rule for each incoming sequence flow to start the activity.
 An activity can be started using a token positioned at any of its incoming sequence flows.
 This rule template generates the sample rule in the right of \autoref{fig:gtRuleConcrete}.
+Having multiple incoming or outgoing sequence flows for a flow node is considered bad practice since the implicitly encoded gateways should be explicit to avoid confusion.
+Our formalization still supports this behavior, but we recommend using static analyzers to avoid such models \cite{camundaservicesgmbhBpmnlint2023}.
 
 The second template generates one rule that ends the activity.
 It deletes a token at the activity and adds one at each outgoing sequence flow.
-Like start events, this implicitly encodes a parallel gateway (see \autoref{fig:gatewayTemplates}). 
+This implicitly encodes a parallel gateway (see \autoref{fig:gatewayTemplates}) but should be avoided as described earlier. 
 
 \begin{figure}[ht]
     \centering
@@ -319,7 +321,7 @@ The created process snapshot is represented with a colored circle on the top lef
 There is a \textit{subprocess} link between the process snapshots to depict the \textsf{subprocesses} relation in \autoref{fig:typeGraph}.
 If the subprocess has no start events, a token will be added to every activity and gateway with no incoming sequence flows.
 
-The bottom part of the template template generates one rule to delete a terminated process snapshot and adds tokens at each outgoing sequence flow.
+The bottom part of the template generates one rule to delete a terminated process snapshot and adds tokens at each outgoing sequence flow.
 Subprocesses are terminated by the termination rule (see section \ref{subsec:instAndTermination}).
 
 
@@ -475,6 +477,7 @@ Additionally, we have conducted a performance benchmark for our approach, as des
 Model checking is a useful technique but often falls short in practice due to insufficient performance.
 Poor performance might have many reasons, most notably large models leading to state space explosion.
 We experimented with ten different \gls*{bpmn} models from \cite{houhouFirstOrderLogicVerification2022} to assess the performance of our implementation.
+We picked the models at random besides disregarding some models that were similar.
 The models include realistic business process models (001, 002, and 020) \cite{houhouFirstOrderLogicVerification2022}.
 
 To calculate the average runtime, we used the hyperfine benchmarking tool \cite{peterHyperfine2022} (version 1.15.0), which ran state space exploration for each \gls*{bpmn} model ten times.
@@ -498,7 +501,6 @@ A comprehensive benchmark, including a detailed comparison to other tools, is le
 \begin{table}[ht]
 \centering
 
-% Add number of processes/pools and nodes and gateways?
 \begin{tabular}{| c | c | c || c | c | c |}
  \hline
  BPMN model & Processes & Nodes (gw.) & States & Transitions & Total time \\
