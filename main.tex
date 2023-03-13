@@ -128,10 +128,12 @@ Furthermore, our application of \gls*{gt}s to formalize the execution semantics 
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.7\linewidth]{images/bpmn_semantics-bpmn-metamodel.pdf}
+  \includegraphics[width=0.9\linewidth]{images/bpmn_semantics-bpmn-metamodel.pdf}
   \caption{Excerpt of the \gls*{bpmn} metamodel \cite{objectmanagementgroupBusinessProcessModel2013}}
   \label{fig:bpmnMetamodel}
 \end{figure}
+% Containment: participants, messageFlows see fig. 9.33 in the BPMN spec.
+% Containment: flowNodes (Process is FlowElementsContainer fig. 8.23). FlowElementsContainer have a containment of flowElements (also includes sequence flows)
 
 A \gls*{bpmn} model is represented by a \textsf{Collaboration} that has \textsf{participants} and \textsf{MessageFlows} between \textsf{InteractionNodes}.
 Each participant is a \textsf{Process} containing \textsf{FlowNodes} connected by \textsf{SequenceFlows}.
