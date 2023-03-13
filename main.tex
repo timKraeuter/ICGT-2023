@@ -58,7 +58,7 @@ University of Applied Sciences, FHDW, Hanover, Germany\\
 \begin{abstract}
 The Business Process Modeling Notation (BPMN) is a widely used standard notation for defining intra- and inter-organizational workflows.
 However, the informal description of the BPMN execution semantics leads to different interpretations of BPMN elements and difficulties in checking behavioral properties.
-In this paper, we propose a formalization of the execution semantics of BPMN that, compared to existing approaches, covers more BPMN elements while faciliating property checking.
+In this paper, we propose a formalization of the execution semantics of BPMN that, compared to existing approaches, covers more BPMN elements while facilitating property checking.
 Our approach is based on a higher-order transformation from BPMN models to graph transformation systems.
 As proof of concept, we have implemented our approach in an open-source web-based tool.
 
@@ -66,7 +66,7 @@ As proof of concept, we have implemented our approach in an open-source web-base
 \end{abstract}
 
 \section{Introduction}
-In today's fast-paced business environment, organisations with complex workflows require a powerful means to accurately map, analyse, and optimize their processes. 
+In today's fast-paced business environment, organizations with complex workflows require a powerful means to accurately map, analyze, and optimize their processes. 
 \gls*{bpmn} \cite{objectmanagementgroupBusinessProcessModel2013} is widely used standard to define these workflows.
 However, the informal description of the \gls*{bpmn} execution semantics leads to different interpretations of \gls*{bpmn} elements and difficulties in checking behavioral properties \cite{corradiniFormalApproachAnalysis2021}.
 Formalizing \gls*{bpmn} would reduce the cost of business process automation drastically by facilitating the detection of errors and optimization potentials in process models already during design time. 
@@ -79,7 +79,6 @@ Second, \textit{state-changing elements}, i.e., which elements in a model encode
 These elements are implemented using \gls*{gt} rules.
 In our approach, we automatically generate \gls*{gt} rules based on a \gls*{hot} for each specific \gls*{bpmn} model, as shown in \autoref{fig:approach}.
 
-% Describe the approach and highlight that it can be generalized to other languages with state and state-changing elements.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{images/bpmn_semantics-overview.pdf}
@@ -96,15 +95,18 @@ Furthermore, we define a \gls*{hot} from \gls*{bpmn} models to \gls*{gt} systems
 We call the transformation \textit{higher-order} since the resulting graph-transformation systems represent model-transformations themselves \cite{tisiUseHigherOrderModel2009}.
 The \gls*{hot} creates a \gls*{gt} system, i.e., \gls*{gt} rules and a start graph for a given \gls*{bpmn} model.
 It is defined using rule generation templates, which describe how \gls*{gt} rules should be generated for each state-changing element in \gls*{bpmn} (see \autoref{sec:formalization}).
-The obtained \gls*{gt} system conforms to the execution type graph which corresponds to the \gls*{bpmn} execution metamodel.
+The obtained \gls*{gt} system conforms to the execution type graph, which corresponds to the \gls*{bpmn} execution metamodel.
 In the figure, we have colored both artifacts blue to visualize that they contain the same information.
-Ultimately, we use Groove as an execution engine for the \gls*{gt} system and to check the behavioral properties that were defined earlier.
+Ultimately, we use Groove as an execution engine for the \gls*{gt} system and check the behavioral properties defined earlier.
 
-Our approach has been incorporated into a user-friendly, open-source web-based tool, which can be accessed without the need for installation.
-The tool was validated using a comprehensive test suite.
+Our approach has been incorporated into a user-friendly, open-source web-based tool, the \textit{\gls*{bpmn} Analyzer}, which can be used online without needing installation.
+The \gls*{bpmn} Analyzer was validated using a comprehensive test suite.
 Additionally, our approach is versatile as it can be applied to formalize other behavioral languages as well. 
 To define the execution semantics of an alternate behavioral language, one simply needs to establish a new execution metamodel and \gls*{hot} (see the language engineer in \autoref{fig:approach}).
 
+% To summarize, our paper makes two main contributions of practical nature.
+% First, we conceptualize a new approach utilizing a \gls*{hot} to generate \gls*{gt} rules instead of providing a fixed set of \gls*{gt} rules to formalize the semantics of a behavioral language.
+% Second, we apply our approach to \gls*{bpmn}, resulting in a formalization covering most \gls*{bpmn} elements, which facilitates 
 
 % Paper outline
 The remainder of this paper is structured as follows.
