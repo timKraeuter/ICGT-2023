@@ -223,14 +223,14 @@ An example of a start graph is shown in \autoref{fig:startGraph} using abstract 
 \end{figure}
 
 The \gls*{hot} generates one or more \gls*{gt} rules for each \textsf{FlowNode}, i.e., state-changing element in a \gls*{bpmn} model.
-In order to provide a better understanding of the transformation process, we will begin by presenting two example results, namely the generated rules for an NSE and a task (as shown in \autoref{fig:bpmnelementsOverview}).
+In order to provide a better understanding of the transformation process, we will begin by presenting two example results, namely the generated rules for an activity (as shown in \autoref{fig:bpmnelementsOverview}).
 Following this, we will delve into an explanation of how our \gls*{hot} creates these rules as well as others.
 
-\autoref{fig:gtRuleAbstract} depicts an example \gls*{gt} rule ($L \to R$) to start a task in abstract syntax.
-The rule is straightforward, moving a token from the incoming sequence flow to the task itself.
+\autoref{fig:gtRuleAbstract} depicts an example \gls*{gt} rule ($L \to R$) to start an activity in abstract syntax.
+The rule is straightforward, moving a token from the incoming sequence flow to the activity itself.
 For the rest of the paper, we will depict all rules in the concrete syntax introduced earlier.
 The rule from \autoref{fig:gtRuleAbstract} depicted in concrete syntax is shown on the left in \autoref{fig:gtRuleConcrete}.
-The rule on the right in \autoref{fig:gtRuleConcrete} implements the end of a task, which will move one token from the task to the outgoing sequence flow.
+The rule on the right in \autoref{fig:gtRuleConcrete} implements the termination of an activity, which will move one token from the activity to the outgoing sequence flow.
 
 \begin{figure}[ht]
     \centering
@@ -242,7 +242,7 @@ The rule on the right in \autoref{fig:gtRuleConcrete} implements the end of a ta
 \begin{figure}[ht]
     \centering
   \includegraphics[width=1\textwidth]{images/rule_concrete.pdf}
-  \caption{Example \gls*{gt} rule to start an activity (left) and end (right) in concrete syntax}
+  \caption{Example \gls*{gt} rule to start (left) and terminate (right) an activity}
   \label{fig:gtRuleConcrete}
 \end{figure}
 
@@ -427,9 +427,9 @@ The property \textit{Proper Completion} is not yet implemented, but all the info
 To make model checking user-friendly, we envision modelers defining atomic propositions in the extended \gls*{bpmn} syntax, i.e., the concrete syntax introduced in \autoref{fig:typeGraph}.
 Therefore, to define an atomic proposition, a modeler adds process snapshots and tokens to a \gls*{bpmn} model, which we can automatically convert to a graph representing an atomic proposition.
 
-For example, the token distribution shown in \autoref{fig:atomicProposition} defines two running process snapshots with a token at task A.
+For example, the token distribution shown in \autoref{fig:atomicProposition} defines two running process snapshots with a token at activity A.
 Differently colored tokens define different process snapshots.
-A modeler could use this atomic proposition, for example, to check if, eventually, two processes are executing task A simultaneously by creating an LTL/CTL property.
+A modeler could use this atomic proposition, for example, to check if, eventually, two processes are executing activity A simultaneously by creating an LTL/CTL property.
 Thus, a modeler does not need to know the \gls*{gt} semantics used for execution.
 
 However, the modeler must still know the temporal logic, such as LTL and CTL, to express his properties.
