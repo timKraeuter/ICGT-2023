@@ -77,7 +77,7 @@ First, \textit{state structure}, i.e., how models are represented during executi
 The state structure corresponds to the type graph in \gls*{gt} systems.
 Second, \textit{state-changing elements}, i.e., which elements in a model encode state changes.
 These elements are implemented using \gls*{gt} rules.
-In our approach, we create \gls*{gt} rules based on a \gls*{hot}, as shown in \autoref{fig:approach}.
+In our approach, we automatically generate \gls*{gt} rules based on a \gls*{hot} for each specific \gls*{bpmn} model, as shown in \autoref{fig:approach}.
 
 % Describe the approach and highlight that it can be generalized to other languages with state and state-changing elements.
 \begin{figure}[ht]
@@ -100,7 +100,8 @@ The obtained \gls*{gt} system conforms to the execution type graph which corresp
 In the figure, we have colored both artifacts blue to visualize that they contain the same information.
 Ultimately, we use Groove as an execution engine for the \gls*{gt} system and to check the behavioral properties that were defined earlier.
 
-Our approach has been incorporated into a user-friendly, open-source web-based tool, which can be accessed without the need for installation. 
+Our approach has been incorporated into a user-friendly, open-source web-based tool, which can be accessed without the need for installation.
+The tool was validated using a comprehensive test suite.
 Additionally, our approach is versatile as it can be applied to formalize other behavioral languages as well. 
 To define the execution semantics of an alternate behavioral language, one simply needs to establish a new execution metamodel and \gls*{hot} (see the language engineer in \autoref{fig:approach}).
 
