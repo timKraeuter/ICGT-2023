@@ -158,7 +158,7 @@ Each state, i.e., token distribution during the execution of a \gls*{bpmn} model
 
 % Groove uses the single pushout approach with negative application conditions.
 Regarding \gls*{gt}, we utilize the single-pushout (SPO) approach with negative application conditions (NAC) \cite{ehrigALGEBRAICAPPROACHESGRAPH1997}, as implemented in Groove \cite{rensinkGROOVESimulatorTool2004}.
-In addition, we utilize \textit{nested rules} with quantification to make parts of a rule applied repeatedly or optionally \cite{rensinkNestedQuantificationGraph2006,rensinkHowMuchAre2017}.
+In addition, we utilize \textit{nested rules} with quantification to make parts of a rule repeatedly applicable or optional \cite{rensinkNestedQuantificationGraph2006,rensinkHowMuchAre2017}.
 Moreover, we utilize NACs to implement more intricate parts in the \gls*{bpmn} execution semantics, such as the termination of processes.
 
 
@@ -535,11 +535,10 @@ Like BProVe, \textsf{fbpmn} allows checking general \gls*{bpmn} properties, such
 Furthermore, they focus on different communication models besides the standard in the \gls*{bpmn} specification and support time-related constructs.
 We currently disregard time-related constructs \cite{duranVerifyingTimedBPMN2017,houhouFirstOrderLogicVerification2022} and data flow \cite{corradiniFormalisingAnimatingMultiple2022,el-saberCMMICMComplianceChecking2015}.
 
-\autoref{tab:supportedelements} shows which \gls*{bpmn} elements are supported by the approaches mentioned above compared to ours.
-The coverage of \gls*{bpmn} elements greatly impacts how useful each approach is in practice.
-% Summarize the findings and explain them in more detail
-Our approach covers most of the \gls*{bpmn} elements compared to other current approaches.
-In addition, it covers the most important elements found in practice since we come close to the element coverage of popular process engines such as Camunda \cite{camundaservicesgmbhBPMNImplementationReference2023}.
+\autoref{tab:supportedelements} shows which \gls*{bpmn} elements are supported by our approach and the approaches mentioned above.
+We cover most \gls*{bpmn} elements when compared to other approaches.
+The coverage of \gls*{bpmn} elements greatly impacts how useful each approach is to check properties in practice.
+In addition, we cover the most important elements found in practice since we come close to the element coverage of popular process engines such as Camunda \cite{camundaservicesgmbhBPMNImplementationReference2023}.
 
 \begin{table}[htbp]
     \caption{\gls*{bpmn} elements supported by different formalizations (based on \cite{vangorpVisualTokenbasedFormalization2013}).}
