@@ -1,112 +1,112 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
     <graph id="Receive_Goods_end" role="rule" edgeids="false" edgemode="directed">
-        <node id="n192">
+        <node id="n178">
             <attr name="layout">
                 <string>440 332 0 0</string>
             </attr>
         </node>
-        <edge from="n192" to="n192">
+        <edge from="n178" to="n178">
             <attr name="label">
                 <string>type:Token</string>
             </attr>
         </edge>
-        <edge from="n192" to="n192">
+        <edge from="n178" to="n178">
             <attr name="label">
                 <string>new:</string>
             </attr>
         </edge>
-        <node id="n190">
+        <node id="n176">
             <attr name="layout">
                 <string>440 242 0 0</string>
             </attr>
         </node>
-        <edge from="n190" to="n190">
+        <edge from="n176" to="n176">
             <attr name="label">
                 <string>type:Token</string>
             </attr>
         </edge>
-        <edge from="n190" to="n190">
+        <edge from="n176" to="n176">
             <attr name="label">
                 <string>del:</string>
             </attr>
         </edge>
-        <node id="n187">
+        <node id="n173">
             <attr name="layout">
                 <string>62 87 0 0</string>
             </attr>
         </node>
-        <edge from="n187" to="n187">
+        <edge from="n173" to="n173">
             <attr name="label">
                 <string>type:ProcessSnapshot</string>
             </attr>
         </edge>
-        <node id="n188">
+        <node id="n174">
             <attr name="layout">
                 <string>402 152 0 0</string>
             </attr>
         </node>
-        <edge from="n188" to="n188">
+        <edge from="n174" to="n174">
             <attr name="label">
                 <string>string:"Client"</string>
             </attr>
         </edge>
-        <node id="n189">
+        <node id="n175">
             <attr name="layout">
                 <string>402 72 0 0</string>
             </attr>
         </node>
-        <edge from="n189" to="n189">
+        <edge from="n175" to="n175">
             <attr name="label">
                 <string>type:Running</string>
             </attr>
         </edge>
-        <node id="n191">
+        <node id="n177">
             <attr name="layout">
                 <string>647 242 0 0</string>
             </attr>
         </node>
-        <edge from="n191" to="n191">
+        <edge from="n177" to="n177">
             <attr name="label">
                 <string>string:"Receive_Goods"</string>
             </attr>
         </edge>
-        <node id="n193">
+        <node id="n179">
             <attr name="layout">
                 <string>647 332 0 0</string>
             </attr>
         </node>
-        <edge from="n193" to="n193">
+        <edge from="n179" to="n179">
             <attr name="label">
                 <string>string:"Receive_Goods_cEnd"</string>
             </attr>
         </edge>
-        <edge from="n187" to="n192">
+        <edge from="n173" to="n178">
             <attr name="label">
                 <string>new:tokens</string>
             </attr>
         </edge>
-        <edge from="n192" to="n193">
+        <edge from="n178" to="n179">
             <attr name="label">
                 <string>new:position</string>
             </attr>
         </edge>
-        <edge from="n187" to="n190">
+        <edge from="n173" to="n176">
             <attr name="label">
                 <string>del:tokens</string>
             </attr>
         </edge>
-        <edge from="n190" to="n191">
+        <edge from="n176" to="n177">
             <attr name="label">
                 <string>del:position</string>
             </attr>
         </edge>
-        <edge from="n187" to="n188">
+        <edge from="n173" to="n174">
             <attr name="label">
                 <string>name</string>
             </attr>
         </edge>
-        <edge from="n187" to="n189">
+        <edge from="n173" to="n175">
             <attr name="label">
                 <string>state</string>
             </attr>

@@ -48,7 +48,7 @@
         </node>
         <edge from="n4" to="n4">
             <attr name="label">
-                <string>string:"Sender_StartEvent_1"</string>
+                <string>string:"StartEvent_1_ExclusiveGateway_1gus05a"</string>
             </attr>
         </edge>
         <node id="n5">
@@ -98,7 +98,7 @@
         </node>
         <edge from="n9" to="n9">
             <attr name="label">
-                <string>string:"Receiver_StartEvent_0x0o2ml"</string>
+                <string>string:"StartEvent_0x0o2ml_ExclusiveGateway_1aidani"</string>
             </attr>
         </edge>
         <edge from="n0" to="n1">

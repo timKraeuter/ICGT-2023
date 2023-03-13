@@ -48,7 +48,7 @@
         </node>
         <edge from="n4" to="n4">
             <attr name="label">
-                <string>string:"A_StartEvent_0ayuyd2"</string>
+                <string>string:"StartEvent_0ayuyd2_SP"</string>
             </attr>
         </edge>
         <node id="n5">
@@ -98,7 +98,7 @@
         </node>
         <edge from="n9" to="n9">
             <attr name="label">
-                <string>string:"B_StartEvent_13qwxem"</string>
+                <string>string:"StartEvent_13qwxem_Task_D"</string>
             </attr>
         </edge>
         <edge from="n0" to="n1">

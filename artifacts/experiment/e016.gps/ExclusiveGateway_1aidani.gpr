@@ -1,87 +1,87 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
     <graph id="ExclusiveGateway_1aidani" role="rule" edgeids="false" edgemode="directed">
-        <node id="n90">
+        <node id="n76">
             <attr name="layout">
                 <string>62 85 0 0</string>
             </attr>
         </node>
-        <edge from="n90" to="n90">
+        <edge from="n76" to="n76">
             <attr name="label">
                 <string>type:ProcessSnapshot</string>
             </attr>
         </edge>
-        <node id="n91">
+        <node id="n77">
             <attr name="layout">
                 <string>392 232 0 0</string>
             </attr>
         </node>
-        <edge from="n91" to="n91">
+        <edge from="n77" to="n77">
             <attr name="label">
                 <string>string:"Receiver"</string>
             </attr>
         </edge>
-        <node id="n92">
+        <node id="n78">
             <attr name="layout">
                 <string>392 72 0 0</string>
             </attr>
         </node>
-        <edge from="n92" to="n92">
+        <edge from="n78" to="n78">
             <attr name="label">
                 <string>type:Running</string>
             </attr>
         </edge>
-        <node id="n93">
+        <node id="n79">
             <attr name="layout">
                 <string>462 152 0 0</string>
             </attr>
         </node>
-        <edge from="n93" to="n93">
+        <edge from="n79" to="n79">
             <attr name="label">
                 <string>type:Token</string>
             </attr>
         </edge>
-        <node id="n94">
+        <node id="n80">
             <attr name="layout">
                 <string>667 224 0 0</string>
             </attr>
         </node>
-        <edge from="n94" to="n94">
+        <edge from="n80" to="n80">
             <attr name="label">
                 <string>string:"StartEvent_0x0o2ml_ExclusiveGateway_1aidani"</string>
             </attr>
         </edge>
-        <node id="n95">
+        <node id="n81">
             <attr name="layout">
                 <string>667 144 0 0</string>
             </attr>
         </node>
-        <edge from="n95" to="n95">
+        <edge from="n81" to="n81">
             <attr name="label">
                 <string>string:"ExclusiveGateway_1aidani"</string>
             </attr>
         </edge>
-        <edge from="n93" to="n95">
+        <edge from="n79" to="n81">
             <attr name="label">
                 <string>new:position</string>
             </attr>
         </edge>
-        <edge from="n93" to="n94">
+        <edge from="n79" to="n80">
             <attr name="label">
                 <string>del:position</string>
             </attr>
         </edge>
-        <edge from="n90" to="n91">
+        <edge from="n76" to="n77">
             <attr name="label">
                 <string>name</string>
             </attr>
         </edge>
-        <edge from="n90" to="n92">
+        <edge from="n76" to="n78">
             <attr name="label">
                 <string>state</string>
             </attr>
         </edge>
-        <edge from="n90" to="n93">
+        <edge from="n76" to="n79">
             <attr name="label">
                 <string>tokens</string>
             </attr>

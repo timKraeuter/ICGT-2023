@@ -48,7 +48,7 @@
         </node>
         <edge from="n4" to="n4">
             <attr name="label">
-                <string>string:"Client_cStart"</string>
+                <string>string:"cStart_Send_Command"</string>
             </attr>
         </edge>
         <edge from="n0" to="n1">

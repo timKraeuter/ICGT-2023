@@ -48,7 +48,7 @@
         </node>
         <edge from="n4" to="n4">
             <attr name="label">
-                <string>string:"A_StartEvent_1"</string>
+                <string>string:"StartEvent_1_ExclusiveGateway_1j1chqb"</string>
             </attr>
         </edge>
         <edge from="n0" to="n1">

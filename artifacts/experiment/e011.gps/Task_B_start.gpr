@@ -1,112 +1,112 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
     <graph id="Task_B_start" role="rule" edgeids="false" edgemode="directed">
-        <node id="n86">
+        <node id="n79">
             <attr name="layout">
                 <string>417 332 0 0</string>
             </attr>
         </node>
-        <edge from="n86" to="n86">
+        <edge from="n79" to="n79">
             <attr name="label">
                 <string>type:Token</string>
             </attr>
         </edge>
-        <edge from="n86" to="n86">
+        <edge from="n79" to="n79">
             <attr name="label">
                 <string>new:</string>
             </attr>
         </edge>
-        <node id="n84">
+        <node id="n77">
             <attr name="layout">
                 <string>417 242 0 0</string>
             </attr>
         </node>
-        <edge from="n84" to="n84">
+        <edge from="n77" to="n77">
             <attr name="label">
                 <string>type:Token</string>
             </attr>
         </edge>
-        <edge from="n84" to="n84">
+        <edge from="n77" to="n77">
             <attr name="label">
                 <string>del:</string>
             </attr>
         </edge>
-        <node id="n81">
+        <node id="n74">
             <attr name="layout">
                 <string>62 87 0 0</string>
             </attr>
         </node>
-        <edge from="n81" to="n81">
+        <edge from="n74" to="n74">
             <attr name="label">
                 <string>type:ProcessSnapshot</string>
             </attr>
         </edge>
-        <node id="n82">
+        <node id="n75">
             <attr name="layout">
                 <string>402 152 0 0</string>
             </attr>
         </node>
-        <edge from="n82" to="n82">
+        <edge from="n75" to="n75">
             <attr name="label">
                 <string>string:"SP"</string>
             </attr>
         </edge>
-        <node id="n83">
+        <node id="n76">
             <attr name="layout">
                 <string>402 72 0 0</string>
             </attr>
         </node>
-        <edge from="n83" to="n83">
+        <edge from="n76" to="n76">
             <attr name="label">
                 <string>type:Running</string>
             </attr>
         </edge>
-        <node id="n85">
+        <node id="n78">
             <attr name="layout">
                 <string>602 242 0 0</string>
             </attr>
         </node>
-        <edge from="n85" to="n85">
+        <edge from="n78" to="n78">
             <attr name="label">
                 <string>string:"ExclusiveGateway_1j1chqb_Task_B"</string>
             </attr>
         </edge>
-        <node id="n87">
+        <node id="n80">
             <attr name="layout">
                 <string>602 332 0 0</string>
             </attr>
         </node>
-        <edge from="n87" to="n87">
+        <edge from="n80" to="n80">
             <attr name="label">
                 <string>string:"Task_B"</string>
             </attr>
         </edge>
-        <edge from="n81" to="n86">
+        <edge from="n74" to="n79">
             <attr name="label">
                 <string>new:tokens</string>
             </attr>
         </edge>
-        <edge from="n86" to="n87">
+        <edge from="n79" to="n80">
             <attr name="label">
                 <string>new:position</string>
             </attr>
         </edge>
-        <edge from="n81" to="n84">
+        <edge from="n74" to="n77">
             <attr name="label">
                 <string>del:tokens</string>
             </attr>
         </edge>
-        <edge from="n84" to="n85">
+        <edge from="n77" to="n78">
             <attr name="label">
                 <string>del:position</string>
             </attr>
         </edge>
-        <edge from="n81" to="n82">
+        <edge from="n74" to="n75">
             <attr name="label">
                 <string>name</string>
             </attr>
         </edge>
-        <edge from="n81" to="n83">
+        <edge from="n74" to="n76">
             <attr name="label">
                 <string>state</string>
             </attr>

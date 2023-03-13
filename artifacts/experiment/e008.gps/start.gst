@@ -48,7 +48,7 @@
         </node>
         <edge from="n4" to="n4">
             <attr name="label">
-                <string>string:"A_StartEvent_0ayuyd2"</string>
+                <string>string:"StartEvent_0ayuyd2_SubProcess_0mgtdae"</string>
             </attr>
         </edge>
         <edge from="n0" to="n1">
