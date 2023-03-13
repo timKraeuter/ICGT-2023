@@ -345,10 +345,11 @@ However, the resulting rule is simple since it only deletes a token from an inco
 % Message throw with intermediate catch message events
 The first rule template describes how MITEs interact with MICEs.
 A MITE deletes an incoming token and adds one at each outgoing sequence flow.
-In addition, it sends one message to each waiting process by adding it to the incoming messages of the process.
+In addition, it sends one message to each process by adding it to the incoming messages of the process.
 However, sending each message is optional, meaning that if a process is not ready to consume a message immediately, the message is not added.
+A process can consume a message if its MICE has at least one token at an incoming sequence flow (see \autoref{fig:messageEventTemplates}).
 We implement optional message sending using nested rules with quantification.
-Concretely, we use an optional existential quantifier \cite{rensinkNestedQuantificationGraph2006} (see blue dotted rectangle marked with optional in \autoref{fig:messageEventTemplates}) to send a message only if the receiving process is ready to receive it.
+Concretely, we use an optional existential quantifier \cite{rensinkNestedQuantificationGraph2006} (see blue dotted rectangle marked with optional in \autoref{fig:messageEventTemplates}) to send a message only if the receiving process is ready to consume it.
 
 \begin{figure}[ht]
     \centering
