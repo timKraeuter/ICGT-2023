@@ -296,7 +296,7 @@ This rule template generates the sample rule in the right of \autoref{fig:gtRule
 Having multiple incoming or outgoing sequence flows for a flow node is considered bad practice since the implicitly encoded gateways should be explicit to avoid confusion.
 Our formalization still supports this behavior, but we recommend using static analyzers to avoid such models \cite{camundaservicesgmbhBpmnlint2023}.
 
-The second template generates one rule that ends the activity.
+The second template generates one rule that terminates the activity.
 It deletes a token at the activity and adds one at each outgoing sequence flow.
 This implicitly encodes a parallel gateway (see \autoref{fig:gatewayTemplates}) but should be avoided as described earlier. 
 
@@ -374,7 +374,7 @@ The rule template shows that MICEs delete one message and one token, as well as 
 \section{Model checking BPMN} \label{sec:modelChecking}
 
 Model checking---and verification in general---of \gls*{bpmn} models is necessary to ensure the correctness and reliability of business processes, which ultimately leads to increased efficiency, reduced costs, and improved user satisfaction.
-Using our approach, model checking a \gls*{bpmn} model is possible using the generated \gls*{gt} system, a set of temporal properties to be checked, and the atomic propositions used in these properties.
+Using our approach, model checking a \gls*{bpmn} model is possible using the generated \gls*{gt} system and a set of temporal properties with atomic propositions.
 Properties are defined using a temporal logic, such as CTL and LTL.
 In this paper we will use CTL.
 An atomic proposition is formalized as a graph and holds in a given state if a match exists from the graph representing the proposition to the graph representing the state \cite{kastenbergModelCheckingDynamic2006}.
@@ -387,7 +387,7 @@ Then, we describe how custom properties can be defined and checked.
 \subsection{General BPMN properties}
 \textit{Safeness} and \textit{Soundness} properties are defined for \gls*{bpmn} in \cite{corradiniClassificationBPMNCollaborations2018}.
 A \gls*{bpmn} model is \textit{safe} if, during its execution, at most one token occurs along the same sequence flow \cite{corradiniClassificationBPMNCollaborations2018}.
-Soundness is further decomposed into (i) \textit{Option to complete}: any running process instance must eventually complete, (ii) \textit{Proper completion}: at the moment of completion, each token of the process instance must be in a different end event, as well as (iii) \textit{No dead activities}: each activity can be executed in at least one process instance \cite{corradiniClassificationBPMNCollaborations2018}.
+Soundness is further decomposed into (i) \textit{Option to complete}: any running process instance must eventually complete, (ii) \textit{Proper completion}: after completion, each token of the process instance must be consumed by a different end event, as well as (iii) \textit{No dead activities}: each activity can be executed in at least one process instance \cite{corradiniClassificationBPMNCollaborations2018}.
 In the following, we will describe how to implement the \textit{Safeness} and \textit{Option to complete} properties.
 
 % Safeness
@@ -433,7 +433,7 @@ A modeler could use this atomic proposition, for example, to check if, eventuall
 Thus, a modeler does not need to know the \gls*{gt} semantics used for execution.
 
 However, the modeler must still know the temporal logic, such as LTL and CTL, to express his properties.
-In the future, a domain-specific property language for \gls*{bpmn} would further lessen the knowledge required from the modeler \cite{meyersProMoBoxFrameworkGenerating2014}. 
+In the future, a domain-specific property language for \gls*{bpmn} would further lessen the amount of knowledge required from the modeler \cite{meyersProMoBoxFrameworkGenerating2014}. 
 
 
 \begin{figure}[ht]
