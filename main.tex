@@ -47,7 +47,6 @@ Yngve Lamo\inst{1}\orcidlink{0000-0001-9196-1779}}
 \authorrunning{T. Kräuter et al.}
 % First names are abbreviated in the running head.
 % If there are more than two authors, 'et al.' is used.
-%
 \institute{Western Norway University of Applied Sciences, Bergen, Norway 
 \email{tkra@hvl.no, aru@hvl.no, yla@hvl.no} \and
 University of Applied Sciences, FHDW, Hanover, Germany\\
@@ -67,7 +66,7 @@ As proof of concept, we have implemented our approach in an open-source web-base
 
 \section{Introduction}
 In today's fast-paced business environment, organizations with complex workflows require a powerful means to accurately map, analyze, and optimize their processes. 
-\gls*{bpmn} \cite{objectmanagementgroupBusinessProcessModel2013} is widely used standard to define these workflows.
+\gls*{bpmn} \cite{objectmanagementgroupBusinessProcessModel2013} is a widely used standard to define these workflows.
 However, the informal description of the \gls*{bpmn} execution semantics leads to different interpretations of \gls*{bpmn} elements and difficulties in checking behavioral properties \cite{corradiniFormalApproachAnalysis2021}.
 Formalizing \gls*{bpmn} would reduce the cost of business process automation drastically by facilitating the detection of errors and optimization potentials in process models already during design time. 
 To this end, we propose a formalization that covers most of the \gls*{bpmn} elements used in practice and supports checking behavioral properties.
@@ -144,7 +143,7 @@ Furthermore, gateways model conditions, parallelizations, and synchronizations \
 
 The \gls*{bpmn} execution semantics is described using the concept of \textit{tokens} \cite{objectmanagementgroupBusinessProcessModel2013}, which can be located at sequence flows and specific flow nodes.
 Tokens are consumed and created by flow nodes according to the connected sequence flows.
-The \textsf{FlowNode} is colored purple in \autoref{fig:bpmnMetamodel} since it represents a state-changing element of \gls*{bpmn} as described in \autoref{sec:formalization}.
+The \textsf{FlowNode} is colored purple in \autoref{fig:bpmnMetamodel} since it represents a state-changing element of \gls*{bpmn}, as described in \autoref{sec:formalization}.
 
 A \gls*{bpmn} process is triggered by one of its start events, leading to a token at each outgoing flow of the triggered start event.
 % Activities
@@ -161,7 +160,6 @@ For example, message events will add or delete messages.
 We use typed attributed graphs for the formalization of the \gls*{bpmn} execution semantics.
 Each state, i.e., token distribution during the execution of a \gls*{bpmn} model, is represented as an attributed graph typed by the \gls*{bpmn} execution type graph, which we introduce in \autoref{sec:formalization}.
 
-% Groove uses the single pushout approach with negative application conditions.
 Regarding \gls*{gt}, we utilize the single-pushout (SPO) approach with negative application conditions (NAC) \cite{ehrigALGEBRAICAPPROACHESGRAPH1997}, as implemented in Groove \cite{rensinkGROOVESimulatorTool2004}.
 In addition, we utilize \textit{nested rules} with quantification to make parts of a rule repeatedly applicable or optional \cite{rensinkNestedQuantificationGraph2006,rensinkHowMuchAre2017}.
 Moreover, we utilize NACs to implement more intricate parts in the \gls*{bpmn} execution semantics, such as the termination of processes.
@@ -173,7 +171,7 @@ The approach supports all the \gls*{bpmn} elements depicted in \autoref{fig:bpmn
 These \gls*{bpmn} elements are divided into \textsf{Events}, \textsf{Gateways}, \textsf{Activities}, and \textsf{Edges}.
 \textsf{Events} and \textsf{Activities} are further divided into subgroups.
 Although all these elements have been implemented and tested (see \cite{krauterArtifactsICGT2023}), due to space limitations, we only explain the realization of the elements marked with a green background.
-In the following, first we define the \gls*{bpmn} execution metamodel to represent the \gls*{bpmn} state structure, then we explain our formalization of the elements in \autoref{fig:bpmnelementsOverview}.
+In the following, first, we define the \gls*{bpmn} execution metamodel to represent the \gls*{bpmn} state structure, then we explain our formalization of the elements in \autoref{fig:bpmnelementsOverview}.
 
 
 \begin{figure}[ht]
@@ -217,7 +215,7 @@ Since our approach is based on a \gls*{hot} from \gls*{bpmn} to \gls*{gt} system
 Generating the start graph for a \gls*{bpmn} model is straightforward.
 First, for each process in the \gls*{bpmn} model, we generate a process snapshot if the process contains a none start event (NSE).
 An NSE describes a start event without a trigger (none).
-Then, for each NSE we add one token to each outgoing sequence flow.
+Then, for each NSE, we add one token to each outgoing sequence flow.
 An example of a start graph is shown in \autoref{fig:startGraph} using abstract and concrete syntax.
 
 \begin{figure}[ht]
@@ -257,7 +255,7 @@ Elements of the \gls*{hot} are depicted using rule generation templates that des
 
 \subsection{Process instantiation and termination} \label{subsec:instAndTermination}
 
-Start events do not need \gls*{gt} rules since the generated start graph of the \gls*{gt} system will contain a token for each outgoing sequence flow of a NSE.
+Start events do not need \gls*{gt} rules since the generated start graph of the \gls*{gt} system will contain a token for each outgoing sequence flow of an NSE.
 Other types of start events are triggered in corresponding throw event rules.
 
 \autoref{fig:startAndEndTemplate} depicts the rule generation template for end events (\textsf{NEE} in \autoref{fig:bpmnelementsOverview}).
@@ -297,13 +295,13 @@ The rule changes the state of the process snapshot from running to terminated if
 Activity execution is divided into two steps implemented by two rule templates.
 The first template generates one rule for each incoming sequence flow to start the activity.
 An activity can be started using a token positioned at any of its incoming sequence flows.
-This rule template generates the sample rule in the right of \autoref{fig:gtRuleConcrete}.
+This rule template generates the sample rule on the right of \autoref{fig:gtRuleConcrete}.
 Having multiple incoming or outgoing sequence flows for a flow node is considered bad practice since the implicitly encoded gateways should be explicit to avoid confusion.
 Our formalization still supports this behavior, but we recommend using static analyzers to avoid such models \cite{camundaservicesgmbhBpmnlint2023}.
 
 The second template generates one rule that terminates the activity.
 It deletes a token at the activity and adds one at each outgoing sequence flow.
-This implicitly encodes a parallel gateway (see \autoref{fig:gatewayTemplates}) but should be avoided as described earlier. 
+This implicitly encodes a parallel gateway (see \autoref{fig:gatewayTemplates}) but should be avoided, as described earlier. 
 
 \begin{figure}[ht]
     \centering
@@ -372,7 +370,7 @@ The rule template shows that MICEs delete one message and one token, as well as 
 Model checking---and verification in general---of \gls*{bpmn} models is necessary to ensure the correctness and reliability of business processes, which ultimately leads to increased efficiency, reduced costs, and improved user satisfaction.
 Using our approach, model checking a \gls*{bpmn} model is possible using the generated \gls*{gt} system and a set of temporal properties with atomic propositions.
 Properties are defined using a temporal logic, such as CTL and LTL.
-In this paper we will use CTL.
+In this paper, we will use CTL.
 An atomic proposition is formalized as a graph and holds in a given state if a match exists from the graph representing the proposition to the graph representing the state \cite{kastenbergModelCheckingDynamic2006}.
 
 We differentiate between \textit{general \gls*{bpmn} properties} defined for all \gls*{bpmn} models and \textit{custom properties} tailored towards a particular \gls*{bpmn} model.
@@ -445,8 +443,8 @@ In this section, we will present our tool and then describe experiments regardin
 
 \subsection{BPMN Analyzer tool}
 
-Our approach is implemented in a web-based tool called \textit{BPMN Analyzer} that is open-source, publicly available, and does not require any installation \cite{krauterArtifactsICGT2023}.
-\autoref{fig:implScreenshot} depicts a screenshot of BPMN Analyzer.
+Our approach is implemented in a web-based tool called \textit{\gls*{bpmn} Analyzer}, which is open-source, publicly available, and does not require any installation \cite{krauterArtifactsICGT2023}.
+\autoref{fig:implScreenshot} depicts a screenshot of the \gls*{bpmn} Analyzer.
 
 The modeler can create or upload a \gls*{bpmn} model, which can then be verified using either \gls*{bpmn}-specific properties or custom CTL properties in the verification section.
 BPMN Analyzer can generate a \gls*{gt} system for the supplied \gls*{bpmn} model and run model checking in Groove \cite{kastenbergModelCheckingDynamic2006}. 
@@ -467,7 +465,7 @@ Additionally, we have conducted a performance benchmark for our approach, as des
 Model checking is a useful technique but often falls short in practice due to insufficient performance.
 Poor performance might have many reasons, most notably large models leading to state space explosion.
 We experimented with ten different \gls*{bpmn} models from \cite{houhouFirstOrderLogicVerification2022} to assess the performance of our implementation.
-We picked the models at random besides disregarding some models that were similar.
+We picked the models at random, besides disregarding some models that were similar.
 The models include realistic business process models (001, 002, and 020) \cite{houhouFirstOrderLogicVerification2022}.
 
 To calculate the average runtime, we used the hyperfine benchmarking tool \cite{peterHyperfine2022} (version 1.15.0), which ran state space exploration for each \gls*{bpmn} model ten times.
