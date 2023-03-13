@@ -173,7 +173,7 @@ In the following, first we define the \gls*{bpmn} execution metamodel to represe
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.99\textwidth]{images/bpmn_semantics-element-overview.pdf}
+    \includegraphics[width=0.99\textwidth]{images/bpmn_semantics-elements-overview.pdf}
     \caption{Overview of the supported \gls*{bpmn} elements (structure adapted from \cite{houhouFirstOrderLogicVerification2022})}
     \label{fig:bpmnelementsOverview}
 \end{figure}
@@ -205,7 +205,7 @@ The token's color must match the color of the process snapshot holding the token
 The concrete syntax was inspired by the bpmn-js-token-simulation \cite{camundaservicesgmbhBpmnjsTokenSimulation2023}.
 
 
-The execution metamodel is a UML class diagram without operations, which can be seen as an attributed type graph with inheritance \cite{heckelGraphTransformationSoftware2020}.
+The execution metamodel is a UML class diagram without operations, which can be seen as an attributed type graph \cite{heckelGraphTransformationSoftware2020}.
 Using execution metamodel as the type graph, we can now define how the start graph and graph-transformation rules for the different \gls*{bpmn} elements are created.
 
 Since our approach is based on a \gls*{hot} from \gls*{bpmn} to \gls*{gt} systems, we generate a \textit{start graph} and \textit{\gls*{gt} rules} for each given \gls*{bpmn} model.
