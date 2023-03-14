@@ -61,7 +61,7 @@ In this paper, we propose a formalization of the execution semantics of BPMN tha
 Our approach is based on a higher-order transformation from BPMN models to graph transformation systems.
 As proof of concept, we have implemented our approach in an open-source web-based tool.
 
-\keywords{BPMN \and Model transformation \and Graph transformation \and Model checking \and Formalization}
+\keywords{BPMN \and Higher-order model transformation \and Graph transformation \and Model checking \and Formalization}
 \end{abstract}
 
 % Final todos:
@@ -126,7 +126,6 @@ In this section, we will briefly introduce the execution semantics of BPMN, and 
 Furthermore, our application of \gls*{gt}s to formalize the execution semantics of \gls*{bpmn} will be outlined in addition to a brief overview of the theoretical principles that underlie our use of \gls*{gt}s.
 
 
-
 \subsection{BPMN}
 \autoref{fig:bpmnMetamodel} depicts the structure of \gls*{bpmn} models with the corresponding concrete syntax \gls*{bpmn} symbols contained in clouds.
 
@@ -139,8 +138,8 @@ Furthermore, our application of \gls*{gt}s to formalize the execution semantics 
 % Containment: participants, messageFlows see fig. 9.33 in the BPMN spec.
 % Containment: flowNodes (Process is FlowElementsContainer fig. 8.23). FlowElementsContainer have a containment of flowElements (also includes sequence flows)
 
-A \gls*{bpmn} model is represented by a \textsf{Collaboration} that has \textsf{participants} and \textsf{MessageFlows} between \textsf{InteractionNodes}.
-Each participant is a \textsf{Process} containing \textsf{FlowNodes} connected by \textsf{SequenceFlows}.
+A \gls*{bpmn} model is represented by a \textsf{Collaboration} that has \textsf{participants} and \textsf{messageFlows} between \textsf{InteractionNodes}.
+Each participant is a \textsf{Process} containing \textsf{flowNodes} connected by \textsf{SequenceFlows}.
 A \textsf{FlowNode} is either an \textsf{Activity}, \textsf{Gateway}, or \textsf{Event}.
 Many types of \textsf{Activities}, \textsf{Gateways}, and \textsf{Events} exist.
 Activities represent certain tasks to be carried out during a process, while events may happen during the execution of these tasks.
@@ -148,13 +147,13 @@ Furthermore, gateways model conditions, parallelizations, and synchronizations \
 
 The \gls*{bpmn} execution semantics is described using the concept of \textit{tokens} \cite{objectmanagementgroupBusinessProcessModel2013}, which can be located at sequence flows and specific flow nodes.
 Tokens are consumed and created by flow nodes according to the connected sequence flows.
-The \textsf{FlowNode} is colored purple in \autoref{fig:bpmnMetamodel} since it represents a state-changing element of \gls*{bpmn}, as described in \autoref{sec:formalization}.
+The \textsf{FlowNode} is colored purple in \autoref{fig:bpmnMetamodel} since it represents the state-changing elements of \gls*{bpmn}, as described in \autoref{sec:formalization}.
 
 A \gls*{bpmn} process is triggered by one of its start events, leading to a token at each outgoing flow of the triggered start event.
 % Activities
 Activities can start when at least one token is on an incoming sequence flow.
 The start of an activity will move the incoming token to the activity.
-When an activity finishes, it deletes its token and adds one at each outgoing sequence flow.
+When an activity terminates, it deletes its token and adds one at each outgoing sequence flow.
 % Gateways
 Furthermore, different gateway types exist, such as parallelization, synchronization, XOR, and OR distribution of tokens.
 % Events (basic)
@@ -214,7 +213,7 @@ The concrete syntax was inspired by the bpmn-js-token-simulation \cite{camundase
 
 
 The execution metamodel is a UML class diagram without operations, which can be seen as an attributed type graph \cite{heckelGraphTransformationSoftware2020}.
-Using execution metamodel as the type graph, we can now define how the start graph and graph-transformation rules for the different \gls*{bpmn} elements are created.
+Using the execution metamodel as the type graph, we can now define how the start graph and \gls*{gt} rules for the different \gls*{bpmn} elements are created.
 
 Since our approach is based on a \gls*{hot} from \gls*{bpmn} to \gls*{gt} systems, we generate a \textit{start graph} and \textit{\gls*{gt} rules} for each given \gls*{bpmn} model.
 Generating the start graph for a \gls*{bpmn} model is straightforward.
@@ -297,14 +296,14 @@ The rule changes the state of the process snapshot from running to terminated if
 
 % Normal activities
 \autoref{fig:activityTemplates} depicts the rule generation templates for activities and subprocesses (see \autoref{fig:bpmnelementsOverview}).
-Activity execution is divided into two steps implemented by two rule templates.
-The first template generates one rule for each incoming sequence flow to start the activity.
+Activity execution is divided into two steps implemented in two parts in the first rule template.
+The upper part generates one rule for each incoming sequence flow to start the activity.
 An activity can be started using a token positioned at any of its incoming sequence flows.
-This rule template generates the sample rule on the right of \autoref{fig:gtRuleConcrete}.
+This part generates the sample rule on the right of \autoref{fig:gtRuleConcrete}.
 Having multiple incoming or outgoing sequence flows for a flow node is considered bad practice since the implicitly encoded gateways should be explicit to avoid confusion.
 Our formalization still supports this behavior, but we recommend using static analyzers to avoid such models \cite{camundaservicesgmbhBpmnlint2023}.
 
-The second template generates one rule that terminates the activity.
+The lower part generates one rule that terminates the activity.
 It deletes a token at the activity and adds one at each outgoing sequence flow.
 This implicitly encodes a parallel gateway (see \autoref{fig:gatewayTemplates}) but should be avoided, as described earlier. 
 
@@ -352,7 +351,7 @@ The first rule template describes how MITEs interact with MICEs.
 A MITE deletes an incoming token and adds one at each outgoing sequence flow.
 In addition, it sends one message to each process by adding it to the incoming messages of the process.
 However, sending each message is optional, meaning that if a process is not ready to consume a message immediately, the message is not added.
-A process can consume a message if its MICE has at least one token at an incoming sequence flow (see \autoref{fig:messageEventTemplates}).
+A process can consume a message if its MICE has at least one token at an incoming sequence flow (see rule template two in \autoref{fig:messageEventTemplates}).
 We implement optional message sending using nested rules with quantification.
 Concretely, we use an optional existential quantifier \cite{rensinkNestedQuantificationGraph2006} (see blue dotted rectangle marked with optional in \autoref{fig:messageEventTemplates}) to send a message only if the receiving process is ready to consume it.
 
@@ -454,7 +453,7 @@ Our approach is implemented in a web-based tool called \textit{\gls*{bpmn} Analy
 The modeler can create or upload a \gls*{bpmn} model, which can then be verified using either \gls*{bpmn}-specific properties or custom CTL properties in the verification section.
 BPMN Analyzer can generate a \gls*{gt} system for the supplied \gls*{bpmn} model and run model checking in Groove \cite{kastenbergModelCheckingDynamic2006}. 
 To evaluate the correctness of our \gls*{hot}, we have created a comprehensive test suite that verifies the correct generation of rules for the implemented \gls*{bpmn} elements \cite{krauterArtifactsICGT2023}.
-Additionally, we have conducted a performance benchmark for our approach, as described in the next section.
+Additionally, we have conducted performance experiments for our approach, as described in the next section.
 
 
 % Use impl/impl_short/impl_very_short
@@ -625,7 +624,7 @@ In addition, we can use this environment to visualize potential counterexamples 
 \section{Appendix}
 
 
-This section shows examples of our tool checking general \gls*{bpmn} properties.
+This section shows examples of the \gls*{bpmn} Analyzer checking general \gls*{bpmn} properties.
 Our tool and the example models are available as artifacts \cite{krauterArtifactsICGT2023}.
 
 \subsection{Safeness example}
@@ -641,7 +640,7 @@ This could be a simple mistake of picking an exclusive instead of a parallel gat
 \begin{figure}[ht]
     \centering
     \includegraphics[width=1\textwidth]{artifacts/appendix/unsafe_sample.png}
-    \caption{Screenshot of the tool detecting an unsafe situation}
+    \caption{Screenshot of detecting an unsafe situation}
     \label{fig:unsafeSample}
 \end{figure}
 
@@ -655,7 +654,7 @@ Thus, not every process might terminate.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=1\textwidth]{artifacts/appendix/option_to_complete_sample.png}
-    \caption{Screenshot of the tool checking \textit{Option to complete}}
+    \caption{Screenshot of checking \textit{Option to complete}}
     \label{fig:optionToCompleteSample}
 \end{figure}
 
@@ -666,7 +665,7 @@ Activity C is \textit{dead}, which is highlighted when checking for dead activit
 \begin{figure}[ht]
     \centering
     \includegraphics[width=1\textwidth]{artifacts/appendix/dead_sample.png}
-    \caption{Screenshot of the tool detecting a dead activity}
+    \caption{Screenshot of detecting a dead activity}
     \label{fig:deadSample}
 \end{figure}
 
