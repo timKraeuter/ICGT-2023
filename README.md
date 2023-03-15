@@ -23,9 +23,9 @@ deleted and green parts are added.
 
 ## Model Checking BPMN
 
-### BPMN-specific properties
+### General BPMN properties
 
-BPMN-specific properties can be checked in the [web-based tool](https://bpmnanalyzer.whitefield-c9fed487.northeurope.azurecontainerapps.io), which runs Groove in the cloud (no local installation needed).
+General BPMN properties can be checked in the [web-based tool](https://bpmnanalyzer.whitefield-c9fed487.northeurope.azurecontainerapps.io), which runs Groove in the cloud (no local installation needed).
 
 The [Implementation](https://github.com/timKraeuter/ICGT-2023#implementation) section shows a screenshot with an example verification result.
 
