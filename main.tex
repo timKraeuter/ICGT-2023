@@ -67,7 +67,7 @@ As proof of concept, we have implemented our approach in an open-source web-base
 \section{Introduction}
 In today's fast-paced business environment, organizations with complex workflows require a powerful means to accurately map, analyze, and optimize their processes. 
 \gls*{bpmn} \cite{objectmanagementgroupBusinessProcessModel2013} is a widely used standard to define these workflows.
-However, the informal description of the \gls*{bpmn} execution semantics leads to different interpretations of \gls*{bpmn} elements and difficulties in checking behavioral properties \cite{corradiniFormalApproachAnalysis2021}.
+However, the informal description of the \gls*{bpmn} execution semantics leads to different interpretations of \gls*{bpmn} models and difficulties in checking behavioral properties \cite{corradiniFormalApproachAnalysis2021}.
 Formalizing \gls*{bpmn} would reduce the cost of business process automation drastically by facilitating the detection of errors and optimization potentials in process models already during design time. 
 To this end, we propose a formalization that covers most of the \gls*{bpmn} elements used in practice and supports checking behavioral properties.
 
@@ -100,7 +100,7 @@ Ultimately, we use Groove as an execution engine for the \gls*{gt} system and ch
 
 Our approach has been implemented in a user-friendly, open-source web-based tool, the \textit{\gls*{bpmn} Analyzer}, which can be used online without needing installation.
 The \gls*{bpmn} Analyzer was validated using a comprehensive test suite.
-Additionally, our approach is versatile as it can be applied to formalize other behavioral languages as well. 
+Additionally, our approach is versatile as it can be applied to formalize other behavioral languages, such as activity diagrams, state charts, and more.
 To define the execution semantics of an alternate behavioral language, one simply needs to establish a new execution metamodel and \gls*{hot} (see the language engineer in \autoref{fig:approach}).
 
 % Contributions summary
@@ -265,6 +265,7 @@ For example, the expression $\forall \text{sf} \in \text{E.incSFs}$ for the rule
 We use ``.'' in expressions to navigate along the associations of the \gls*{bpmn} metamodel shown in \autoref{fig:bpmnMetamodel}.
 In the example, \textsf{E.incSFs} means following all \textsf{incSFs} links for a \textsf{FlowNode} object, resulting in a set of \textsf{SequenceFlow} objects.
 
+% Implementation currently only allows one incoming flow.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.8\textwidth]{images/end_template.pdf}
@@ -287,6 +288,10 @@ The rule changes the state of the process snapshot from running to terminated if
     \label{fig:terminationRule}
 \end{figure}
 
+The Groove syntax is the following.
+The thin black elements in \autoref{fig:terminationRule} need to be present and will be preserved during transformation, while the dashed blue elements need to be present but will be removed.
+Furthermore, the fat green elements will be created and the dashed fat red elements represent the NACs, whose presence prevent the rule from being applied.
+
 \subsection{Activities \& Subprocesses}
 
 % Normal activities
@@ -296,7 +301,7 @@ The upper part generates one rule for each incoming sequence flow to start the a
 An activity can be started using a token positioned at any of its incoming sequence flows.
 This part generates the sample rule on the right of \autoref{fig:gtRuleConcrete}.
 Having multiple incoming or outgoing sequence flows for a flow node is considered bad practice since the implicitly encoded gateways should be explicit to avoid confusion.
-Our formalization still supports this behavior, but we recommend using static analyzers to avoid such models \cite{camundaservicesgmbhBpmnlint2023}.
+Our formalization still supports those models not to force modelers to rewrite them, but we recommend using static analyzers to avoid such models \cite{camundaservicesgmbhBpmnlint2023}.
 
 The lower part generates one rule that terminates the activity.
 It deletes a token at the activity and adds one at each outgoing sequence flow.
