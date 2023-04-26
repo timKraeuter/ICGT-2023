@@ -402,8 +402,10 @@ In the following, we will describe how to implement the \textit{Safeness} and \t
 
 % Safeness
 We specify \textit{Safeness} as the CTL property defined in \eqref{eq:safeness}.
-The atomic property \textsf{Unsafe} is true if two tokens of one process snapshot point to the same sequence flow.
+The atomic proposition \textsf{Unsafe} is true if two tokens of one process snapshot point to the same sequence flow.
 It is shown in \autoref{fig:unsafe} using abstract syntax.
+We cannot use the concrete syntax to define the \textsf{Unsafe} proposition because it must apply to any BPMN model.
+Our concrete syntax is always used alongside a given BPMN model.
 
 \begin{figure}[ht]
     \centering
