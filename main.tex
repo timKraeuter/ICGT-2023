@@ -385,12 +385,12 @@ The rule template shows that MICEs delete one message and one token, as well as 
 \section{Model checking BPMN} \label{sec:modelChecking}
 
 Model checking---and verification in general---of \gls*{bpmn} models is necessary to ensure the correctness and reliability of business processes, which ultimately leads to increased efficiency, reduced costs, and user satisfaction.
-Using our approach, model checking a \gls*{bpmn} model is possible using the generated \gls*{gt} system and a set of behavioral properties with atomic propositions (see \autoref{fig:approach}).
-Properties are defined using a temporal logic, such as CTL and LTL.
+Using our approach, model checking a \gls*{bpmn} model is possible using the generated \gls*{gt} system and behavioral properties based on atomic propositions (see \autoref{fig:approach}).
+Behavioral properties are defined using a temporal logic, such as CTL and LTL.
 In this paper, we will use CTL.
 An atomic proposition is formalized as a graph and holds in a given state if a match exists from the graph representing the proposition to the graph representing the state \cite{kastenbergModelCheckingDynamic2006}.
 
-We differentiate between \textit{general \gls*{bpmn} properties} defined for all \gls*{bpmn} models and \textit{custom properties} tailored towards a particular \gls*{bpmn} model.
+We differentiate between two types of behavioral properties: \textit{general \gls*{bpmn} properties} defined for all \gls*{bpmn} models and \textit{custom properties} tailored towards a particular \gls*{bpmn} model.
 We do not consider structural properties (like conformance to the syntax of BPMN) since they can be checked using a standard modeling tool without implementing execution semantics.
 We will now give an example of two predefined general \gls*{bpmn} properties and show how they can be checked using our approach.
 Then, we describe how custom properties can be defined and checked.
