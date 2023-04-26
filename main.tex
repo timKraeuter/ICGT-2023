@@ -538,6 +538,14 @@ A comprehensive benchmark, including a detailed comparison to other tools and sc
 \end{table}
 
 \section{Related work} \label{sec:relatedWork}
+% Petri nets formalisms
+The most common formalizations of \gls*{bpmn} use Petri Nets.
+For example, \cite{dijkmanSemanticsAnalysisBusiness2008} formalize a subset of \gls*{bpmn} elements by defining a mapping to Petri Nets, which is conceptually close to our \gls*{hot}-based formalization.
+% Difficulties with Petri net encodings
+Encoding basic \gls*{bpmn} modeling elements into Petri Nets is generally simple, but for some advanced elements, it can be complicated to define \cite{hofstedeWorkflowPatternsExpressive2002}.
+For example, representing \textit{termination end events} and \textit{interrupting boundary events}, which interrupt a running process, is usually not supported because of the complexity of managing non-local propagation of tokens in Petri Nets \cite{corradiniFormalApproachAnalysis2021}.
+We solve these situations by using nested graph conditions, for example, to remove all tokens when reaching a termination end event.
+
 % Van gorp
 A \gls*{bpmn} formalization based on in-place \gls*{gt} rules is given in \cite{vangorpVisualTokenbasedFormalization2013}.
 The formalization covers a substantial part of the \gls*{bpmn} specification, including complex concepts such as inclusive gateways and compensation.
@@ -570,49 +578,49 @@ We plan to support these elements by extending our implementation and test suite
     \caption{\gls*{bpmn} elements supported by different formalizations (based on \cite{vangorpVisualTokenbasedFormalization2013}).}
     \label{tab:supportedelements}
     \begin{threeparttable}
-    \begin{tabular}{l l l l l}
+    \begin{tabular}{l l l l l l}
     \hline
-      \gls*{bpmn} element/feature & Van Gorp &  Corradini & Houhou & This\\
-      & et al. \cite{vangorpVisualTokenbasedFormalization2013} & et al. \cite{corradiniFormalApproachAnalysis2021}& et al. \cite{houhouFirstOrderLogicVerification2022} & paper\\
+      \gls*{bpmn} element/feature & Dijkman & Van Gorp &  Corradini & Houhou & This\\
+      & et al. \cite{dijkmanSemanticsAnalysisBusiness2008} & et al. \cite{vangorpVisualTokenbasedFormalization2013} & et al. \cite{corradiniFormalApproachAnalysis2021}& et al. \cite{houhouFirstOrderLogicVerification2022} & paper\\
       \hline
-      \textit{Instantiation and termination} & &\\
-      Start event instantiation & X & X & X & X\\
-      Exclusive event-based gateway instantiation & X & & & X\\
-      Parallel event-based gateway instantiation &  & & & \\
-      Receive task instantiation & & & & X\\
-      Normal process completion & X & X & X & X\\
+      \textit{Instantiation and termination}\\
+      Start event instantiation & X & X & X & X & X\\
+      Exclusive event-based gateway instantiation & & X & & & X\\
+      Parallel event-based gateway instantiation & &  & & & \\
+      Receive task instantiation & & & & & X\\
+      Normal process completion & X & X & X & X & X\\
       \\
-      \textit{Activities} & & & &\\
-      Activity & X & X & X & X\\
-      Loop activity & X & & &\\
-      Multiple instance activity & & & & \\
-      Subprocess & X & & X & X\\
-      Event subprocess &  &  &  & X\\
-      Transaction &  &  &  & \\
-      Ad-hoc subprocesses & & & &\\
+      \textit{Activities}\\
+      Activity & X & X & X & X & X\\
+      Loop activity & X & X & & &\\
+      Multiple instance activity & & & & & \\
+      Subprocess & X & X & & X & X\\
+      Event subprocess & &  &  &  & X\\
+      Transaction & &  &  &  & \\
+      Ad-hoc subprocesses & & & & &\\
       \\
-      \textit{Gateways} & & & &\\
-      Parallel gateway & X & X & X & X\\
-      Exclusive gateway & X & X & X & X\\
-      Inclusive gateway (split) & X & X & X & X\\
-      Inclusive gateway (merge) & X & & X & X\\
-      Event-based gateway &  & X\tnote{1} & X & X\\ % No timer and conditional events after event based gateway supported.
-      Complex gateway & & & &\\
+      \textit{Gateways}\\
+      Parallel gateway & X & X & X & X & X\\
+      Exclusive gateway & X & X & X & X & X\\
+      Inclusive gateway (split) & X & X & X & X & X\\
+      Inclusive gateway (merge) & & X & & X & X\\
+      Event-based gateway & & & X\tnote{1} & X & X\\ % No timer and conditional events after event based gateway supported.
+      Complex gateway & & & & &\\
       \\
-      \textit{Events} & & & & \\
-      None Events & X & X & X & X\\
-      Message events & X & X & X & X\\
-      Timer Events & & & X & \\
-      Escalation Events & & & & X\\
-      Error Events & X & & & X\\
-      Cancel Events & X & & &\\
-      Compensation Events & X & & &\\
-      Conditional Events & & & &\\
-      Link Events & X & & & X\\
-      Signal Events & X & & & X\\
-      Multiple Events &  & & & \\
-      Terminate Events & X & X & X & X\\
-      Boundary Events & X\tnote{2} & & X\tnote{3} & X\\ % To the same extent as the event support
+      \textit{Events} \\
+      None Events & X & X & X & X & X\\
+      Message events & X & X & X & X & X\\
+      Timer Events & & & & X & \\
+      Escalation Events & & & & & X\\
+      Error Events & X & X & & & X\\
+      Cancel Events & & X & & &\\
+      Compensation Events & & X & & &\\
+      Conditional Events & & & & &\\
+      Link Events & & X & & & X\\
+      Signal Events & & X & & & X\\
+      Multiple Events & &  & & & \\
+      Terminate Events & & X & X & X & X\\
+      Boundary Events & & X\tnote{2} & & X\tnote{3} & X\\ % To the same extent as the event support
     \end{tabular}
     \begin{tablenotes}
         \item[1] Does not support receive tasks after event-based gateways.
