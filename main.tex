@@ -34,6 +34,7 @@
 \begin{document}
 %
 \title{Formalization and analysis of BPMN using graph transformation systems}
+% Formal semantics and verification of BPMN using graph transformation systems
 %
 %\titlerunning{Abbreviated paper title}
 % If the paper title is too long for the running head, you can set
@@ -487,7 +488,7 @@ We picked the models at random, besides disregarding some models that were simil
 The models include realistic business process models (001, 002, and 020) \cite{houhouFirstOrderLogicVerification2022}.
 
 To calculate the average runtime, we used the hyperfine benchmarking tool \cite{peterHyperfine2022} (version 1.15.0), which ran state space exploration for each \gls*{bpmn} model ten times.
-The experiment was run on Windows 11 (AMD Ryzen 7700X processor, 32 GB RAM) using Groove version 5.8.1 \cite{krauterArtifactsICGT2023}. 
+The experiment was run on Windows 11 (AMD Ryzen 7700X processor, 32 GB RAM) using Groove version 5.8.1 \cite{krauterArtifactsICGT2023}.
 
 First, we ran our \gls*{hot} for the \gls*{bpmn} models.
 The \gls*{hot} took less than one second to generate a \gls*{gt} system for each model.
@@ -556,9 +557,13 @@ Furthermore, they focus on different communication models besides the standard i
 We currently disregard time-related constructs \cite{duranVerifyingTimedBPMN2017,houhouFirstOrderLogicVerification2022} and data flow \cite{corradiniFormalisingAnimatingMultiple2022,el-saberCMMICMComplianceChecking2015}.
 
 \autoref{tab:supportedelements} shows which \gls*{bpmn} elements are supported by our approach and the approaches mentioned above.
-We cover most \gls*{bpmn} elements when compared to other approaches.
+Compared to other approaches, we cover most \gls*{bpmn} elements.
 The coverage of \gls*{bpmn} elements greatly impacts how useful each approach is to check properties in practice.
 In addition, we cover the most important elements found in practice since we come close to the element coverage of popular process engines such as Camunda \cite{camundaservicesgmbhBPMNImplementationReference2023}.
+
+The missing elements, when compared to Camunda, are transactions, cancel events, and compensation events.
+These elements are rather complex, but \cite{vangorpVisualTokenbasedFormalization2013} shows how cancel and compensation events can be formalized.
+We plan to support these elements by extending our implementation and test suite in the future.
 
 \begin{table}[htbp]
     \caption{\gls*{bpmn} elements supported by different formalizations (based on \cite{vangorpVisualTokenbasedFormalization2013}).}
@@ -575,12 +580,16 @@ In addition, we cover the most important elements found in practice since we com
       Parallel event-based gateway instantiation &  & & & \\
       Receive task instantiation & & & & X\\
       Normal process completion & X & X & X & X\\
+      \\
       \textit{Activities} & & & &\\
       Activity & X & X & X & X\\
-      Subprocess & X & & X & X\\
-      Ad-hoc subprocesses & & & &\\
       Loop activity & X & & &\\
       Multiple instance activity & & & & \\
+      Subprocess & X & & X & X\\
+      Event subprocess &  &  &  & X\\
+      Transaction &  &  &  & \\
+      Ad-hoc subprocesses & & & &\\
+      \\
       \textit{Gateways} & & & &\\
       Parallel gateway & X & X & X & X\\
       Exclusive gateway & X & X & X & X\\
@@ -588,6 +597,7 @@ In addition, we cover the most important elements found in practice since we com
       Inclusive gateway (merge) & X & & X & X\\
       Event-based gateway &  & X\tnote{1} & X & X\\ % No timer and conditional events after event based gateway supported.
       Complex gateway & & & &\\
+      \\
       \textit{Events} & & & & \\
       None Events & X & X & X & X\\
       Message events & X & X & X & X\\
@@ -601,8 +611,7 @@ In addition, we cover the most important elements found in practice since we com
       Signal Events & X & & & X\\
       Multiple Events &  & & & \\
       Terminate Events & X & X & X & X\\
-     Boundary Events & X\tnote{2} & & X\tnote{3} & X\\ % To the same extent as the event support
-      Event subprocess &  &  &  & X\\
+      Boundary Events & X\tnote{2} & & X\tnote{3} & X\\ % To the same extent as the event support
     \end{tabular}
     \begin{tablenotes}
         \item[1] Does not support receive tasks after event-based gateways.
