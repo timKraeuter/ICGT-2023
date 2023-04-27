@@ -165,7 +165,10 @@ Each state, i.e., token distribution during the execution of a \gls*{bpmn} model
 
 Regarding \gls*{gt}, we utilize the single-pushout (SPO) approach with negative application conditions (NAC) \cite{ehrigALGEBRAICAPPROACHESGRAPH1997}, as implemented in Groove \cite{rensinkGROOVESimulatorTool2004}.
 In addition, we utilize \textit{nested rules} with quantification to make parts of a rule repeatedly applicable or optional \cite{rensinkNestedQuantificationGraph2006,rensinkHowMuchAre2017}.
-Moreover, we utilize NACs to implement more intricate parts in the \gls*{bpmn} execution semantics, such as the termination of processes.
+Moreover, we utilize the NACs to implement more intricate parts in the \gls*{bpmn} execution semantics, such as the termination of processes.
+
+Formal definitions of SPO rules, their application, and the corresponding extensions of the theory (NACs, nested rules) are well-known, see \cite{ehrigALGEBRAICAPPROACHESGRAPH1997,rensinkNestedQuantificationGraph2006}.
+We do not repeat them to instead focus on our practical contribution.
 
 
 \section{BPMN semantics formalization} \label{sec:formalization}
@@ -653,6 +656,8 @@ In addition, we can use this environment to visualize potential counterexamples 
 
 % The appendix is not published.
 % I added it to showcase the tool's capabilities in more detail.
+\newpage
+
 \section{Appendix}
 
 
