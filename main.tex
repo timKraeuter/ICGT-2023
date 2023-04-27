@@ -540,11 +540,11 @@ A comprehensive benchmark, including a detailed comparison to other tools and sc
 \section{Related work} \label{sec:relatedWork}
 % Petri nets formalisms
 The most common formalizations of \gls*{bpmn} use Petri Nets.
-For example, \cite{dijkmanSemanticsAnalysisBusiness2008} formalize a subset of \gls*{bpmn} elements by defining a mapping to Petri Nets, which is conceptually close to our \gls*{hot}-based formalization.
+For example, \cite{dijkmanSemanticsAnalysisBusiness2008} formalize a subset of \gls*{bpmn} elements by defining a mapping to Petri Nets conceptually close to our \gls*{hot}-based formalization.
 % Difficulties with Petri net encodings
-Encoding basic \gls*{bpmn} modeling elements into Petri Nets is generally simple, but for some advanced elements, it can be complicated to define \cite{hofstedeWorkflowPatternsExpressive2002}.
-For example, representing \textit{termination end events} and \textit{interrupting boundary events}, which interrupt a running process, is usually not supported because of the complexity of managing non-local propagation of tokens in Petri Nets \cite{corradiniFormalApproachAnalysis2021}.
-We solve these situations by using nested graph conditions, for example, to remove all tokens when reaching a termination end event.
+Encoding basic \gls*{bpmn} modeling elements into Petri Nets is generally straightforward, but for some advanced elements, it can be complicated to define \cite{hofstedeWorkflowPatternsExpressive2002}.
+For example, representing \textit{termination end events} and \textit{interrupting boundary events}, which interrupt a running process, is usually unsupported because of the complexity of managing the non-local propagation of tokens in Petri Nets \cite{corradiniFormalApproachAnalysis2021}.
+We solve these situations by using nested graph conditions, for example, to remove all tokens when reaching a \textit{termination end event}.
 
 % Van gorp
 A \gls*{bpmn} formalization based on in-place \gls*{gt} rules is given in \cite{vangorpVisualTokenbasedFormalization2013}.
