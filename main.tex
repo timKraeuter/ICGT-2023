@@ -405,12 +405,12 @@ In the following, we will describe how to implement the \textit{Safeness} and \t
 We specify \textit{Safeness} as the CTL property defined in \eqref{eq:safeness}.
 The atomic proposition \textsf{Unsafe} is true if two tokens of one process snapshot point to the same sequence flow.
 It is shown in \autoref{fig:unsafe} using abstract syntax.
-We cannot use the concrete syntax to define the \textsf{Unsafe} proposition because it must apply to any BPMN model.
-Our concrete syntax is always used alongside a given BPMN model.
+We cannot use the concrete syntax to define the \textsf{Unsafe} proposition because the proposition should apply to any BPMN model.
+Our concrete syntax is always used with a given BPMN model.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.7\textwidth]{images/Unsafe.png}
+    \includegraphics[width=0.8\textwidth]{images/Unsafe.png}
     \caption{The atomic proposition \textit{Unsafe} in Groove.}
     \label{fig:unsafe}
 \end{figure}
@@ -451,7 +451,7 @@ In the future, a domain-specific property language for \gls*{bpmn} would further
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.45\textwidth]{images/bpmn_semantics-atomic-proposition.pdf}
+    \includegraphics[width=0.6\textwidth]{images/bpmn_semantics-atomic-proposition.pdf}
     \caption{Token distribution defining an atomic proposition.}
     \label{fig:atomicProposition}
 \end{figure}
@@ -506,6 +506,7 @@ A comprehensive benchmark, including a detailed comparison to other tools and sc
 
 \begin{table}[ht]
 \centering
+\caption[Experimental results for a full state space exploration in Groove]{Experimental results for a full state space exploration in Groove}
 
 \begin{tabular}{| c | c | c || c | c | c |}
  \hline
@@ -532,7 +533,6 @@ A comprehensive benchmark, including a detailed comparison to other tools and sc
  020 & 1 & 39(6) & 3060 & 8584 & $\sim$ 1.75 s \\
  \hline
 \end{tabular}
-\caption[Experimental results for a full state space exploration in Groove]{Experimental results for a full state space exploration in Groove}
 \label{table:stateSpaceBenchmark}
 \end{table}
 
