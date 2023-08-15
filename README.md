@@ -4,7 +4,7 @@ This repository contains the sources for our [paper](https://doi.org/10.1007/978
 
 The corresponding BPMN Analyzer tool is available [here](https://bpmnanalyzer.whitefield-c9fed487.northeurope.azurecontainerapps.io).
 
-[**The paper received the _Best Software Science Paper Award_.**](https://raw.githubusercontent.com/timKraeuter/timKraeuter.github.io/master/assets/BestPaperICGT2023.pdf)
+[**★ The paper received the _Best Software Science Paper Award_. ★**](https://raw.githubusercontent.com/timKraeuter/ICGT-2023/main/BestPaperICGT2023.pdf)
 
 ## BPMN Semantics formalization
 
