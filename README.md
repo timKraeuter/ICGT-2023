@@ -1,13 +1,14 @@
 # ICGT-2023
 
-This repository contains the sources for our [paper](https://doi.org/10.1007/978-3-031-36709-0_11) ([pre-print](./paper.pdf)) published at [ICGT-2023](https://conf.researchr.org/home/icgt-2023) together with additional information
-below.
+This repository contains the sources for our [paper](https://doi.org/10.1007/978-3-031-36709-0_11) ([pre-print](./paper.pdf)) published at [ICGT-2023](https://conf.researchr.org/home/icgt-2023) together with additional information below.
 
-**The corresponding BPMN Analyzer tool is available [here](https://bpmnanalyzer.whitefield-c9fed487.northeurope.azurecontainerapps.io).**
+The corresponding BPMN Analyzer tool is available [here](https://bpmnanalyzer.whitefield-c9fed487.northeurope.azurecontainerapps.io).
+
+[**The paper received the _Best Software Science Paper Award_.**](https://raw.githubusercontent.com/timKraeuter/timKraeuter.github.io/master/assets/BestPaperICGT2023.pdf)
 
 ## BPMN Semantics formalization
 
-Our [wiki](https://github.com/timKraeuter/Rewrite_Rule_Generation/wiki) describes the BPMN formalization in more detail accompanied by many examples BPMN models and graph transformation rule examples.
+Our [wiki](https://github.com/timKraeuter/Rewrite_Rule_Generation/wiki) describes the BPMN formalization in more detail, accompanied by many examples of BPMN models and graph transformation rule examples.
 
 ### Process termination
 
@@ -17,8 +18,7 @@ Process termination is implemented by the following graph transformation rule in
 
 The rule is called **Terminate** and is automatically added during graph grammar generation.
 The dashed red borders mark parts of negative application conditions, grey parts remain untouched,
-blue parts are
-deleted and green parts are added.
+blue parts are deleted, and green parts are added.
 
 ## Model Checking BPMN
 
