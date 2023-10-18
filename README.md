@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/587236412.svg)](https://zenodo.org/doi/10.5281/zenodo.10016468)
+
 # ICGT-2023
 
 This repository contains the sources for our [paper](https://doi.org/10.1007/978-3-031-36709-0_11) ([pre-print](./paper.pdf)) published at [ICGT-2023](https://conf.researchr.org/home/icgt-2023) together with additional information below.
