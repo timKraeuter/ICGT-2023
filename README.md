@@ -4,7 +4,7 @@
 
 This repository contains the sources for our [paper](https://doi.org/10.1007/978-3-031-36709-0_11) ([pre-print](./paper.pdf)) published at [ICGT-2023](https://conf.researchr.org/home/icgt-2023) together with additional information below.
 
-The corresponding BPMN Analyzer tool is available [here](https://bpmnanalyzer.whitefield-c9fed487.northeurope.azurecontainerapps.io).
+The corresponding BPMN Analyzer tool is available [here](https://bpmn-analyzer.wittyrock-9d6a3c00.northeurope.azurecontainerapps.io).
 
 [**★ The paper received the _Best Software Science Paper Award_. ★**](https://raw.githubusercontent.com/timKraeuter/ICGT-2023/main/BestPaperICGT2023.pdf)
 
@@ -26,7 +26,7 @@ blue parts are deleted, and green parts are added.
 
 ### General BPMN properties
 
-General BPMN properties can be checked in the [web-based tool](https://bpmnanalyzer.whitefield-c9fed487.northeurope.azurecontainerapps.io), which runs Groove in the cloud (no local installation needed).
+General BPMN properties can be checked in the [web-based tool](https://bpmn-analyzer.wittyrock-9d6a3c00.northeurope.azurecontainerapps.io), which runs Groove in the cloud (no local installation needed).
 
 The [Implementation](https://github.com/timKraeuter/ICGT-2023#implementation) section shows a screenshot with an example verification result.
 
@@ -59,9 +59,9 @@ Thus, for the time being, custom properties have to be checked in Groove by defi
 ### BPMN Analyzer tool
 
 The BPMN Analyzer is available
-online [here](https://bpmnanalyzer.whitefield-c9fed487.northeurope.azurecontainerapps.io).
+online [here](https://bpmn-analyzer.wittyrock-9d6a3c00.northeurope.azurecontainerapps.io).
 
-[![Atomic property Unsafe implemented in Groove.](./images/impl.png)](https://bpmnanalyzer.whitefield-c9fed487.northeurope.azurecontainerapps.io)
+[![Atomic property Unsafe implemented in Groove.](./images/impl.png)](https://bpmn-analyzer.wittyrock-9d6a3c00.northeurope.azurecontainerapps.io)
 
 The source code of the BPMN Analyzer is
 available [here](https://github.com/timKraeuter/Rewrite_Rule_Generation) and instructions
